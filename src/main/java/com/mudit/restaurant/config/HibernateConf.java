@@ -8,21 +8,21 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.mudit.blog")
-@EnableTransactionManagement
+@ComponentScan("com.mudit.restaurant")
 public class HibernateConf {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
-        sessionFactory.setPackagesToScan("com.mudit.blog");
+        sessionFactory.setPackagesToScan("com.mudit.restaurant");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -30,19 +30,19 @@ public class HibernateConf {
     @Bean
     public DataSource getDataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/blog");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantDB");
+        driverManagerDataSource.setUsername("mudit");
+        driverManagerDataSource.setPassword("itsmebro");
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         return driverManagerDataSource;
     }
 
-    @Bean
-    public HibernateTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager=new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory().getObject());
-        return transactionManager;
-    }
+//    @Bean
+//    public TransactionManager hibernateTransactionManager() {
+//        HibernateTransactionManager transactionManager=new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(sessionFactory().getObject());
+//        return transactionManager;
+//    }
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();

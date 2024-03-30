@@ -35,11 +35,10 @@ import javax.sql.DataSource;
 import java.util.Locale;
 import java.util.Properties;
 
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableWebMvc
 @EnableWebSecurity
 @Configuration
-@ComponentScan(basePackages = {"com.mudit.blog"})
+@ComponentScan(basePackages = {"com.mudit.restaurant"})
 
 public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
@@ -48,6 +47,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         // Serve CSS files from the /css/ path
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+
     }
 
     @Bean
@@ -60,11 +61,12 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 
     //    @Bean
     DataSource dataSource() {
+
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/blog");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantDB");
+        driverManagerDataSource.setUsername("mudit");
+        driverManagerDataSource.setPassword("itsmebro");
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 //        System.out.println(driverManagerDataSource.getSchema());
         return driverManagerDataSource;
@@ -72,6 +74,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println("Mudit tiwari");
         auth.jdbcAuthentication().dataSource(dataSource()).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
