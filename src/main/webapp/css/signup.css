@@ -122,8 +122,8 @@ body {
     height: 12px;
     width: 12px;
     position: relative;
-    top: -6%;
-    left: 5%;
+    top: 0%;
+    left: 8%;
   }
   
   
@@ -228,4 +228,15 @@ input[type="password"]:focus::placeholder {
 
 
   
-  
+.signupinput input{
+  width: 80%;
+}
+
+.error{
+  text-align: start;
+  margin-left: 24px;
+  color: white;
+  font-size: 11px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}

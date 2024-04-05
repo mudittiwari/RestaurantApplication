@@ -14,10 +14,12 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -72,20 +74,29 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         return driverManagerDataSource;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("Mudit tiwari");
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource()).passwordEncoder(NoOpPasswordEncoder.getInstance());
+//        auth.inMemoryAuthentication()
+//                .withUser("mudit@gmail.com")
+//                .password("{noop}itsmebro")
+//                .roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/**").hasRole("ADMIN")
-//                .and()
-//                .formLogin().and().httpBasic();
-//        http.csrf().disable();
-//        http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
+        http
+                .authorizeRequests()
+                .antMatchers("/login","/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll().and().authorizeRequests().anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll().and().httpBasic();
+    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }

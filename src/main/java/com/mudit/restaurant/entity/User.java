@@ -1,31 +1,27 @@
 package com.mudit.restaurant.entity;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    private String email;
+    private String username;
 
-
-    @Length(min = 5,max = 10,message = "name validation failed")
+    @Length(min = 5,max = 40,message = "name validation failed")
     private String name;
 
+    @Length(min = 8,message = "password validation failed")
     private String password;
 
     private boolean enabled;
 
+    @Length(min = 10,max = 10,message = "Phone Number validation failed")
     private String mobileNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Authority authority;
 
     public boolean isEnabled() {
@@ -40,12 +36,12 @@ public class User {
         return name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getMobileNumber() {
@@ -79,7 +75,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
