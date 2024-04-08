@@ -11,9 +11,6 @@
   </head>
   <body>
     <div class="container">
-      <c:if test="${not empty name}">
-        <div>${name}</div>
-    </c:if>
 
       <div class="bg-setup">
         <img

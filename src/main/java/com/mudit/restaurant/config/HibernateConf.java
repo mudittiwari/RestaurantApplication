@@ -30,9 +30,9 @@ public class HibernateConf {
     @Bean
     public DataSource getDataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantDB");
-        driverManagerDataSource.setUsername("mudit");
-        driverManagerDataSource.setPassword("itsmebro");
+        driverManagerDataSource.setUrl("jdbc:mysql://9wr.h.filess.io:3307/restaurantdb_gardentune");
+        driverManagerDataSource.setUsername("restaurantdb_gardentune");
+        driverManagerDataSource.setPassword("f6d645fca14c818dea5e45c6eb24ec1f067d80b3");
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         return driverManagerDataSource;
     }

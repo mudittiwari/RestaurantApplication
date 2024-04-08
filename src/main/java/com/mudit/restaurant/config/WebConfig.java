@@ -24,6 +24,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -87,16 +89,25 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login","/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll().and().authorizeRequests().anyRequest().authenticated()
+                .antMatchers("/login","/admin/**","/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll().and().authorizeRequests().anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll().and().httpBasic();
+        http.csrf().disable();
     }
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(5 * 1024 * 1024);
+        return resolver;
+    }
+
 
 }

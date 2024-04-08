@@ -1,6 +1,7 @@
 package com.mudit.restaurant.controllers;
 
 
+import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.services.UserService;
 import com.mudit.restaurant.utils.Message;
@@ -30,6 +31,7 @@ public class MainController {
     public User newUser() {
         return new User();
     }
+
     @RequestMapping("/")
     public String home(){
         return "homepage";
@@ -71,6 +73,5 @@ public class MainController {
 ////        SecurityContextHolder.getContext().setAuthentication(authentication);
 //        return "homepage";
 //    }
-
 
 }
