@@ -27,7 +27,7 @@
         />
         <img src="${pageContext.request.contextPath}/images/login/Ellipse 44.png" alt="" />
         <img src="${pageContext.request.contextPath}/images/login/Ellipse 45.png" alt="" />
-        <img src=".${pageContext.request.contextPath}/images/login/vawe (2).png" alt="" />
+        <img src="${pageContext.request.contextPath}/images/login/vawe (2).png" alt="" />
         <img src="${pageContext.request.contextPath}/images/login/vawe (3).png" alt="" />
         <img src="${pageContext.request.contextPath}/images/login/Oval Copy.png" alt="" />
         <div class="login-form">

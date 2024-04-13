@@ -15,6 +15,10 @@ background-size: cover;
   padding: 0;
   overflow: hidden;
 }
+
+a {
+    text-decoration: none;
+}
 .swiper {
   width: 57%;
   overflow: visible;
@@ -852,8 +856,7 @@ right sidebar css */
 }
 
 
-  
-}
+
 
 
 

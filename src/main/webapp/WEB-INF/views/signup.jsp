@@ -1,7 +1,8 @@
-<!DOCTYPE html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,7 +25,7 @@
         <img src="${pageContext.request.contextPath}/images/signup/Oval Copy.png" alt="" />
         <div class="login-form">
           <h2>Sign-up</h2>
-           <form:form method="post" class="form-container" modelAttribute="user" action="/RestaurantWebApplication/submitsignup" id="customerForm">
+           <form:form method="post" class="form-container" modelAttribute="user" action="${pageContext.request.contextPath}/submitsignup" id="customerForm">
 
             <div class="signupinput">
 

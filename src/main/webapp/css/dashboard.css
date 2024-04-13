@@ -1,0 +1,251 @@
+body {
+    margin: 5px;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background-color: black;
+  }
+  
+  .container {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #FBFBFB;
+    border-radius: 55px;
+    box-shadow: 0px 4px 25px 0px #0000001A;
+    display: flex;
+  }
+  
+  .sidebar {
+    min-height: 100vh;
+    color: #A098AE;
+    width: 250px;
+    padding-left: 25px;
+  }
+
+  .sidebar .logo{
+    display: flex;
+    align-items: center;
+    padding: 5px 50px;
+  }
+
+  .sidebar .logo img{
+    height: 85px;
+    width: 75px;
+
+  }
+  .sidebar .logo img:last-child{
+    padding-top: 30px;
+    height: 35px;
+    width: 95px;
+
+  }
+  .sidebar .menu{
+    min-height: 65vh;
+  }
+  .sidebar .menu ul{
+    list-style: none;
+  }
+  .slidebar .menu ul>li{
+    height: 50px;
+    margin-top: 10px;
+
+  }
+  
+  .main {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* Rest of your CSS styles for the sidebar, logo, menu, profile, contact-info, order-history, etc. */
+  
+
+  .menu {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar .menu li {
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+
+  }
+  .sidebar .menu li:first-child{
+    background-color: #F8B602;
+  }
+  .sidebar .menu li:first-child button{
+    color: #FBFBFB;
+  }
+  
+  
+  
+  .sidebar .menu li button {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap as needed */
+    padding: 5px;
+    border: none;
+    color: #A098AE;
+    cursor: pointer;
+    background: transparent; /* Adjust border radius as needed */
+    font-family: Arial, sans-serif; /* Use your preferred font family */
+    font-size: 18px; /* Adjust font size as needed */
+  }
+  
+  .sidebar .menu li button svg {
+    width: 25px; /* Fixed width for the SVG icon */
+    height: 25px; /* Fixed height for the SVG icon */
+  }
+  
+  
+  .menu li:hover {
+    background-color: #F8B602;
+    cursor: pointer;
+    color: #FBFBFB;
+  }
+  .menu li:hover button{
+    color: #FBFBFB;
+  }
+  .menu li:hover button svg path{
+    fill: #FBFBFB;
+  }
+  .sidebar .banner{
+    position: relative;
+    height: inherit;
+    width: inherit;
+    padding: 0px 35px;
+  }
+  .sidebar .banner img{
+    object-fit: cover;
+    height: 136px;
+    width: 210px;
+    cursor: pointer;
+  }
+  .sidebar .banner span{
+    position: absolute;
+    top: 34px;
+    left: 49px;
+    font-size: 24px;
+    color: #FBFBFB;
+  }
+  
+
+
+  /* main styling starts here */
+  .main{
+    padding-left: 21px;
+    padding-right: 30px;
+  }
+
+  .main .go-cards{
+    width: 100%;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .main .go-cards .card{
+    height: 350px;
+    width: 282px;
+    padding-bottom: 0px;
+    cursor: pointer;
+  }
+  .main .go-cards .card img{
+    height: 224px;
+    width: 280px;
+    object-fit: cover;
+  }
+  .main .go-cards .card:hover {
+  transform: scale(1.1);
+  }
+
+  .main .go-cards .card {
+    transition: transform 0.5s ease;
+    }
+
+
+  .main .go-cards .card span{
+    position: relative;
+    top: 30%;
+    left: 5%;
+    color: #FBFBFB;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .main .headline{
+    height: 50px;
+    margin-top: -70px;
+    
+  }
+  .main .product-item-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 400px;
+    width: 100%;
+    
+  }
+  .main .product-item-container .product{
+    height: inherit;
+    width: 250px;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+  }
+  .main .product-item-container .product img:hover{
+    transform: scale(1.2);
+  }
+  .main .product-item-container .product img{
+  transition: transform 0.5s ease;
+  }
+  .main .product-item-container .product h2{
+    color: #A098AE;
+    font-weight: bold;
+  }
+  .main .product-item-container .product .par1{
+   
+    display: flex;
+    color: #A098AE;
+    font-size: 15px;
+    justify-content:space-around;
+    padding: 0px 25px 0 25px;
+
+  }
+  .main .product-item-container .product .par2{
+    display: flex;
+    color: #F8B602;
+    font-size: 10px;
+    justify-content:space-around;
+    padding: 0px 25px 0 25px;
+    margin-top: -10px;
+  }
+
+  .main .product-item-container .product .par3 span:first-child{
+        background-color: #F8B602;
+        padding: 2px 15px;
+        border-radius: 50px;
+        margin-left: 50px;
+        color: #FBFBFB;
+       
+  }
+  .main .product-item-container .product .par3 span:last-child{
+    position: relative;
+    right: 50px;
+    top: 8px;
+    font-weight: bolder;
+    color: #F8B602;
+    font-size: 40px;
+    text-shadow: 
+    -1px -1px 0 #fff,  
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff;
+    
+  }
+a {
+    text-decoration: none;
+}
+
+  
+  

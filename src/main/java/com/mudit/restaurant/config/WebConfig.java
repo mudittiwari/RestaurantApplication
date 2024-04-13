@@ -89,13 +89,18 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login","/admin/**","/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll().and().authorizeRequests().anyRequest().authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll().and().httpBasic();
+                .permitAll()
+                .and()
+                .httpBasic();
         http.csrf().disable();
     }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

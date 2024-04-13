@@ -34,11 +34,15 @@ public class MainController {
 
     @RequestMapping("/")
     public String home(){
-        return "homepage";
+        return "discount";
     }
     @RequestMapping("/signup")
     public String signup(){
         return "signup";
+    }
+    @RequestMapping("/dashboard")
+    public String dashboard(){
+        return "homepage";
     }
 
     @RequestMapping("/submitsignup")
