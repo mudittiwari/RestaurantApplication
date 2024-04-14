@@ -131,8 +131,8 @@
     <tbody>
         <c:forEach items="${categories}" var="category">
             <tr>
-                <td>${category.id}</td>
-                <td>${category.name}</td>
+                <td>${category.getId()}</td>
+                <td>${category.getName()}</td>
                 <td>
                     <a href="#" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a>
                     <a href="update_category.html?id=${category.id}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>

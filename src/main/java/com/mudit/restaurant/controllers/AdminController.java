@@ -107,6 +107,7 @@ public class AdminController {
                               @RequestParam("name") String name,
                               @RequestParam("desc")  String desc,
                               @RequestParam("price")  double price,
+                              @RequestParam("discountedprice") double discountedPrice,
                               @RequestParam("category") String categoryId,
                               RedirectAttributes attributes){
         System.out.println(image);
@@ -119,6 +120,13 @@ public class AdminController {
         if(price<0){
             attributes.addFlashAttribute("priceerror","price can't be less than zero");
         }
+        if(discountedPrice<0){
+            attributes.addFlashAttribute("discountedpriceerror","discounted price can't be less than zero");
+        }
+        if(discountedPrice>price){
+            attributes.addFlashAttribute("discountedpriceerror","discounted price can't be greater than actual price");
+        }
+
         if(categoryId.isEmpty() || Integer.parseInt(categoryId)==-1){
             attributes.addFlashAttribute("categoryerror","category can't be empty");
         }
@@ -142,6 +150,7 @@ public class AdminController {
                     item.setDescription(desc);
                     item.setCategory(category);
                     item.setPrice(price);
+                    item.setDiscountedPrice(discountedPrice);
                     item.setImage("/uploads/".concat(orgName));
                     System.out.println(item);
                     if(adminService.addItem(item)) {
@@ -186,9 +195,10 @@ public class AdminController {
                               @RequestParam("name") String name,
                               @RequestParam("desc")  String desc,
                               @RequestParam("price")  double price,
+                               @RequestParam("discountedprice") double discountedPrice,
                               @RequestParam("category") String categoryId,
                               RedirectAttributes attributes){
-        System.out.println("mudit tiwari");
+        System.out.println(discountedPrice);
         if(name.length()<5){
             attributes.addFlashAttribute("nameerror","Name length too short");
         }
@@ -197,6 +207,12 @@ public class AdminController {
         }
         if(price<0){
             attributes.addFlashAttribute("priceerror","price can't be less than zero");
+        }
+        if(discountedPrice<0){
+            attributes.addFlashAttribute("discountedpriceerror","discounted price can't be less than zero");
+        }
+        if(discountedPrice>price){
+            attributes.addFlashAttribute("discountedpriceerror","discounted price can't be greater than actual price");
         }
         if(categoryId.isEmpty() || Integer.parseInt(categoryId)==-1){
             attributes.addFlashAttribute("categoryerror","category can't be empty");
@@ -216,12 +232,12 @@ public class AdminController {
                     System.out.println(orgName);
                     Item item=new Item();
                     Category category=adminService.getCategory(Integer.parseInt(categoryId));
-                    System.out.println(category.getName());
                     item.setId(id);
                     item.setName(name);
                     item.setDescription(desc);
                     item.setCategory(category);
                     item.setPrice(price);
+                    item.setDiscountedPrice(discountedPrice);
                     item.setImage("/uploads/".concat(orgName));
                     System.out.println(item);
                     if(adminService.editItem(item)) {
@@ -260,6 +276,71 @@ public class AdminController {
             Message message = new Message();
             message.setTitle("Error");
             message.setDesc("Error occoured while deleting the item");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/admin/items/";
+    }
+
+    @RequestMapping("/addfeatured/{id}")
+    public String addFeatured(@PathVariable("id") int id,RedirectAttributes attributes){
+        if(adminService.addFeatured(id)){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item added as featured successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while adding the item as featured");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/admin/items/";
+    }
+    @RequestMapping("/removefeatured/{id}")
+    public String removeFeatured(@PathVariable("id") int id,RedirectAttributes attributes){
+        if(adminService.removeFeatured(id)){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item removed as featured successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while adding the item as removedm");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/admin/items/";
+    }
+    @RequestMapping("/addinstock/{id}")
+    public String addInStock(@PathVariable("id") int id,RedirectAttributes attributes){
+        if(adminService.addInStock(id)){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item added in stock successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while adding the item in stock");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/admin/items/";
+    }
+    @RequestMapping("/removeinstock/{id}")
+    public String removeInStock(@PathVariable("id") int id,RedirectAttributes attributes){
+        if(adminService.removeInStock(id)){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item removed from stock successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while removing the item from stock");
             attributes.addFlashAttribute("message", message);
         }
         return "redirect:/admin/items/";

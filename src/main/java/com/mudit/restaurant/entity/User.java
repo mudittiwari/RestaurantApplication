@@ -3,6 +3,8 @@ package com.mudit.restaurant.entity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +25,17 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Authority authority;
+
+    @ManyToMany
+    private List<Item> favourites=new ArrayList<>();
+
+    public List<Item> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<Item> favourites) {
+        this.favourites = favourites;
+    }
 
     public boolean isEnabled() {
         return enabled;

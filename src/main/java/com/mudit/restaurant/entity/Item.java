@@ -15,10 +15,34 @@ public class Item {
     private String name;
     private String description;
     private double price;
+    private double discountedPrice;
+
+    public double getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
+    }
+
     private String image;
     private boolean inStock;
     @ManyToOne
     private Category category;
+
+    private boolean isFeatured;
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean featured) {
+        isFeatured = featured;
+    }
 
     public String getImage() {
         return image;
@@ -83,6 +107,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", desc='" + description + '\'' +
                 ", price=" + price +
+                ", discounted price=" + discountedPrice +
                 ", image='" + image + '\'' +
                 ", inStock=" + inStock +
                 '}';

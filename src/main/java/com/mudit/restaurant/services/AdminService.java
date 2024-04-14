@@ -43,4 +43,16 @@ public class AdminService {
     public boolean deleteUser(String username){
         return adminRepo.deleteUser(username);
     }
+    public boolean addFeatured(int id){
+        return adminRepo.addFeatured(id);
+    }
+    public boolean removeFeatured(int id){
+        return adminRepo.removeFeatured(id);
+    }
+    public boolean addInStock(int id){
+        return adminRepo.addInStock(id);
+    }
+    public boolean removeInStock(int id){
+        return adminRepo.removeInStock(id);
+    }
 }

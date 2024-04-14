@@ -37,11 +37,11 @@ function showGIF() {
 
 // Event listener to trigger the showGIF function on any click event
 document.addEventListener("click", function () {
-  //   showGIF(); // Call the function to show the GIF whenever any click event happens
+  showGIF(); // Call the function to show the GIF whenever any click event happens
 });
 
 window.addEventListener("load", function () {
-  //   showGIF(); // Call the function to show the GIF when the page loads
+  showGIF(); // Call the function to show the GIF when the page loads
 });
 
 // js for sidebar
@@ -49,7 +49,7 @@ window.addEventListener("load", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const image = document.getElementById("image");
   const slideInDiv = document.getElementById("slideInDiv");
-  slideInDiv.style.left = "-280px"; // Hide the sliding div
+  slideInDiv.style.left = "-280px";
   // Function to toggle the visibility of the sliding div
   function toggleSlideInDiv() {
     slideInDiv.style.left = slideInDiv.style.left === "0px" ? "280px" : "0px";

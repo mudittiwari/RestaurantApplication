@@ -2,6 +2,7 @@ package com.mudit.restaurant.controllers;
 
 
 import com.mudit.restaurant.entity.Category;
+import com.mudit.restaurant.entity.Item;
 import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.services.UserService;
 import com.mudit.restaurant.utils.Message;
@@ -13,13 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -33,7 +32,9 @@ public class MainController {
     }
 
     @RequestMapping("/")
-    public String home(){
+    public String home(Model model){
+        List<Item> discountedItems=service.getDiscountedItems();
+        model.addAttribute("discountedItems",discountedItems);
         return "discount";
     }
     @RequestMapping("/signup")
@@ -41,10 +42,21 @@ public class MainController {
         return "signup";
     }
     @RequestMapping("/dashboard")
-    public String dashboard(){
-        return "homepage";
+    public String dashboard(Model model){
+        List<Item> featuredItems=service.getFeaturedItems();
+        System.out.println(featuredItems);
+        model.addAttribute("featuredItems",featuredItems);
+        return "user_dashboard";
     }
-
+    @RequestMapping("/items/{id}")
+    public String items(@PathVariable("id") int id, Model model){
+        List<Item> items=service.getCategoryItems(id);
+        List<Category> categories=service.getCategories();
+        System.out.println(items);
+        model.addAttribute("items",items);
+        model.addAttribute("categories",categories);
+        return "useritems";
+    }
     @RequestMapping("/submitsignup")
     public String submitSignup(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes attributes){
         if(bindingResult.hasErrors()){

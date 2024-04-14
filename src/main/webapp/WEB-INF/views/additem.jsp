@@ -137,7 +137,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Select Category</label>
                     <select name="category" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
@@ -151,6 +151,16 @@
 </c:if>
                 </div>
             </div>
+             <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Discounted Price</label>
+                    <input required="true" type="number" name="discountedprice" class="form-control" placeholder="0" />
+                    <c:if test="${not empty discountedpriceerror}">
+    <span class="error">${discountedpriceerror}</span>
+</c:if>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="form-actions">

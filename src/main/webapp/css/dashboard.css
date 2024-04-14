@@ -1,251 +1,370 @@
 body {
-    margin: 5px;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    background-color: black;
-  }
-  
-  .container {
-    width: 100vw;
-    min-height: 100vh;
-    background-color: #FBFBFB;
-    border-radius: 55px;
-    box-shadow: 0px 4px 25px 0px #0000001A;
-    display: flex;
-  }
-  
-  .sidebar {
-    min-height: 100vh;
-    color: #A098AE;
-    width: 250px;
-    padding-left: 25px;
-  }
+  margin: 5px;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  background-color: black;
+}
 
-  .sidebar .logo{
-    display: flex;
-    align-items: center;
-    padding: 5px 50px;
-  }
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #FBFBFB;
+  border-radius: 55px;
+  box-shadow: 0px 4px 25px 0px #0000001A;
+  display: flex;
+  overflow: hidden;
+  margin-left: 20px;
+}
 
-  .sidebar .logo img{
-    height: 85px;
-    width: 75px;
+.sidebar {
+  /* min-height: 100vh; */
+  color: #A098AE;
+  width: 250px;
+  left: 0px;
+  padding-left: 25px;
+}
 
-  }
-  .sidebar .logo img:last-child{
-    padding-top: 30px;
-    height: 35px;
-    width: 95px;
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  padding: 5px 70px;
+}
 
-  }
-  .sidebar .menu{
-    min-height: 65vh;
-  }
-  .sidebar .menu ul{
-    list-style: none;
-  }
-  .slidebar .menu ul>li{
-    height: 50px;
-    margin-top: 10px;
+.sidebar .logo img {
+  height: 85px;
+  width: 75px;
 
-  }
-  
-  .main {
+}
+
+.sidebar .logo img:last-child {
+  padding-top: 30px;
+  height: 35px;
+  width: 95px;
+
+}
+
+.sidebar .menu {
+  min-height: 65vh;
+}
+
+.sidebar .menu ul {
+  list-style: none;
+}
+
+.slidebar .menu ul>li {
+  height: 50px;
+  margin-top: 10px;
+
+}
+
+*/
+/* .main {
     flex: 1;
     padding: 20px;
-  }
-  
-  /* Rest of your CSS styles for the sidebar, logo, menu, profile, contact-info, order-history, etc. */
-  
+  } */
 
-  .menu {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar .menu li {
-    padding: 8px 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-
-  }
-  .sidebar .menu li:first-child{
-    background-color: #F8B602;
-  }
-  .sidebar .menu li:first-child button{
-    color: #FBFBFB;
-  }
-  
-  
-  
-  .sidebar .menu li button {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adjust the gap as needed */
-    padding: 5px;
-    border: none;
-    color: #A098AE;
-    cursor: pointer;
-    background: transparent; /* Adjust border radius as needed */
-    font-family: Arial, sans-serif; /* Use your preferred font family */
-    font-size: 18px; /* Adjust font size as needed */
-  }
-  
-  .sidebar .menu li button svg {
-    width: 25px; /* Fixed width for the SVG icon */
-    height: 25px; /* Fixed height for the SVG icon */
-  }
-  
-  
-  .menu li:hover {
-    background-color: #F8B602;
-    cursor: pointer;
-    color: #FBFBFB;
-  }
-  .menu li:hover button{
-    color: #FBFBFB;
-  }
-  .menu li:hover button svg path{
-    fill: #FBFBFB;
-  }
-  .sidebar .banner{
-    position: relative;
-    height: inherit;
-    width: inherit;
-    padding: 0px 35px;
-  }
-  .sidebar .banner img{
-    object-fit: cover;
-    height: 136px;
-    width: 210px;
-    cursor: pointer;
-  }
-  .sidebar .banner span{
-    position: absolute;
-    top: 34px;
-    left: 49px;
-    font-size: 24px;
-    color: #FBFBFB;
-  }
-  
+/* Rest of your CSS styles for the sidebar, logo, menu, profile, contact-info, order-history, etc. */
 
 
-  /* main styling starts here */
-  .main{
-    padding-left: 21px;
-    padding-right: 30px;
-  }
+.menu {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .main .go-cards{
-    width: 100%;
-    height: 230px;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-  }
-  .main .go-cards .card{
-    height: 350px;
-    width: 282px;
-    padding-bottom: 0px;
-    cursor: pointer;
-  }
-  .main .go-cards .card img{
-    height: 224px;
-    width: 280px;
-    object-fit: cover;
-  }
-  .main .go-cards .card:hover {
+.sidebar .menu li {
+  padding: 8px 20px;
+  border-radius: 5px;
+  margin-top: 15px;
+
+}
+
+.sidebar .menu li:first-child {
+  background-color: #F8B602;
+}
+
+.sidebar .menu li:first-child button {
+  color: #FBFBFB;
+}
+
+.sidebar .menu li button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border: none;
+  color: #A098AE;
+  cursor: pointer;
+  background: transparent;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.sidebar .menu li button svg {
+  width: 25px;
+  height: 25px;
+}
+
+
+.menu li:hover {
+  background-color: #F8B602;
+  cursor: pointer;
+  color: #FBFBFB;
+}
+
+.menu li:hover button {
+  color: #FBFBFB;
+}
+
+.menu li:hover button svg path {
+  fill: #FBFBFB;
+}
+
+.sidebar .banner {
+  position: relative;
+  height: inherit;
+  width: 200px;
+}
+
+.sidebar .banner img {
+  object-fit: cover;
+  height: 136px;
+  width: 210px;
+  cursor: pointer;
+}
+
+.sidebar .banner span {
+  position: absolute;
+  top: 34px;
+  left: 49px;
+  font-size: 24px;
+  color: #FBFBFB;
+}
+
+
+
+/* main styling starts here */
+.main {
+  margin-left: 280px;
+  margin-right: 300px;
+}
+
+.main .go-cards {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  gap: 10px;
+  padding: auto;
+}
+
+.main .go-cards .card {
+  height: 300px;
+  width: 240px;
+  padding-bottom: 0px;
+  cursor: pointer;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.main .go-cards .card img {
+  height: 224px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.main .go-cards .card:hover {
   transform: scale(1.1);
+}
+
+.main .go-cards .card {
+  transition: transform 0.5s ease;
+}
+
+
+.main .go-cards .card span {
+  position: relative;
+  top: 30%;
+  left: 5%;
+  color: #FBFBFB;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main .headline {
+  height: 50px;
+  margin-top: -70px;
+
+}
+
+.main .product-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 400px;
+  width: 100%;
+  overflow-x: auto;
+  gap: 10px;
+
+}
+
+.main .product-item-container .product .fav {
+  height: 30px;
+  width: 30px;
+  /* padding-left: 230px; */
+  /* padding-top: 10px; */
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  background-color: #FBFBFB;
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+  z-index: 1;
+  top: 15px;
+  right: 40px;
+  background-color: white;
+}
+
+.main .product-item-container .product .fav:hover {
+  transform: scale(1.2);
+}
+
+.main .product-item-container .product {
+  height: inherit;
+  width: 33%;
+  text-align: center;
+  padding-right: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.main .product-item-container .product img:hover {
+  transform: scale(1.1);
+}
+
+.main .product-item-container .product img {
+  transition: transform 0.5s ease;
+}
+
+.main .product-item-container .product h2 {
+  color: #A098AE;
+  font-weight: bold;
+}
+
+.main .product-item-container .product .par1 {
+
+  display: flex;
+  color: #A098AE;
+  font-size: 15px;
+  justify-content: space-around;
+  padding: 0px 25px 0 25px;
+  margin-top: 10px;
+
+}
+
+.main .product-item-container .product .par2 {
+  display: flex;
+  color: #F8B602;
+  font-size: 10px;
+  justify-content: space-around;
+  padding: 0px 25px 0 25px;
+  margin-top: 10px;
+}
+
+.main .product-item-container .product .par3 span:first-child {
+  background-color: #F8B602;
+  padding: 2px 15px;
+  border-radius: 50px;
+  margin-left: 50px;
+  color: #FBFBFB;
+
+}
+
+.main .product-item-container .product .par3 span:last-child {
+  position: relative;
+  right: 50px;
+  top: 8px;
+  font-weight: bolder;
+  color: #F8B602;
+  font-size: 40px;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+
+}
+
+/* Styles for small screens (mobile devices) */
+@media (max-width: 767px) {
+  #image {
+    height: 40px;
+    width: 40px;
   }
 
-  .main .go-cards .card {
-    transition: transform 0.5s ease;
-    }
-
-
-  .main .go-cards .card span{
-    position: relative;
-    top: 30%;
-    left: 5%;
-    color: #FBFBFB;
-    font-size: 20px;
-    font-weight: bold;
+  /* Mobile-specific styles */
+  .container {
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+    padding: 30px;
   }
 
-  .main .headline{
-    height: 50px;
-    margin-top: -70px;
-    
-  }
-  .main .product-item-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 400px;
+  .sidebar {
     width: 100%;
-    
+    padding: 0;
+    height: 10%;
+    /* display: none; */
   }
-  .main .product-item-container .product{
+
+  .main {
+    width: 100%;
+  }
+
+  #sidebar2 {
+    display: none;
+  }
+
+  .main .product-item-container .product {
     height: inherit;
     width: 250px;
     text-align: center;
-    padding: 20px;
+    padding-right: 80px;
     cursor: pointer;
   }
-  .main .product-item-container .product img:hover{
-    transform: scale(1.2);
-  }
-  .main .product-item-container .product img{
-  transition: transform 0.5s ease;
-  }
-  .main .product-item-container .product h2{
-    color: #A098AE;
-    font-weight: bold;
-  }
-  .main .product-item-container .product .par1{
-   
-    display: flex;
-    color: #A098AE;
-    font-size: 15px;
-    justify-content:space-around;
-    padding: 0px 25px 0 25px;
 
-  }
-  .main .product-item-container .product .par2{
-    display: flex;
-    color: #F8B602;
-    font-size: 10px;
-    justify-content:space-around;
-    padding: 0px 25px 0 25px;
-    margin-top: -10px;
-  }
-
-  .main .product-item-container .product .par3 span:first-child{
-        background-color: #F8B602;
-        padding: 2px 15px;
-        border-radius: 50px;
-        margin-left: 50px;
-        color: #FBFBFB;
-       
-  }
-  .main .product-item-container .product .par3 span:last-child{
+  .sidebar .banner {
     position: relative;
-    right: 50px;
-    top: 8px;
-    font-weight: bolder;
-    color: #F8B602;
-    font-size: 40px;
-    text-shadow: 
-    -1px -1px 0 #fff,  
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff;
-    
+    height: inherit;
+    width: 200px;
+    margin-left: 70px;
   }
-a {
-    text-decoration: none;
 }
 
-  
-  
+/* Styles for medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Tablet-specific styles */
+  /* ... */
+}
+
+/* Styles for large screens (desktops) */
+@media (min-width: 992px) {
+  /* Desktop-specific styles */
+  /* ... */
+
+  #image {
+    display: none;
+  }
+
+  #slideInDiv {
+    display: none;
+  }
+}
+
+.productimg{
+  width: 100%;
+  height: 50%;
+}

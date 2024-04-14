@@ -93,6 +93,7 @@ public class AdminRepo {
             item.setName(updatedItem.getName());
             item.setDescription(updatedItem.getDescription());
             item.setPrice(updatedItem.getPrice());
+            item.setDiscountedPrice(updatedItem.getDiscountedPrice());
             item.setImage(updatedItem.getImage());
             item.setCategory(updatedItem.getCategory());
             item.setInStock(updatedItem.getInStock());
@@ -142,6 +143,87 @@ public class AdminRepo {
             return false;
         }
     }
+    public boolean addFeatured(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            if (item != null) {
+                item.setFeatured(true);
+                session.update(item);
+                tx.commit();
+                return true;
+            }
+            return false; // Item not found
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean removeFeatured(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            if (item != null) {
+                item.setFeatured(false);
+                session.update(item);
+                tx.commit();
+                return true;
+            }
+            return false; // Item not found
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean addInStock(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            if (item != null) {
+                item.setInStock(true);
+                session.update(item);
+                tx.commit();
+                return true;
+            }
+            return false; // Item not found
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean removeInStock(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            if (item != null) {
+                item.setInStock(false);
+                session.update(item);
+                tx.commit();
+                return true;
+            }
+            return false; // Item not found
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public List<User> getUsers(){
         List<User> lst=new ArrayList<>();

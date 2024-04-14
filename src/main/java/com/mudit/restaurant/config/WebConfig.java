@@ -52,7 +52,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
         registry.addResourceHandler("/images/**").addResourceLocations("/images/");
-
+        registry.addResourceHandler("/uploads/**").addResourceLocations("/uploads/");
     }
 
     @Bean
@@ -67,10 +67,12 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     DataSource dataSource() {
 
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantDB");
-        driverManagerDataSource.setUsername("mudit");
-        driverManagerDataSource.setPassword("itsmebro");
+        driverManagerDataSource.setUrl("jdbc:mysql://srv1231.hstgr.io:3306/u756147391_restaurantdb");
+        driverManagerDataSource.setUsername("u756147391_mudit");
+        driverManagerDataSource.setPassword("Itsmebro@6");
+//        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantDB");
+//        driverManagerDataSource.setUsername("mudit");
+//        driverManagerDataSource.setPassword("itsmebro");
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 //        System.out.println(driverManagerDataSource.getSchema());
         return driverManagerDataSource;
@@ -90,7 +92,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         http
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/signup","/submitsignup","/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/signup","/submitsignup","/css/**", "/js/**", "/images/**","/uploads/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -111,6 +111,7 @@
             <th>Dish</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Discounted Price</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -122,10 +123,28 @@
                 <td>${item.getName()}</td>
                 <td>${item.getDescription()}</td>
                 <td>${item.getPrice()}</td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10">Edit</a>
-                    <a href="${pageContext.request.contextPath}/admin/deleteitem/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5">Delete</a>
-                </td>
+                <td>${item.getDiscountedPrice()}</td>
+               <td>
+    <a href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-xs m-b-10">Edit</a>
+    <c:choose>
+        <c:when test="${item.isFeatured()}">
+            <a href="${pageContext.request.contextPath}/admin/removefeatured/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5">Remove Featured</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/admin/addfeatured/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5">Add Featured</a>
+        </c:otherwise>
+    </c:choose>
+    <c:choose>
+        <c:when test="${item.isInStock()}">
+            <a href="${pageContext.request.contextPath}/admin/removeinstock/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5">Remove In Stock</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/admin/addinstock/${item.getId()}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5">Add In Stock</a>
+        </c:otherwise>
+    </c:choose>
+    <a href="${pageContext.request.contextPath}/admin/deleteitem/${item.getId()}" class="btn btn-danger btn-flat btn-addon btn-sm m-b-10 m-l-5">Delete</a>
+</td>
+
             </tr>
         </c:forEach>
     </tbody>

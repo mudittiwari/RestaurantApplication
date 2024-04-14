@@ -8,13 +8,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Discount of The Day</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/discount.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/useritems.css" />
+    <title>Dona</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/useritems.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
@@ -38,22 +37,20 @@
         <div class="menu">
           <ul>
             <li>
-              <a href="${pageContext.request.contextPath}/dashboard">
-                <button>
-                  <svg
-                    width="26"
-                    height="29"
-                    viewBox="0 0 26 29"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0.333374 24.8334C0.333374 27.6967 6.81337 29 12.8334 29C18.8534 29 25.3334 27.6967 25.3334 24.8334C25.3334 22.56 21.3984 21.5334 18.5634 21.09L20.5 19.1667C22.0152 17.6517 23.0471 15.7214 23.4651 13.6199C23.8832 11.5184 23.6687 9.34012 22.8488 7.36054C22.0289 5.38095 20.6404 3.68896 18.8588 2.49854C17.0773 1.30812 14.9827 0.672729 12.84 0.672729C10.6974 0.672729 8.60282 1.30812 6.82127 2.49854C5.03972 3.68896 3.65118 5.38095 2.83126 7.36054C2.01134 9.34012 1.79685 11.5184 2.21493 13.6199C2.63301 15.7214 3.66488 17.6517 5.18004 19.1667L7.11004 21.0967C4.26837 21.5334 0.333374 22.56 0.333374 24.8334ZM14.5 7.33338C14.5 7.17862 14.5431 7.02691 14.6245 6.89527C14.7059 6.76362 14.8223 6.65723 14.9607 6.58802C15.0991 6.51881 15.2541 6.48951 15.4082 6.50341C15.5623 6.51731 15.7096 6.57385 15.8334 6.66671C16.8653 7.44094 17.7222 8.42427 18.348 9.55239C18.9738 10.6805 19.3545 11.928 19.465 13.2134C19.5016 13.6082 19.3952 14.0031 19.1652 14.3261C18.9352 14.6491 18.5968 14.8788 18.2117 14.9734L16.1667 15.485V17.3334C16.1667 17.5544 16.0789 17.7664 15.9226 17.9226C15.7663 18.0789 15.5544 18.1667 15.3334 18.1667C15.1124 18.1667 14.9004 18.0789 14.7441 17.9226C14.5878 17.7664 14.5 17.5544 14.5 17.3334V7.33338ZM7.00004 9.00004V7.33338C7.00004 7.11236 7.08784 6.9004 7.24412 6.74412C7.4004 6.58784 7.61236 6.50004 7.83337 6.50004C8.05439 6.50004 8.26635 6.58784 8.42263 6.74412C8.57891 6.9004 8.66671 7.11236 8.66671 7.33338V9.00004C8.67002 9.28745 8.74874 9.56895 8.89498 9.81639C9.04122 10.0638 9.24986 10.2685 9.50004 10.41V7.33338C9.50004 7.11236 9.58784 6.9004 9.74412 6.74412C9.9004 6.58784 10.1124 6.50004 10.3334 6.50004C10.5544 6.50004 10.7663 6.58784 10.9226 6.74412C11.0789 6.9004 11.1667 7.11236 11.1667 7.33338V10.41C11.4169 10.2685 11.6255 10.0638 11.7718 9.81639C11.918 9.56895 11.9967 9.28745 12 9.00004V7.33338C12 7.11236 12.0878 6.9004 12.2441 6.74412C12.4004 6.58784 12.6124 6.50004 12.8334 6.50004C13.0544 6.50004 13.2663 6.58784 13.4226 6.74412C13.5789 6.9004 13.6667 7.11236 13.6667 7.33338V9.00004C13.6639 9.73689 13.4171 10.4521 12.9648 11.0337C12.5125 11.6154 11.8802 12.0308 11.1667 12.215V17.3334C11.1667 17.5544 11.0789 17.7664 10.9226 17.9226C10.7663 18.0789 10.5544 18.1667 10.3334 18.1667C10.1124 18.1667 9.9004 18.0789 9.74412 17.9226C9.58784 17.7664 9.50004 17.5544 9.50004 17.3334V12.215C8.78659 12.0308 8.15428 11.6154 7.70196 11.0337C7.24964 10.4521 7.0028 9.73689 7.00004 9.00004ZM8.59004 22.5767L11.065 25.0534C11.2972 25.2857 11.5729 25.47 11.8763 25.5957C12.1797 25.7215 12.5049 25.7862 12.8334 25.7862C13.1618 25.7862 13.487 25.7215 13.7905 25.5957C14.0939 25.47 14.3695 25.2857 14.6017 25.0534L17.0767 22.5767C21.6567 23.1067 23.6667 24.3134 23.6667 24.8334C23.6667 25.58 19.9817 27.3334 12.8334 27.3334C5.68504 27.3334 2.00004 25.58 2.00004 24.8334C2.00004 24.3134 4.01004 23.1067 8.59004 22.5767Z"
-                      fill="white"
-                    /></svg
-                  >Dashboard
-                </button>
-              </a>
+              <button>
+                <svg
+                  width="26"
+                  height="29"
+                  viewBox="0 0 26 29"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.333374 24.8334C0.333374 27.6967 6.81337 29 12.8334 29C18.8534 29 25.3334 27.6967 25.3334 24.8334C25.3334 22.56 21.3984 21.5334 18.5634 21.09L20.5 19.1667C22.0152 17.6517 23.0471 15.7214 23.4651 13.6199C23.8832 11.5184 23.6687 9.34012 22.8488 7.36054C22.0289 5.38095 20.6404 3.68896 18.8588 2.49854C17.0773 1.30812 14.9827 0.672729 12.84 0.672729C10.6974 0.672729 8.60282 1.30812 6.82127 2.49854C5.03972 3.68896 3.65118 5.38095 2.83126 7.36054C2.01134 9.34012 1.79685 11.5184 2.21493 13.6199C2.63301 15.7214 3.66488 17.6517 5.18004 19.1667L7.11004 21.0967C4.26837 21.5334 0.333374 22.56 0.333374 24.8334ZM14.5 7.33338C14.5 7.17862 14.5431 7.02691 14.6245 6.89527C14.7059 6.76362 14.8223 6.65723 14.9607 6.58802C15.0991 6.51881 15.2541 6.48951 15.4082 6.50341C15.5623 6.51731 15.7096 6.57385 15.8334 6.66671C16.8653 7.44094 17.7222 8.42427 18.348 9.55239C18.9738 10.6805 19.3545 11.928 19.465 13.2134C19.5016 13.6082 19.3952 14.0031 19.1652 14.3261C18.9352 14.6491 18.5968 14.8788 18.2117 14.9734L16.1667 15.485V17.3334C16.1667 17.5544 16.0789 17.7664 15.9226 17.9226C15.7663 18.0789 15.5544 18.1667 15.3334 18.1667C15.1124 18.1667 14.9004 18.0789 14.7441 17.9226C14.5878 17.7664 14.5 17.5544 14.5 17.3334V7.33338ZM7.00004 9.00004V7.33338C7.00004 7.11236 7.08784 6.9004 7.24412 6.74412C7.4004 6.58784 7.61236 6.50004 7.83337 6.50004C8.05439 6.50004 8.26635 6.58784 8.42263 6.74412C8.57891 6.9004 8.66671 7.11236 8.66671 7.33338V9.00004C8.67002 9.28745 8.74874 9.56895 8.89498 9.81639C9.04122 10.0638 9.24986 10.2685 9.50004 10.41V7.33338C9.50004 7.11236 9.58784 6.9004 9.74412 6.74412C9.9004 6.58784 10.1124 6.50004 10.3334 6.50004C10.5544 6.50004 10.7663 6.58784 10.9226 6.74412C11.0789 6.9004 11.1667 7.11236 11.1667 7.33338V10.41C11.4169 10.2685 11.6255 10.0638 11.7718 9.81639C11.918 9.56895 11.9967 9.28745 12 9.00004V7.33338C12 7.11236 12.0878 6.9004 12.2441 6.74412C12.4004 6.58784 12.6124 6.50004 12.8334 6.50004C13.0544 6.50004 13.2663 6.58784 13.4226 6.74412C13.5789 6.9004 13.6667 7.11236 13.6667 7.33338V9.00004C13.6639 9.73689 13.4171 10.4521 12.9648 11.0337C12.5125 11.6154 11.8802 12.0308 11.1667 12.215V17.3334C11.1667 17.5544 11.0789 17.7664 10.9226 17.9226C10.7663 18.0789 10.5544 18.1667 10.3334 18.1667C10.1124 18.1667 9.9004 18.0789 9.74412 17.9226C9.58784 17.7664 9.50004 17.5544 9.50004 17.3334V12.215C8.78659 12.0308 8.15428 11.6154 7.70196 11.0337C7.24964 10.4521 7.0028 9.73689 7.00004 9.00004ZM8.59004 22.5767L11.065 25.0534C11.2972 25.2857 11.5729 25.47 11.8763 25.5957C12.1797 25.7215 12.5049 25.7862 12.8334 25.7862C13.1618 25.7862 13.487 25.7215 13.7905 25.5957C14.0939 25.47 14.3695 25.2857 14.6017 25.0534L17.0767 22.5767C21.6567 23.1067 23.6667 24.3134 23.6667 24.8334C23.6667 25.58 19.9817 27.3334 12.8334 27.3334C5.68504 27.3334 2.00004 25.58 2.00004 24.8334C2.00004 24.3134 4.01004 23.1067 8.59004 22.5767Z"
+                    fill="white"
+                  /></svg
+                >Dashboard
+              </button>
             </li>
             <li>
               <button>
@@ -168,13 +165,78 @@
           </ul>
         </div>
       </div>
+      <div class="bg-corner">
+        <img src="${pageContext.request.contextPath}/images/useritems/Ellipse 40.png" alt="" />
+        <img src="${pageContext.request.contextPath}/images/useritems/Ellipse 41.png" alt="" />
+        <img src="${pageContext.request.contextPath}/images/useritems/Vector (10).png" alt="" id="image" />
+      </div>
+      <div class="bg-right-corner">
+        <ul>
+          <li><img src="${pageContext.request.contextPath}/images/useritems/Vector (9).png" alt="" /></li>
+          <!-- <li><img src="./img/Group 1171274707.png" alt="" /></li> -->
+          <li><img src="${pageContext.request.contextPath}/images/useritems/Group 1171274706.png" alt="" id="image2" /></li>
+        </ul>
+      </div>
+      <div class="bg-bottom">
+        <img src="${pageContext.request.contextPath}/images/useritems/vawe (1).png" alt="" />
+        <img src="${pageContext.request.contextPath}/images/useritems/vawe.png" alt="" />
+      </div>
+      <div class="button-container" id="buttonContainer">
+        <c:forEach items="${categories}" var="category">
+            <a href="${pageContext.request.contextPath}/items/${category.getId()}"><button class="button active" id="starterButton">${category.getName()}</button></a>
+        </c:forEach>
+        <!-- Border highlight element -->
+      </div>
+     
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+           <c:forEach items="${items}" var="item">
+  <div class="swiper-slide">
+            <div>
+              <h2>${item.getName()}</h2>
+            </div>
+            <img
+              src="${pageContext.request.contextPath}${item.getImage()}"
+              height="500"
+              width="500"
+              alt="Grilled steak with vegetables"
+            />
+             <div class="info">
+        <p>${item.getDescription()}</p>
+        <p>${item.getDiscountedPrice()} Rs.</p>
+        <div class="veg-items">
+          <ul>
+            <li><img src="${pageContext.request.contextPath}/images/useritems/onion.png" alt="" /></li>
+            <li><img src="${pageContext.request.contextPath}/images/useritems/gajar.png" alt="" /></li>
+            <li><img src="${pageContext.request.contextPath}/images/useritems/mirch.png" alt="" /></li>
+            <li><img src="${pageContext.request.contextPath}/images/useritems/meat.png" alt="" /></li>
+          </ul>
+        </div>
+        <div class="button-container">
+          <div id="button-background">
+            <span class="slide-text">Add to Cart</span>
+            <div id="slider">
+              <i id="locker" class="material-icons"
+                >keyboard_double_arrow_right</i
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+
+    </c:forEach>
+        </div>
+      </div>
+      <!-- <div class="steam-img">
+        <img src="./img/steam.gif" class="hidden" id="gif" alt="">
+    </div> -->
+
       <div class="sidebar-right" id="slideInDiv2">
         <div class="header">
           <span>Your Order</span
-          ><img
-            src="../../homepage-mod/homepage/img/chef (1).png"
-            alt="Order Image"
-          />
+          ><img src="${pageContext.request.contextPath}/images/useritems/chef (1).png" alt="Order Image" />
         </div>
 
         <div class="right-sidebar-container">
@@ -218,63 +280,12 @@
           </div>
         </div>
       </div>
-      <div class="bg-corner">
-        <img src="${pageContext.request.contextPath}/images/discount/Ellipse 40.png" alt="" />
-        <img src="${pageContext.request.contextPath}/images/discount/Ellipse 41.png" alt="" />
-        <img src="${pageContext.request.contextPath}/images/discount/Vector (10).png" alt="" id="image" />
-      </div>
-      <div class="bg-right-corner">
-        <ul>
-          <li>
-            <img src="${pageContext.request.contextPath}/images/discount/Vector (9).png" alt="" />
-          </li>
-          <!-- <li>
-              <img src="../new discount/img/Group 1171274707.png" alt="" />
-            </li> -->
-          <li>
-            <img
-              src="${pageContext.request.contextPath}/images/discount/Group 1171274706.png"
-              alt=""
-              id="image2"
-            />
-          </li>
-        </ul>
-      </div>
-      <div class="left-btn-corner">
-        <img src="${pageContext.request.contextPath}/images/discount/pngimg 1.png" alt="" />
-      </div>
-      <div class="bottom-wave">
-        <img src="${pageContext.request.contextPath}/images/discount/vawe.png" alt="" />
-        <img src="${pageContext.request.contextPath}/images/discount/vawe (1).png" alt="" />
-      </div>
-
-      <div class="product-container">
-        <div class="top-header">
-          <img
-            src="${pageContext.request.contextPath}/images/discount/sassy-blonde-girl-show-okay-sign-wink-smiling-assure-you-will-like-this-best-choice-ever-made_176420-33331-removebg-preview 1.png"
-            alt=""
-          />
-          <h2>DISCOUNT OF THE DAY</h2>
-        </div>
-        <div class="product-card-container">
-    <c:forEach items="${discountedItems}" var="item">
-        <div class="card">
-    <img src="${pageContext.request.contextPath}${item.getImage()}" alt="" />
-    <span>${item.getName()}</span>
-    <div>
-      <span class="price">${item.getPrice()} Rs.</span>
-    <span class="discounted-price">${item.getDiscountedPrice()} Rs. Only!!</span>
     </div>
-</div>
+    <!-- Swiper -->
 
-    </c:forEach>
-</div>
-
-      </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/discount.js"></script>
+    <script src="${pageContext.request.contextPath}/js/useritems.js"></script>
     <script src="${pageContext.request.contextPath}/js/swiper-button.js"></script>
   </body>
 </html>
