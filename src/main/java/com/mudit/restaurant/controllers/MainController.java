@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,9 +45,15 @@ public class MainController {
     }
     @RequestMapping("/dashboard")
     public String dashboard(Model model){
-        List<Item> featuredItems=service.getFeaturedItems();
-        System.out.println(featuredItems);
-        model.addAttribute("featuredItems",featuredItems);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            List<Item> favItems=service.getFavouriteItems(username);
+            model.addAttribute("favourites",favItems);
+            List<Item> featuredItems=service.getFeaturedItems();
+            model.addAttribute("featuredItems",featuredItems);
+        }
         return "user_dashboard";
     }
     @RequestMapping("/items/{id}")
@@ -81,14 +88,43 @@ public class MainController {
         return "login";
     }
 
-//    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public String submitLogin(@RequestParam("email") String email,@RequestParam("password") String password){
-//        System.out.println("hello world");
-////        Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
-////        authentication = authenticationManagerBean.authenticate(authentication);
-////        System.out.println(authentication.isAuthenticated());
-////        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        return "homepage";
-//    }
+    @RequestMapping("/favourite")
+    public String favourites(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            List<Item> favItems=service.getFavouriteItems(username);
+            model.addAttribute("favourites",favItems);
+        }
+        return "favourite";
+    }
+    @RequestMapping("/addfavourite/{id}")
+    public String favourites(@PathVariable("id") int id,RedirectAttributes attributes){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            if(service.addFavItem(id,username)){
+                Message message = new Message();
+                message.setTitle("Success");
+                message.setDesc("Item added to favourites successfully");
+                attributes.addFlashAttribute("message", message);
+            }
+            else{
+                Message message = new Message();
+                message.setTitle("Error");
+                message.setDesc("Error occoured while adding the item to favourites");
+                attributes.addFlashAttribute("message", message);
+            }
 
+        }
+        else {
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while adding the item to favourites");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/favourite";
+    }
 }

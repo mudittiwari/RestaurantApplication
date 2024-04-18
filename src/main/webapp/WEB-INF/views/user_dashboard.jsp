@@ -271,20 +271,25 @@
           Featured Items
         </div>
 
+
         <div class="w-full px-16 w-full flex flex-wrap justify-start gap-12">
           <c:forEach items="${featuredItems}" var="item">
-          <div class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center">
+           
+<div class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center">
   <div class="relative w-full px-2">
     <img class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
       src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
-    <button class="absolute top-0 right-0 mt-2 mr-2">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
-        <path
-          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-        </path>
-      </svg>
-    </button>
+    <a href="${pageContext.request.contextPath}/${favourites.contains(item) ? 'removefavourite' : 'addfavourite'}/${item.getId()}">
+  <button class="absolute top-0 right-0 mt-2 mr-2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+      fill="${favourites.contains(item) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+      <path
+        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+      </path>
+    </svg>
+  </button>
+</a>
   </div>
   <div class="font-bold text-xl mt-5 titleColor">${item.getName()}</div>
   <div class="py-2 text-center">
@@ -308,6 +313,7 @@
     </div>
   </div>
 </div>
+
 
           </c:forEach>
         </div>
@@ -690,5 +696,15 @@
         };
       };
     </script>
+    <script>
+  function containsItem(list, item) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].id === item.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+</script>
   </body>
 </html>

@@ -80,4 +80,43 @@ public class UserRepo {
         return lst;
     }
 
+
+    public User getUserByUsername(String username){
+        User user=null;
+        try (Session session = sessionFactory.openSession()) {
+            user=session.get(User.class,username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    public boolean addFavItem(int itemId,String username){
+        Transaction tx=null;
+        try (Session session = sessionFactory.openSession()) {
+            tx=session.beginTransaction();
+            User user=session.get(User.class,username);
+            Item item=session.get(Item.class,itemId);
+            List<Item> favourites=user.getFavourites();
+            favourites.add(item);
+            user.setFavourites(favourites);
+            session.save(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            assert tx != null;
+            tx.rollback();
+        }
+        return false;
+    }
+    public List<Item> getFavouriteItems(String username){
+        List<Item> favItems=null;
+        try (Session session = sessionFactory.openSession()) {
+            User user=session.get(User.class,username);
+            favItems=user.getFavourites();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return favItems;
+    }
 }

@@ -250,16 +250,16 @@
       </div>
 
       <!-- Main Content -->
-      <div class="flex flex-col w-full">
+      <div class="flex flex-col w-3/4 mx-auto my-auto h-screen">
         <div class="w-full text-2xl font-bold mb-4 flex justify-center">
           <img src="${pageContext.request.contextPath}/images/resources/discount-banner.png" class="w-2/5 mt-1" />
         </div>
 
         <!-- Products -->
-      <div class="w-full relative">
+      <div class="w-full h-full relative">
   <!-- Select Product -->
-  <div class="swiper mt-32">
-    <div class="swiper-wrapper">
+  <div class="swiper mt-32 h-full">
+    <div class="swiper-wrapper h-full">
       <!-- Product Cards -->
       <c:forEach items="${discountedItems}" var="item" varStatus="loop">
         <!-- Open new swiper-slide for every 3 products -->
@@ -267,9 +267,9 @@
           <div class="swiper-slide">
             <div class="w-full flex flex-wrap justify-center gap-12">
         </c:if>
-        <div class="w-1/3 flex justify-center flex-col align-center">
-          <div class="w-full bg-white overflow-hidden border border-white rounded-3xl flex justify-center flex-col items-center">
-            <img class="w-full object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+        <div class="w-1/4 h-full flex justify-center flex-col align-center">
+          <div class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center">
+            <img class="w-2/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
               src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
           </div>
           <div class="w-full font-bold text-xl mt-5 text-center">
@@ -285,12 +285,12 @@
     </div>
   </div>
   <!-- Add Pagination -->
-  <div class="swiper-pagination"></div>
+  <!-- <div class="swiper-pagination"></div> -->
   <!-- Add Navigation -->
-  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-prev flex"></div>
   <div class="swiper-button-next"></div>
   <!-- Add Scrollbar -->
-  <div class="swiper-scrollbar"></div>
+  <!-- <div class="swiper-scrollbar"></div> -->
 </div>
 
       <!-- Right Navbar -->

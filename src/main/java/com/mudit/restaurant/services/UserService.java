@@ -37,4 +37,13 @@ public class UserService {
     public List<Category> getCategories(){
         return repo.getCategories();
     }
+    public User getUserByUsername(String username){
+        return repo.getUserByUsername(username);
+    }
+    public boolean addFavItem(int itemId,String username){
+        return repo.addFavItem(itemId,username);
+    }
+    public List<Item> getFavouriteItems(String username){
+        return repo.getFavouriteItems(username);
+    }
 }

@@ -26,7 +26,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Authority authority;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Item> favourites=new ArrayList<>();
 
     public List<Item> getFavourites() {

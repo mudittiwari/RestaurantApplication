@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.util.Objects;
 
 @Entity
 public class Item {
@@ -111,5 +112,15 @@ public class Item {
                 ", image='" + image + '\'' +
                 ", inStock=" + inStock +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        Item item=(Item) o;
+        return this.id == item.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
