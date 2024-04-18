@@ -46,4 +46,7 @@ public class UserService {
     public List<Item> getFavouriteItems(String username){
         return repo.getFavouriteItems(username);
     }
+    public boolean removeFavItem(int itemId,String username){
+        return repo.removeFavItem(itemId,username);
+    }
 }

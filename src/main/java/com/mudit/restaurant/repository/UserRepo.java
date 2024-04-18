@@ -109,6 +109,25 @@ public class UserRepo {
         }
         return false;
     }
+    public boolean removeFavItem(int itemId,String username){
+        Transaction tx=null;
+        try (Session session = sessionFactory.openSession()) {
+            tx=session.beginTransaction();
+            User user=session.get(User.class,username);
+            Item item=session.get(Item.class,itemId);
+            List<Item> favourites=user.getFavourites();
+            favourites.remove(item);
+            user.setFavourites(favourites);
+            session.save(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            assert tx != null;
+            tx.rollback();
+        }
+        return false;
+    }
     public List<Item> getFavouriteItems(String username){
         List<Item> favItems=null;
         try (Session session = sessionFactory.openSession()) {

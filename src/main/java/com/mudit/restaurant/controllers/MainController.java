@@ -125,6 +125,34 @@ public class MainController {
             message.setDesc("Error occoured while adding the item to favourites");
             attributes.addFlashAttribute("message", message);
         }
-        return "redirect:/favourite";
+        return "redirect:/dashboard";
+    }
+    @RequestMapping("/removefavourite/{id}")
+    public String removeFavourites(@PathVariable("id") int id,RedirectAttributes attributes){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            if(service.removeFavItem(id,username)){
+                Message message = new Message();
+                message.setTitle("Success");
+                message.setDesc("Item removed from favourites successfully");
+                attributes.addFlashAttribute("message", message);
+            }
+            else{
+                Message message = new Message();
+                message.setTitle("Error");
+                message.setDesc("Error occurred while removing the item from favourites");
+                attributes.addFlashAttribute("message", message);
+            }
+
+        }
+        else {
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occurred while removing the item from favourites");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:/dashboard";
     }
 }
