@@ -7,11 +7,11 @@
 
 body {
     font-family: Arial, sans-serif;
-     background-image: url('./resources/bg-image.png');
+     /* background-image: url('./resources/bg-image.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
+    background-position: center;  */
 }
 
 .container {
