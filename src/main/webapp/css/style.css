@@ -163,6 +163,7 @@ main {
 
 .btnBg {
     background-color: #F8B602;
+    font-size: 10px;
 }
 
 .btnBg:hover {
@@ -236,6 +237,9 @@ main {
     left: 33%;
     /* margin-left: 60px; */
     /* margin-top: 100px; */
+}
+button{
+    font-size: 10px;
 }
 
 .button {

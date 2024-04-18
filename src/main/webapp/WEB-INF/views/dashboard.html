@@ -131,7 +131,7 @@
                         class="flex flex-col items-start h-screen bg-white rounded-l-2xl w-2/5"
                       >
                         <img
-                          src="${pageContext.request.contextPath}/images/resources/logo-dona.png"
+                          src="resources/logo-dona.png"
                           class="w-28 h-20 m-12"
                         />
                         <div class="flex">
@@ -252,7 +252,7 @@
           >
             <img
               class="w-full object-fill"
-              src="${pageContext.request.contextPath}/images/resources/items-list.png"
+              src="./resources/items-list.png"
               alt="Banner"
             />
           </div>
@@ -261,7 +261,7 @@
           >
             <img
               class="w-full object-fill"
-              src="${pageContext.request.contextPath}/images/resources/discounts.png"
+              src="./resources/discounts.png"
               alt="Banner"
             />
           </div>
@@ -278,7 +278,7 @@
           >
             <img
               class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-              src="${pageContext.request.contextPath}${item.getImage()}"
+              src="https://imgs.search.brave.com/0qm_o5AaNTGdNe9x79C5Y69n9bYboyhOIm6oiusF51k/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/NTAzMTcxMzgtMTAw/MDA2ODdhNzJiP3E9/ODAmdz0xMDAwJmF1/dG89Zm9ybWF0JmZp/dD1jcm9wJml4bGli/PXJiLTQuMC4zJml4/aWQ9TTN3eE1qQTNm/REI4TUh4elpXRnlZ/Mmg4TVRoOGZHSmxa/V1lsTWpCaWRYSm5a/WEo4Wlc1OE1IeDhN/SHg4ZkRBPQ.jpeg"
               alt="Product Image"
             />
             <div class="font-bold text-xl mt-5 titleColor">${item.getName()}</div>
@@ -314,19 +314,18 @@
                 </div>
               </div>
             </div>
-            <div class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm">
+            <div class="pt-2 pb-4 w-full flex justify-between text-sm">
+              <div class="btnBg text-white font-bold py-2 m-2 rounded-2xl px-4">
+                In Stock
+              </div>
               <button
-                class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
+                class="btnBg text-white font-bold py-2 px-4 m-2 rounded-2xl"
               >
                 Add to Cart - ${item.getPrice()}
               </button>
-              <div class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4">
-                In Stock
-              </div>
-              
             </div>
           </div>
-          </c:forEach>
+          
         </div>
       </div>
       <!-- Right Navbar -->
@@ -356,13 +355,13 @@
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img src="resources/fav-icon.png" class="w-7 h-6 mt-1" />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
-                    <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                    <img src="resources/orders.png" class="w-7 h-7" />
                   </button>
                 </div>
               </nav>
@@ -374,14 +373,14 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img src="resources/fav-icon.png" class="w-7 h-6 mt-1" />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
                     <div class="flex gap-7">
-                      <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                      <img src="resources/orders.png" class="w-7 h-7" />
                     </div>
                   </button>
                 </div>
