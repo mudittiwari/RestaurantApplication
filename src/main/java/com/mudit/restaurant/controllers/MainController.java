@@ -34,6 +34,7 @@ public class MainController {
     @RequestMapping("/")
     public String home(Model model){
         List<Item> discountedItems=service.getDiscountedItems();
+        System.out.println(discountedItems);
         model.addAttribute("discountedItems",discountedItems);
         return "discount";
     }

@@ -137,7 +137,7 @@
                         class="flex flex-col items-start h-screen bg-white rounded-l-2xl w-2/5"
                       >
                         <img
-                          src="${pageContext.request.contextPath}/images/resources/logo-dona.png"
+                          src="resources/logo-dona.png"
                           class="w-28 h-20 m-12"
                         />
                         <div class="flex">
@@ -252,46 +252,46 @@
       <!-- Main Content -->
       <div class="flex flex-col w-full">
         <div class="w-full text-2xl font-bold mb-4 flex justify-center">
-          <img src="${pageContext.request.contextPath}/images/resources/discount-banner.png" class="w-2/5 mt-1" />
+          <img src="resources/discount-banner.png" class="w-2/5 mt-1" />
         </div>
 
         <!-- Products -->
-      <div class="w-full relative">
-        <!-- Select Product -->
-        <div class="swiper mt-32">
-          <div class="swiper-wrapper">
+        <div class="w-full relative">
+          <!-- Select Product -->
+
+          <div class="swiper">
+            <div class="swiper-wrapper mt-32">
+               <c:forEach items="${discountedItems}" var="item" varStatus="loop">
+      <c:if test="${loop.index % 6 == 0}">
+        <div class="swiper-slide">
+          <div class="w-full flex flex-wrap justify-center gap-12">
             <!-- Product Cards -->
-            <c:forEach items="${discountedItems}" var="item" varStatus="loop">
-              <!-- Open new swiper-slide for every 2 products -->
-              <c:if test="${loop.index % 1 == 0}">
-                <div class="swiper-slide">
-                  <div class="w-full flex flex-wrap justify-center gap-12">
-              </c:if>
-              <div class="w-1/4 flex justify-center flex-col align-center">
-                <div class="w-full bg-white overflow-hidden border border-white rounded-3xl flex justify-center flex-col items-center">
-                  <img class="w-full object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                    src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
-                </div>
-                <div class="w-full font-bold text-xl mt-5 text-center">
-                  ${item.getName()}
-                </div>
-              </div>
-             
-              <!-- Close the swiper-slide if this is the 2nd product or the last product -->
-              <c:if test="${loop.index % 1 == 0 or loop.last}">
+            <c:forEach varStatus="innerLoop" begin="${loop.index}" end="${loop.index + 5}" var="innerItem">
+              <c:if test="${innerLoop.index < discountedItems.size()}">
+                <div class="w-1/4 flex justify-center flex-col align-center">
+                  <div class="w-full bg-white overflow-hidden border border-white rounded-3xl flex justify-center flex-col items-center">
+                    <img class="w-full object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                      src="${pageContext.request.contextPath}${innerItem.getImage()}" alt="Product Image" />
+                  </div>
+                  <div class="w-full font-bold text-xl mt-5 text-center">
+                    ${innerItem.getName()}
                   </div>
                 </div>
               </c:if>
             </c:forEach>
           </div>
         </div>
-          <!-- Add Pagination -->
-          <div class="swiper-pagination"></div>
-          <!-- Add Navigation -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-          <!-- Add Scrollbar -->
-          <div class="swiper-scrollbar"></div>
+      </c:if>
+    </c:forEach>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <div class="swiper-scrollbar"></div>
+          </div>
         </div>
       </div>
       <!-- Right Navbar -->
@@ -321,13 +321,13 @@
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img src="resources/fav-icon.png" class="w-7 h-6 mt-1" />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
-                    <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                    <img src="resources/orders.png" class="w-7 h-7" />
                   </button>
                 </div>
               </nav>
@@ -339,14 +339,14 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img src="resources/fav-icon.png" class="w-7 h-6 mt-1" />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
                     <div class="flex gap-7">
-                      <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                      <img src="resources/orders.png" class="w-7 h-7" />
                     </div>
                   </button>
                 </div>

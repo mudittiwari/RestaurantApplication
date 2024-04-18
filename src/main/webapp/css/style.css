@@ -1,0 +1,272 @@
+/* Reset and global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* background-image: url('./resources/bg-image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.discount-banner {
+    background-color: #ffc107;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount-banner img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+/* Main content styles */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.category,
+.popular-dishes {
+    width: 48%;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.category-icons {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.category-icons div {
+    text-align: center;
+    margin: 10px;
+}
+
+.category-icons img {
+    width: 50px;
+    height: 50px;
+}
+
+.dish-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dish-card {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dish-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.dish-card button {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px;
+    }
+
+    .discount-banner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .discount-banner img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .category,
+    .popular-dishes {
+        width: 100%;
+    }
+}
+
+#rightnavbar {
+    position: fixed !important;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+#leftnavbar {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+
+.btnBg {
+    background-color: #F8B602;
+}
+
+.btnBg:hover {
+    background-color: #f8a202;
+}
+
+.textColor {
+    color: #F8B602;
+}
+
+.titleColor {
+    color: #A098AE;
+}
+
+.bg-Transparent {
+    background-color: transparent;
+}
+
+.bg-Image {
+    background-image: url('./resources/bg-image.png');
+    background-size: 105% 105%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.swiper-container {
+    width: 100%;
+}
+
+.swiper-slide {
+    background-size: cover;
+    background-position: 50%;
+    min-height: 20vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+    height: 70%;
+
+
+    &.swiper-slide-active {
+        transform: scale(1.4);
+        z-index: 2;
+        transition: all 0.5s;
+        transition-delay: 0.1s;
+        transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+        padding-top: 0px;
+    }
+}
+
+.productTitle {
+    color: #EB6D01;
+}
+
+.button-container {
+    width: 500px;
+    height: 60px;
+    display: flex;
+    position: absolute;
+    /* Add position relative */
+    background-color: white;
+    border-radius: 50px;
+    top: 3%;
+    left: 33%;
+    /* margin-left: 60px; */
+    /* margin-top: 100px; */
+}
+
+.button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    /* Add position relative */
+}
+
+.button.active {
+    color: red;
+}
+
+.border-highlight {
+    position: absolute;
+    height: inherit;
+    width: 120px;
+    /* Width of the border highlight element, adjust as needed */
+    background-color: transparent;
+    transition: transform 0.3s;
+    /* Add transition for smooth animation */
+    border: 1px solid red;
+    /* Initial position for border */
+    border-radius: 50px;
+    /* Initial position for border */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    /* Ensure it stays behind buttons */
+}
