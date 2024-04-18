@@ -56,6 +56,12 @@ public class MainController {
         }
         return "user_dashboard";
     }
+    @RequestMapping("/items")
+    public String allItems(Model model){
+        List<Item> items=service.getAllItems();
+        model.addAttribute(items);
+        return "allitems";
+    }
     @RequestMapping("/items/{id}")
     public String items(@PathVariable("id") int id, Model model){
         List<Item> items=service.getCategoryItems(id);

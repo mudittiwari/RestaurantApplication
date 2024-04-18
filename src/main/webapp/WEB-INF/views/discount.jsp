@@ -158,7 +158,7 @@
                                     fill="white"
                                   />
                                 </svg>
-                                <a href="index.php">Dashboard</a>
+                                <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -175,7 +175,7 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-admin.php">Food Order</a>
+                                <a href="${pageContext.request.contextPath}/items">Food Order</a>
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -192,7 +192,7 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-category.php">Favourite</a>
+                                <a href="${pageContext.request.contextPath}/favourite">Favourite</a>
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -217,7 +217,7 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-food.php">Order History</a>
+                                <a href="${pageContext.request.contextPath}/orders">Order History</a>
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -338,7 +338,9 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
+                  <a href="${pageContext.request.contextPath}/favourite">
                   <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                </a>
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"

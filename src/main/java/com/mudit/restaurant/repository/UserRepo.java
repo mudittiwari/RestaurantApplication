@@ -138,4 +138,16 @@ public class UserRepo {
         }
         return favItems;
     }
+    public List<Item> getAllItems(){
+        List<Item> lst=new ArrayList<>();
+        try(Session session=sessionFactory.openSession()){
+            String hql = "FROM Item";
+            Query<Item> query = session.createQuery(hql, Item.class);
+            lst = query.list();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lst;
+    }
 }
