@@ -181,13 +181,6 @@ main {
     background-color: transparent;
 }
 
-.bg-Image {
-    background-image: url('./resources/bg-image.png');
-    background-size: 105% 105%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
 
 * {
     font-family: 'Poppins', sans-serif;

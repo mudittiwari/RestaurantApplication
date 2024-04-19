@@ -24,6 +24,15 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css"
     />
+    <style>
+      body {
+          background-image: url("${pageContext.request.contextPath}/images/resources/bg-image.png");
+          background-size: 105% 105%;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-position: center;
+      }
+  </style>
   </head>
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
     <div class="flex w-full justify-start">
