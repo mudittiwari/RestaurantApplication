@@ -411,16 +411,14 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 Loading.....
               </div>
               <!-- Sidebar -->
-              <div
-                class="flex flex-shrink-0 transition-all right-0 justify-end"
-              >
+              <div class="flex flex-shrink-0 transition-all right-0 justify-end">
                 <!-- Mobile bottom bar -->
                 <nav
                   aria-label="Options"
                   class="absolute h-20 right-2 top-0 flex flex-row items-start z-0 justify-end border-t border-yellow-100 sm:hidden rounded-t-3xl w-40"
                 >
                   <!-- Menu button -->
-
+  
                   <div class="flex gap-7 items-center">
                     <img
                       src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
@@ -506,7 +504,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                             </svg>
                           </button>
                         </div>
-
+  
                         <div
                           class="flex flex-col items-start h-screen bg-white rounded-l-2xl w-2/5"
                         >
@@ -532,7 +530,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                             >
                                               ${totalProducts}
                                             </div>
-
+  
                                             <svg
                                               xmlns="http://www.w3.org/2000/svg"
                                               width="100%"
@@ -566,10 +564,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         class="w-full rounded-b border-t-0 z-10"
                                       >
                                         <div class="w-full">
-                                          <c:forEach
-                                            var="entry"
-                                            items="${cart}"
-                                          >
+                                          <c:forEach var="entry" items="${cart}">
                                             <c:set
                                               var="item"
                                               value="${entry.key}"
@@ -587,9 +582,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                                   alt="img product"
                                                 />
                                               </div>
-                                              <div
-                                                class="flex-auto text-sm w-32"
-                                              >
+                                              <div class="flex-auto text-sm w-32">
                                                 <div class="font-bold">
                                                   ${item.getName()}
                                                 </div>
@@ -646,13 +639,51 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                               </div>
                                             </div>
                                           </c:forEach>
-
+  
+                                          <div class="flex justify-center flex-col">
+                                            <p class="text-center">
+                                              Select Table Number: ${tableNumber}
+                                            </p>
+                                            <form
+                                              action="${pageContext.request.contextPath}/addtocart"
+                                              method="post"
+                                              class="flex justify-center"
+                                            >
+                                              <select
+                                                name="quantity"
+                                                class="w-20 h-8"
+                                              >
+                                                <c:forEach
+                                                  begin="1"
+                                                  end="10"
+                                                  varStatus="loop"
+                                                >
+                                                  <option
+                                                    value="${loop.index}"
+                                                    <c:if
+                                                      test="${loop.index == 1}"
+                                                    >
+                                                      selected
+                                                    </c:if>
+                                                    >${loop.index}</option
+                                                  >
+                                                </c:forEach>
+                                              </select>
+                                              <input
+                                                type="hidden"
+                                                name="id"
+                                                value="${item.getId()}"
+                                              />
+                                            </form>
+  
                                           <div class="p-4 justify-center flex">
-                                            <button
+                                            <form action="${pageContext.request.contextPath}/addorder">
+                                            <button type="submit"
                                               class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                             >
                                               Checkout $${totalPrice}
                                             </button>
+                                          </form>
                                           </div>
                                         </div>
                                       </div>
@@ -672,6 +703,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
 

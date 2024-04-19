@@ -454,12 +454,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
                 <div class="flex gap-7 items-center">
                   <img
-                   
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
-                   
                     class="w-7 h-6 mt-1"
-                 
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
@@ -676,12 +673,50 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                           </div>
                                         </c:forEach>
 
+                                        <div class="flex justify-center flex-col">
+                                          <p class="text-center">
+                                            Select Table Number: ${tableNumber}
+                                          </p>
+                                          <form
+                                            action="${pageContext.request.contextPath}/addtocart"
+                                            method="post"
+                                            class="flex justify-center"
+                                          >
+                                            <select
+                                              name="quantity"
+                                              class="w-20 h-8"
+                                            >
+                                              <c:forEach
+                                                begin="1"
+                                                end="10"
+                                                varStatus="loop"
+                                              >
+                                                <option
+                                                  value="${loop.index}"
+                                                  <c:if
+                                                    test="${loop.index == 1}"
+                                                  >
+                                                    selected
+                                                  </c:if>
+                                                  >${loop.index}</option
+                                                >
+                                              </c:forEach>
+                                            </select>
+                                            <input
+                                              type="hidden"
+                                              name="id"
+                                              value="${item.getId()}"
+                                            />
+                                          </form>
+
                                         <div class="p-4 justify-center flex">
-                                          <button
+                                          <form action="${pageContext.request.contextPath}/addorder">
+                                          <button type="submit"
                                             class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                           >
                                             Checkout $${totalPrice}
                                           </button>
+                                        </form>
                                         </div>
                                       </div>
                                     </div>
@@ -701,6 +736,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           </div>
         </div>
       </div>
+    </div>
 
       <script
         src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"
