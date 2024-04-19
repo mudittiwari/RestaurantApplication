@@ -670,6 +670,42 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                           </div>
                                         </c:forEach>
 
+                                        <div class="flex justify-center flex-col">
+                                          <p class="text-center">
+                                            Select Table Number: ${tableNumber}
+                                          </p>
+                                          <form
+                                            action="${pageContext.request.contextPath}/addtocart"
+                                            method="post"
+                                            class="flex justify-center"
+                                          >
+                                            <select
+                                              name="quantity"
+                                              class="w-20 h-8"
+                                            >
+                                              <c:forEach
+                                                begin="1"
+                                                end="10"
+                                                varStatus="loop"
+                                              >
+                                                <option
+                                                  value="${loop.index}"
+                                                  <c:if
+                                                    test="${loop.index == 1}"
+                                                  >
+                                                    selected
+                                                  </c:if>
+                                                  >${loop.index}</option
+                                                >
+                                              </c:forEach>
+                                            </select>
+                                            <input
+                                              type="hidden"
+                                              name="id"
+                                              value="${item.getId()}"
+                                            />
+                                          </form>
+
                                         <div class="p-4 justify-center flex">
                                           <form action="${pageContext.request.contextPath}/addorder">
                                           <button type="submit"
