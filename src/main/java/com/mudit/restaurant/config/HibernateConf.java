@@ -30,13 +30,13 @@ public class HibernateConf {
     @Bean
     public DataSource getDataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setUrl("jdbc:mysql://srv1231.hstgr.io:3306/u756147391_restaurantdb");
-        driverManagerDataSource.setUsername("u756147391_mudit");
-        driverManagerDataSource.setPassword("Itsmebro@6");
+//        driverManagerDataSource.setUrl("jdbc:mysql://srv1231.hstgr.io:3306/u756147391_restaurantdb");
+//        driverManagerDataSource.setUsername("u756147391_mudit");
+//        driverManagerDataSource.setPassword("Itsmebro@6");
 
-//        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantdb");
-//        driverManagerDataSource.setUsername("mudit");
-//        driverManagerDataSource.setPassword("itsmebro");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/restaurantdb");
+        driverManagerDataSource.setUsername("mudit");
+        driverManagerDataSource.setPassword("itsmebro");
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         return driverManagerDataSource;
     }
@@ -51,11 +51,11 @@ public class HibernateConf {
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "update");
+                "hibernate.hbm2ddl.auto", "create");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         hibernateProperties.setProperty(
-                "hibernate.show_sql", "false");
+                "hibernate.show_sql", "true");
 
         return hibernateProperties;
     }

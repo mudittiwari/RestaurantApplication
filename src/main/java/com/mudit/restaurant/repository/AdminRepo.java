@@ -134,7 +134,6 @@ public class AdminRepo {
                 List<User> users=getUsers();
                 for(int i=0;i<users.size();i++){
                     users.get(i).getFavourites().remove(item);
-                    System.out.println(users.get(i).getFavourites());
                     session.saveOrUpdate(users.get(i));
                 }
                 session.delete(item);
@@ -261,5 +260,28 @@ public class AdminRepo {
         }
         return true;
     }
-
+    public long getItemCount() {
+        try (Session session = sessionFactory.openSession()) {
+            return (Long) session.createQuery("select count(*) from Item").uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public long getCategoryCount() {
+        try (Session session = sessionFactory.openSession()) {
+            return (Long) session.createQuery("select count(*) from Category").uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public long getUserCount() {
+        try (Session session = sessionFactory.openSession()) {
+            return (Long) session.createQuery("select count(*) from User").uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

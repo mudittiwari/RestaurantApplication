@@ -671,11 +671,13 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         </c:forEach>
 
                                         <div class="p-4 justify-center flex">
-                                          <button
+                                          <form action="${pageContext.request.contextPath}/addorder">
+                                          <button type="submit"
                                             class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                           >
                                             Checkout $${totalPrice}
                                           </button>
+                                        </form>
                                         </div>
                                       </div>
                                     </div>

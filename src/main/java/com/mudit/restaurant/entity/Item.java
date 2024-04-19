@@ -18,13 +18,6 @@ public class Item {
     private double price;
     private double discountedPrice;
 
-    public double getDiscountedPrice() {
-        return discountedPrice;
-    }
-
-    public void setDiscountedPrice(double discountedPrice) {
-        this.discountedPrice = discountedPrice;
-    }
 
     private String image;
     private boolean inStock;
@@ -101,6 +94,13 @@ public class Item {
         this.category = category;
     }
 
+    public double getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
+    }
     @Override
     public String toString() {
         return "Item{" +

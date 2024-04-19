@@ -55,4 +55,13 @@ public class AdminService {
     public boolean removeInStock(int id){
         return adminRepo.removeInStock(id);
     }
+    public long getItemCount(){
+        return adminRepo.getItemCount();
+    }
+    public long getCategoryCount(){
+        return adminRepo.getCategoryCount();
+    }
+    public long getUserCount(){
+        return adminRepo.getUserCount();
+    }
 }

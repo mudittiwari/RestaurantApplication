@@ -33,6 +33,11 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Item> favourites=new ArrayList<>();
 
+
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
+
     public List<Item> getFavourites() {
         return favourites;
     }
@@ -88,7 +93,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public List<Order> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
     @Override
     public String toString() {
         return "User{" +
