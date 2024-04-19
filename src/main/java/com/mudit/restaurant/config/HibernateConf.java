@@ -55,7 +55,7 @@ public class HibernateConf {
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         hibernateProperties.setProperty(
-                "hibernate.show_sql", "true");
+                "hibernate.show_sql", "false");
 
         return hibernateProperties;
     }

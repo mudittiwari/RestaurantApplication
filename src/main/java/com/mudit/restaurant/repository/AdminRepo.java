@@ -22,6 +22,7 @@ public class AdminRepo {
         List<Category> lst=new ArrayList<>();
         try(Session session=sessionFactory.openSession()){
             String hql = "FROM Category";
+
             Query<Category> query = session.createQuery(hql, Category.class);
             lst = query.list();
         }

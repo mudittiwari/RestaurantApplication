@@ -2,6 +2,8 @@
 taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
 language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -366,11 +368,13 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <div
                 class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm"
               >
+              <a href="${pageContext.request.contextPath}/addtocart/${item.getId()}">
                 <button
                   class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
                 >
                   Add to Cart - ${item.getPrice()}
                 </button>
+              </a>
                 <div
                   class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4"
                 >
@@ -501,6 +505,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         >
                                           3
                                         </div>
+                                        <a href="${pageContext.request.contextPath}/addtocart/${item.getId()}">
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           width="100%"
@@ -523,26 +528,30 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                             d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
                                           ></path>
                                         </svg>
+                                      </a>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="w-full rounded-b border-t-0 z-10">
-                                    <div class="w-64">
+                                    <div class="w-full">
+                                      <c:forEach var="entry" items="${cart}">
+                                        <c:set var="item" value="${entry.key}" />
+                                        <c:set var="quantity" value="${entry.value}" />
                                       <div
                                         class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
                                       >
                                         <div class="p-2 w-12">
                                           <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
+                                            src="${pageContext.request.contextPath}${item.getImage()}"
                                             alt="img product"
                                           />
                                         </div>
                                         <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 1</div>
+                                          <div class="font-bold">${item.getName()}</div>
                                           <div class="truncate">
-                                            Product 1 description
+                                            ${item.getDescription()}
                                           </div>
-                                          <div class="text-gray-400">Qt: 2</div>
+                                          <div class="text-gray-400">Qt: ${quantity}</div>
                                         </div>
                                         <div
                                           class="flex flex-col w-18 font-medium items-end"
@@ -582,123 +591,11 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                               ></line>
                                             </svg>
                                           </div>
-                                          $12.22
+                                          ${item.getPrice()}
                                         </div>
                                       </div>
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
-                                            alt="img product"
-                                          />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 2</div>
-                                          <div class="truncate">
-                                            Product 2 long description
-                                          </div>
-                                          <div class="text-gray-400">Qt: 2</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
-                                          <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                                          >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
-                                            >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
-                                          </div>
-                                          $12.22
-                                        </div>
-                                      </div>
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
-                                            alt="img product"
-                                          />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 3</div>
-                                          <div class="truncate">
-                                            Product 3 description
-                                          </div>
-                                          <div class="text-gray-400">Qt: 2</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
-                                          <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                                          >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
-                                            >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
-                                          </div>
-                                          $12.22
-                                        </div>
-                                      </div>
+                                      </c:forEach>
+                                      
                                       <div class="p-4 justify-center flex">
                                         <button
                                           class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"

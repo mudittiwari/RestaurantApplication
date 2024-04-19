@@ -4,7 +4,9 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +16,8 @@ public class User {
 
     @Length(min = 5,max = 40,message = "name validation failed")
     private String name;
+
+
 
     @Length(min = 8,message = "password validation failed")
     private String password;
@@ -96,4 +100,5 @@ public class User {
                 ", authority=" + authority +
                 '}';
     }
+
 }

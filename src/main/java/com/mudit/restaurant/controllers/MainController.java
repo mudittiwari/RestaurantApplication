@@ -7,6 +7,7 @@ import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.services.UserService;
 import com.mudit.restaurant.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -170,5 +172,48 @@ public class MainController {
             attributes.addFlashAttribute("message", message);
         }
         return "redirect:/dashboard";
+    }
+
+
+    @RequestMapping("/addtocart/{id}")
+    public String addToCart(@PathVariable("id") int id, RedirectAttributes attributes, HttpServletRequest request){
+        String referer = request.getHeader("referer");
+        System.out.println(referer);
+        Item item=service.getItemById(id);
+        if(service.addCartItem(item,request.getSession())){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item removed from cart successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while removing the item from cart");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:" + referer;
+    }
+
+
+
+    @RequestMapping("/removefromcart/{id}")
+    public String removeFromCart(@PathVariable("id") int id, RedirectAttributes attributes, HttpServletRequest request){
+        String referer = request.getHeader("referer");
+        System.out.println(referer);
+        Item item=service.getItemById(id);
+        if(service.removeCartItem(item,request.getSession())){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Item removed from cart successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while removing the item from cart");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:" + referer;
     }
 }

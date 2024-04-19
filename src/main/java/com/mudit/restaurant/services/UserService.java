@@ -6,10 +6,14 @@ import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.Item;
 import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.repository.UserRepo;
+import org.apache.logging.log4j.core.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -52,4 +56,48 @@ public class UserService {
     public List<Item> getAllItems(){
         return repo.getAllItems();
     }
+    public Item getItemById(int id){
+        return repo.getItemById(id);
+    }
+    public boolean addCartItem(Item item, HttpSession session) {
+        Map<Item,Integer> cart = (Map<Item,Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+        if (cart.containsKey(item)) {
+            cart.put(item, cart.get(item) + 1);
+        } else {
+            cart.put(item, 1);
+        }
+        session.setAttribute("cart", cart);
+        System.out.println(session.getAttribute("cart"));
+        return true;
+    }
+    public Map<Item,Integer> getCart(HttpSession session) {
+        Map<Item,Integer> cart = (Map<Item,Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+        return cart;
+    }
+    public boolean removeCartItem(Item item, HttpSession session) {
+        Map<Item,Integer> cart = (Map<Item,Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            return false; // Cart is empty, nothing to remove
+        }
+
+        if (cart.containsKey(item)) {
+            int quantity = cart.get(item);
+            if (quantity == 1) {
+                cart.remove(item);
+            } else {
+                cart.put(item, quantity - 1);
+            }
+            session.setAttribute("cart", cart);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
