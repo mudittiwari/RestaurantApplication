@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -58,8 +61,15 @@ public class MainController {
     }
     @RequestMapping("/items")
     public String allItems(Model model){
-        List<Item> items=service.getAllItems();
-        model.addAttribute(items);
+        Map<String, List<Item>> items=new HashMap<>();
+        List<Category> categories=service.getCategories();
+        for (int i=0;i<categories.size();i++){
+            String category=categories.get(i).getName();
+            int categoryId=categories.get(i).getId();
+            List<Item> categoryItems=service.getCategoryItems(categoryId);
+            items.put(category,categoryItems);
+        }
+        model.addAttribute("items",items);
         return "allitems";
     }
     @RequestMapping("/items/{id}")

@@ -1,7 +1,6 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <%@
+taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
+language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +20,10 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
-   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/css/style.css"
+    />
   </head>
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
     <div class="flex w-full justify-start">
@@ -158,7 +160,10 @@
                                     fill="white"
                                   />
                                 </svg>
-                                <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/dashboard"
+                                  >Dashboard</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -175,7 +180,10 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="${pageContext.request.contextPath}/items">Food Order</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/items"
+                                  >Food Order</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -192,7 +200,10 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="${pageContext.request.contextPath}/favourite">Favourite</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/favourite"
+                                  >Favourite</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -217,7 +228,10 @@
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="${pageContext.request.contextPath}/orders">Order History</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/orders"
+                                  >Order History</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -252,47 +266,52 @@
       <!-- Main Content -->
       <div class="flex flex-col w-3/4 mx-auto my-auto h-screen">
         <div class="w-full text-2xl font-bold mb-4 flex justify-center">
-          <img src="${pageContext.request.contextPath}/images/resources/discount-banner.png" class="w-2/5 mt-1" />
+          <img
+            src="${pageContext.request.contextPath}/images/resources/discount-banner.png"
+            class="w-2/5 mt-1"
+          />
         </div>
 
         <!-- Products -->
-      <div class="w-full h-full relative">
-  <!-- Select Product -->
-  <div class="swiper mt-32 h-full">
-    <div class="swiper-wrapper h-full">
-      <!-- Product Cards -->
-      <c:forEach items="${discountedItems}" var="item" varStatus="loop">
-        <!-- Open new swiper-slide for every 3 products -->
-        <c:if test="${loop.index % 3 == 0}">
+        <div class="w-full h-full relative">
+          <!-- Select Product -->
+          <div class="swiper mt-32 h-full">
+            <div class="swiper-wrapper h-full">
+              <!-- Product Cards -->
+              <c:forEach items="${discountedItems}" var="item" varStatus="loop">
+                <!-- Open new swiper-slide for every 3 products -->
+                <c:if test="${loop.index % 3 == 0}">
           <div class="swiper-slide">
             <div class="w-full flex flex-wrap justify-center gap-12">
         </c:if>
-        <div class="w-1/4 h-full flex justify-center flex-col align-center">
-          <div class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center">
-            <img class="w-2/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-              src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
-          </div>
-          <div class="w-full font-bold text-xl mt-5 text-center">
-            ${item.getName()}
-          </div>
-        </div>
-        <!-- Close the swiper-slide if this is the 3rd product or the last product -->
-        <c:if test="${loop.index % 3 == 2 or loop.last}">
+                <div
+                  class="w-1/4 h-full flex justify-center flex-col align-center"
+                >
+                  <div
+                    class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center"
+                  >
+                    <img
+                      class="w-2/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                      src="${pageContext.request.contextPath}${item.getImage()}"
+                      alt="Product Image"
+                    />
+                  </div>
+                  <div class="w-full font-bold text-xl mt-5 text-center">
+                    ${item.getName()}
+                  </div>
+                </div>
+                <!-- Close the swiper-slide if this is the 3rd product or the last product -->
+                <c:if test="${loop.index % 3 == 2 or loop.last}">
             </div>
           </div>
         </c:if>
-      </c:forEach>
-    </div>
-  </div>
-  <!-- Add Pagination -->
-  <!-- <div class="swiper-pagination"></div> -->
-  <!-- Add Navigation -->
-  <div class="swiper-button-prev flex"></div>
-  <div class="swiper-button-next"></div>
-  <!-- Add Scrollbar -->
-  <!-- <div class="swiper-scrollbar"></div> -->
-</div>
-
+              </c:forEach>
+            </div>
+          </div>
+          <div class="swiper-button-prev flex"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
       <!-- Right Navbar -->
       <div class="flex justify-end right-0" id="rightnavbar">
         <div
@@ -320,13 +339,19 @@
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img
+                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    class="w-7 h-6 mt-1"
+                  />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
-                    <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                    <img
+                      src="${pageContext.request.contextPath}/images/resources/orders.png"
+                      class="w-7 h-7"
+                    />
                   </button>
                 </div>
               </nav>
@@ -339,15 +364,21 @@
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
                   <a href="${pageContext.request.contextPath}/favourite">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
-                </a>
+                    <img
+                      src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                      class="w-7 h-6 mt-1"
+                    />
+                  </a>
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
                     <div class="flex gap-7">
-                      <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                      <img
+                        src="${pageContext.request.contextPath}/images/resources/orders.png"
+                        class="w-7 h-7"
+                      />
                     </div>
                   </button>
                 </div>
