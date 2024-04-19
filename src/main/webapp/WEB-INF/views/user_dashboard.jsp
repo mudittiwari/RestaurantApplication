@@ -110,7 +110,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <!-- Left mini bar -->
               <nav
                 aria-label="Options"
-                class="z-20 flex-col items-center flex-shrink-0 hidden w-16 sm:flex rounded-tr-3xl rounded-br-3xl"
+                class="h-20 z-20 flex-col items-center flex-shrink-0 hidden w-16 sm:flex rounded-tr-3xl rounded-br-3xl"
               >
                 <!-- Logo -->
                 <div class="flex-shrink-0"></div>
@@ -188,7 +188,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="white"
                                   />
                                 </svg>
-                                <a href="index.php">Dashboard</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/dashboard"
+                                  >Dashboard</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -205,7 +208,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-admin.php">Food Order</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/items"
+                                  >Food Order</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -222,7 +228,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-category.php">Favourite</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/favourite"
+                                  >Favourite</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -247,7 +256,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-food.php">Order History</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/orders"
+                                  >Order History</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -433,14 +445,18 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <!-- Mobile bottom bar -->
               <nav
                 aria-label="Options"
-                class="right-0 top-0 flex flex-row items-start z-0 justify-end border-t border-yellow-100 sm:hidden rounded-t-3xl"
+                class="absolute h-20 right-2 top-0 flex flex-row items-start z-0 justify-end border-t border-yellow-100 sm:hidden rounded-t-3xl w-40"
               >
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
                   <img
+                   
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    href="${pageContext.request.contextPath}/favourite"
+                   
                     class="w-7 h-6 mt-1"
+                 
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
@@ -457,7 +473,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <!-- Left mini bar -->
               <nav
                 aria-label="Options"
-                class="bg-Transparent z-20 flex-col items-center flex-shrink-0 right-0 justify-start hidden w-28 sm:flex rounded-tr-3xl rounded-br-3xl"
+                class="absolute h-10 right-2 top-0 bg-Transparent z-20 flex-col items-center flex-shrink-0 right-0 justify-start hidden w-28 sm:flex rounded-tr-3xl rounded-br-3xl"
               >
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
@@ -503,7 +519,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                       <div class="flex justify-end">
                         <button
                           @click="isSidebarOpen = false"
-                          class="p-2 mt-8 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
+                          class="p-2 mt-12 z-20 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

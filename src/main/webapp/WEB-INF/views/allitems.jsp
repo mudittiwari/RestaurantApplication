@@ -2,6 +2,18 @@
 taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
 language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<c:set var="totalProducts" value="0" />
+<c:forEach var="quantity" items="${cart.values()}">
+  <c:set var="totalProducts" value="${totalProducts + quantity}" />
+</c:forEach>
+<c:set var="totalPrice" value="0" />
+<c:forEach var="entry" items="${cart}">
+    <c:set var="item" value="${entry.key}" />
+    <c:set var="quantity" value="${entry.value}" />
+    <c:set var="subtotal" value="${item.price * quantity}" />
+    <c:set var="totalPrice" value="${totalPrice + subtotal}" />
+</c:forEach>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +34,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
+    <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
     <link
       rel="stylesheet"
       type="text/css"
@@ -39,6 +52,16 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   </head>
 
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
+
+    <c:if test="${not empty message}">
+      <div id="overlay" class="overlay" onclick="hidePopup()"></div>
+      <div id="popup" class="popup">
+          <h2>${message.getTitle()}</h2>
+          <p>${message.getDesc()}</p>
+          <button class="popupbutton" onclick="hidePopup()">Close</button>
+      </div>
+  </c:if>
+
     <div class="flex w-full justify-start">
       <!-- Left Navbar -->
       <div class="flex justify-start left-0" id="leftnavbar">
@@ -95,7 +118,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <!-- Left mini bar -->
               <nav
                 aria-label="Options"
-                class="z-20 flex-col items-center flex-shrink-0 hidden w-16 sm:flex rounded-tr-3xl rounded-br-3xl"
+                class="h-20 z-20 flex-col items-center flex-shrink-0 hidden w-16 sm:flex rounded-tr-3xl rounded-br-3xl"
               >
                 <!-- Logo -->
                 <div class="flex-shrink-0"></div>
@@ -173,7 +196,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="white"
                                   />
                                 </svg>
-                                <a href="index.php">Dashboard</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/dashboard"
+                                  >Dashboard</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -190,7 +216,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-admin.php">Food Order</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/items"
+                                  >Food Order</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -207,7 +236,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-category.php">Favourite</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/favourite"
+                                  >Favourite</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
@@ -232,27 +264,32 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                     fill="#A098AE"
                                   />
                                 </svg>
-                                <a href="manage-food.php">Order History</a>
+                                <a
+                                  href="${pageContext.request.contextPath}/orders"
+                                  >Order History</a
+                                >
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
-                                x-data="{ isOpen: false }">
+                                x-data="{ isOpen: false }"
+                              >
                                 <button
                                   @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})"
                                   class="transition-opacity py-2 gap-4 flex items-center rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2"
-                                ><svg
-                                width="40"
-                                height="40"
-                                viewBox="0 0 40 40"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M24.6438 26.3562L24.5688 23.7C25.1313 23.5937 25.9188 22.6437 26.2375 22.1375L25.1625 19.725C24.5688 19.6313 23.3375 19.575 22.8813 19.925L20.9563 18.0938C21.275 17.625 21.1625 16.4 21.025 15.8188L18.5563 14.875C18.075 15.2187 17.1688 16.0563 17.0938 16.625L14.4375 16.6937C14.3313 16.1312 13.375 15.3562 12.875 15.0312L10.4625 16.1062C10.3688 16.7 10.3125 17.9313 10.6625 18.3875L8.83755 20.3125C8.36255 19.9937 7.13755 20.1125 6.5563 20.2437L5.61255 22.7063C5.9563 23.2 6.7938 24.0938 7.3563 24.175L7.4313 26.8312C6.87505 26.9438 6.0938 27.8875 5.7688 28.3937L6.85005 30.8062C7.43755 30.9 8.6688 30.95 9.12505 30.6125L11.05 32.4312C10.7313 32.9 10.85 34.1313 10.9813 34.7125L13.4438 35.6562C13.9313 35.3062 14.8375 34.4688 14.9125 33.9062L17.5688 33.8312C17.6813 34.4 18.625 35.175 19.1375 35.4937L21.5438 34.425C21.6438 33.825 21.6875 32.6 21.35 32.1437L23.1688 30.2125C23.6438 30.5375 24.8688 30.4187 25.4563 30.2875L26.3938 27.8187C26.0438 27.3375 25.2125 26.4375 24.6438 26.3562ZM18.8188 26.3375C18.6062 26.895 18.233 27.3769 17.7465 27.7224C17.26 28.0678 16.682 28.2612 16.0855 28.2781C15.4891 28.295 14.9011 28.1347 14.3957 27.8174C13.8904 27.5001 13.4906 27.0401 13.2467 26.4955C13.0028 25.951 12.9259 25.3463 13.0257 24.7581C13.1254 24.1698 13.3974 23.6243 13.8072 23.1906C14.217 22.7569 14.7462 22.4545 15.3278 22.3215C15.9095 22.1886 16.5175 22.2311 17.075 22.4437C17.4456 22.5844 17.7847 22.7969 18.0729 23.0689C18.3612 23.3408 18.593 23.667 18.755 24.0288C18.917 24.3905 19.006 24.7806 19.0169 25.1768C19.0279 25.5729 18.9606 25.9674 18.8188 26.3375ZM34.375 9.1625C34.0813 8.91875 33.3875 8.4875 33.0438 8.6L31.9875 6.8C32.25 6.55625 32.2125 5.7375 32.1438 5.36875L30.3375 4.34375C29.9813 4.475 29.2626 4.8625 29.1875 5.2125L27.1 5.23125C27.0188 4.88125 26.2938 4.50625 25.9375 4.375L24.15 5.43125C24.0875 5.8 24.0625 6.61875 24.325 6.8625L23.3 8.675C22.95 8.56875 22.2625 9.0125 21.975 9.25625L21.9938 11.3312C22.2875 11.575 22.9813 12 23.325 11.8938L24.3813 13.6938C24.1188 13.9375 24.1563 14.7563 24.225 15.125L26.0313 16.15C26.3813 16.0187 27.1 15.6313 27.1813 15.2812L29.2625 15.2625C29.35 15.6125 30.075 15.9875 30.4313 16.1187L32.2188 15.0625C32.2813 14.6875 32.3063 13.875 32.0375 13.6312L33.0688 11.8187C33.4125 11.9187 34.1 11.4812 34.3876 11.2375L34.375 9.1625ZM28.1813 11.8813C27.8583 11.8806 27.5428 11.7843 27.2745 11.6045C27.0062 11.4247 26.7972 11.1694 26.6739 10.8709C26.5506 10.5724 26.5184 10.244 26.5816 9.92726C26.6448 9.61051 26.8004 9.31958 27.0288 9.0912C27.2571 8.86282 27.5481 8.70722 27.8648 8.64406C28.1816 8.5809 28.5099 8.613 28.8084 8.73631C29.1069 8.85963 29.3622 9.06863 29.5421 9.33692C29.7219 9.60521 29.8182 9.92077 29.8188 10.2437C29.8193 10.4589 29.7773 10.6721 29.6952 10.871C29.613 11.0699 29.4924 11.2506 29.3403 11.4027C29.1881 11.5549 29.0074 11.6755 28.8085 11.7576C28.6096 11.8397 28.3965 11.8817 28.1813 11.8813Z"
-                                  fill="#A098AE"
-                                />
-                              </svg>
-                              <a>Settings</a>
+                                >
+                                  <svg
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 40 40"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M24.6438 26.3562L24.5688 23.7C25.1313 23.5937 25.9188 22.6437 26.2375 22.1375L25.1625 19.725C24.5688 19.6313 23.3375 19.575 22.8813 19.925L20.9563 18.0938C21.275 17.625 21.1625 16.4 21.025 15.8188L18.5563 14.875C18.075 15.2187 17.1688 16.0563 17.0938 16.625L14.4375 16.6937C14.3313 16.1312 13.375 15.3562 12.875 15.0312L10.4625 16.1062C10.3688 16.7 10.3125 17.9313 10.6625 18.3875L8.83755 20.3125C8.36255 19.9937 7.13755 20.1125 6.5563 20.2437L5.61255 22.7063C5.9563 23.2 6.7938 24.0938 7.3563 24.175L7.4313 26.8312C6.87505 26.9438 6.0938 27.8875 5.7688 28.3937L6.85005 30.8062C7.43755 30.9 8.6688 30.95 9.12505 30.6125L11.05 32.4312C10.7313 32.9 10.85 34.1313 10.9813 34.7125L13.4438 35.6562C13.9313 35.3062 14.8375 34.4688 14.9125 33.9062L17.5688 33.8312C17.6813 34.4 18.625 35.175 19.1375 35.4937L21.5438 34.425C21.6438 33.825 21.6875 32.6 21.35 32.1437L23.1688 30.2125C23.6438 30.5375 24.8688 30.4187 25.4563 30.2875L26.3938 27.8187C26.0438 27.3375 25.2125 26.4375 24.6438 26.3562ZM18.8188 26.3375C18.6062 26.895 18.233 27.3769 17.7465 27.7224C17.26 28.0678 16.682 28.2612 16.0855 28.2781C15.4891 28.295 14.9011 28.1347 14.3957 27.8174C13.8904 27.5001 13.4906 27.0401 13.2467 26.4955C13.0028 25.951 12.9259 25.3463 13.0257 24.7581C13.1254 24.1698 13.3974 23.6243 13.8072 23.1906C14.217 22.7569 14.7462 22.4545 15.3278 22.3215C15.9095 22.1886 16.5175 22.2311 17.075 22.4437C17.4456 22.5844 17.7847 22.7969 18.0729 23.0689C18.3612 23.3408 18.593 23.667 18.755 24.0288C18.917 24.3905 19.006 24.7806 19.0169 25.1768C19.0279 25.5729 18.9606 25.9674 18.8188 26.3375ZM34.375 9.1625C34.0813 8.91875 33.3875 8.4875 33.0438 8.6L31.9875 6.8C32.25 6.55625 32.2125 5.7375 32.1438 5.36875L30.3375 4.34375C29.9813 4.475 29.2626 4.8625 29.1875 5.2125L27.1 5.23125C27.0188 4.88125 26.2938 4.50625 25.9375 4.375L24.15 5.43125C24.0875 5.8 24.0625 6.61875 24.325 6.8625L23.3 8.675C22.95 8.56875 22.2625 9.0125 21.975 9.25625L21.9938 11.3312C22.2875 11.575 22.9813 12 23.325 11.8938L24.3813 13.6938C24.1188 13.9375 24.1563 14.7563 24.225 15.125L26.0313 16.15C26.3813 16.0187 27.1 15.6313 27.1813 15.2812L29.2625 15.2625C29.35 15.6125 30.075 15.9875 30.4313 16.1187L32.2188 15.0625C32.2813 14.6875 32.3063 13.875 32.0375 13.6312L33.0688 11.8187C33.4125 11.9187 34.1 11.4812 34.3876 11.2375L34.375 9.1625ZM28.1813 11.8813C27.8583 11.8806 27.5428 11.7843 27.2745 11.6045C27.0062 11.4247 26.7972 11.1694 26.6739 10.8709C26.5506 10.5724 26.5184 10.244 26.5816 9.92726C26.6448 9.61051 26.8004 9.31958 27.0288 9.0912C27.2571 8.86282 27.5481 8.70722 27.8648 8.64406C28.1816 8.5809 28.5099 8.613 28.8084 8.73631C29.1069 8.85963 29.3622 9.06863 29.5421 9.33692C29.7219 9.60521 29.8182 9.92077 29.8188 10.2437C29.8193 10.4589 29.7773 10.6721 29.6952 10.871C29.613 11.0699 29.4924 11.2506 29.3403 11.4027C29.1881 11.5549 29.0074 11.6755 28.8085 11.7576C28.6096 11.8397 28.3965 11.8817 28.1813 11.8813Z"
+                                      fill="#A098AE"
+                                    />
+                                  </svg>
+                                  <a>Settings</a>
                                 </button>
                                 <div
                                   x-show="isOpen"
@@ -265,7 +302,12 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                   aria-orientation="vertical"
                                   aria-label="user menu"
                                 >
-                                  <a href="${pageContext.request.contextPath}/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                                  <a
+                                    href="${pageContext.request.contextPath}/login"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem"
+                                    >Sign out</a
+                                  >
                                 </div>
                               </li>
                             </ul>
@@ -319,7 +361,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           </a>
             </div>
             <div class="font-bold text-xl mt-5 titleColor">${item.getName()}</div>
-            <div class="py-2 text-center">
+            <div class="py-2 text-center ">
               <div class="flex justify-between gap-4">
                 <div class="mt-4 flex flex-col justify-center items-center">
                   <span class="text-sm font-semibold titleColor">Category</span>
@@ -375,37 +417,53 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <!-- Mobile bottom bar -->
               <nav
                 aria-label="Options"
-                class="right-0 top-0 flex flex-row items-start z-0 justify-end border-t border-yellow-100 sm:hidden rounded-t-3xl"
+                class="absolute h-20 right-2 top-0 flex flex-row items-start z-0 justify-end border-t border-yellow-100 sm:hidden rounded-t-3xl w-40"
               >
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img
+                   
+                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    href="${pageContext.request.contextPath}/favourite"
+                   
+                    class="w-7 h-6 mt-1"
+                 
+                  />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
-                    <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                    <img
+                      src="${pageContext.request.contextPath}/images/resources/orders.png"
+                      class="w-7 h-7"
+                    />
                   </button>
                 </div>
               </nav>
               <!-- Left mini bar -->
               <nav
                 aria-label="Options"
-                class="bg-Transparent z-20 flex-col items-center flex-shrink-0 right-0 justify-start hidden w-28 sm:flex rounded-tr-3xl rounded-br-3xl"
+                class="absolute h-10 right-2 top-0 bg-Transparent z-20 flex-col items-center flex-shrink-0 right-0 justify-start hidden w-28 sm:flex rounded-tr-3xl rounded-br-3xl"
               >
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img
+                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    class="w-7 h-6 mt-1"
+                  />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
                     <div class="flex gap-7">
-                      <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                      <img
+                        src="${pageContext.request.contextPath}/images/resources/orders.png"
+                        class="w-7 h-7"
+                      />
                     </div>
                   </button>
                 </div>
@@ -433,7 +491,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                       <div class="flex justify-end">
                         <button
                           @click="isSidebarOpen = false"
-                          class="p-2 mt-8 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
+                          class="p-2 mt-12 z-20 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -458,232 +516,149 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                         <div class="flex">
                           <div class="w-72 pr-20">
                             <!-- component -->
-                            <div class="p-5">
-                              <div class="flex h-64 justify-center">
-                                <div class="relative">
-                                  <div
-                                    class="flex flex-row cursor-pointer truncate p-2 px-4 rounded"
-                                  >
+                            <c:if test="${empty cart}">
+                              <p>Your cart is empty.</p>
+                            </c:if>
+                            <c:if test="${not empty cart}">
+                              <div class="p-5">
+                                <div class="flex h-64 justify-center">
+                                  <div class="relative">
                                     <div
-                                      class="flex flex-row-reverse ml-20 w-full"
+                                      class="flex flex-row cursor-pointer truncate p-2 px-4 rounded"
                                     >
-                                      <div slot="icon" class="relative">
-                                        <div
-                                          class="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white"
-                                        >
-                                          3
+                                      <div
+                                        class="flex flex-row-reverse ml-20 w-full"
+                                      >
+                                        <div slot="icon" class="relative">
+                                          <div
+                                            class="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white"
+                                          >
+                                            ${totalProducts}
+                                          </div>
+
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="100%"
+                                            height="100%"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-shopping-cart w-6 h-6 mt-2"
+                                          >
+                                            <circle
+                                              cx="9"
+                                              cy="21"
+                                              r="1"
+                                            ></circle>
+                                            <circle
+                                              cx="20"
+                                              cy="21"
+                                              r="1"
+                                            ></circle>
+                                            <path
+                                              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                                            ></path>
+                                          </svg>
                                         </div>
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width="100%"
-                                          height="100%"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          stroke="currentColor"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          class="feather feather-shopping-cart w-6 h-6 mt-2"
-                                        >
-                                          <circle cx="9" cy="21" r="1"></circle>
-                                          <circle
-                                            cx="20"
-                                            cy="21"
-                                            r="1"
-                                          ></circle>
-                                          <path
-                                            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-                                          ></path>
-                                        </svg>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="w-full rounded-b border-t-0 z-10">
-                                    <div class="w-64">
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
-                                            alt="img product"
+                                    <div
+                                      class="w-full rounded-b border-t-0 z-10"
+                                    >
+                                      <div class="w-full">
+                                        <c:forEach var="entry" items="${cart}">
+                                          <c:set
+                                            var="item"
+                                            value="${entry.key}"
                                           />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 1</div>
-                                          <div class="truncate">
-                                            Product 1 description
-                                          </div>
-                                          <div class="text-gray-400">Qt: 2</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
-                                          <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                                          >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
-                                            >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
-                                          </div>
-                                          $12.22
-                                        </div>
-                                      </div>
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
-                                            alt="img product"
+                                          <c:set
+                                            var="quantity"
+                                            value="${entry.value}"
                                           />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 2</div>
-                                          <div class="truncate">
-                                            Product 2 long description
-                                          </div>
-                                          <div class="text-gray-400">Qt: 2</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
                                           <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                                            class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
                                           >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
+                                            <div class="p-2 w-12">
+                                              <img
+                                                src="${pageContext.request.contextPath}${item.getImage()}"
+                                                alt="img product"
+                                              />
+                                            </div>
+                                            <div class="flex-auto text-sm w-32">
+                                              <div class="font-bold">
+                                                ${item.getName()}
+                                              </div>
+                                              <div class="truncate">
+                                                ${item.getDescription()}
+                                              </div>
+                                              <div class="text-gray-400">
+                                                Qt: ${quantity}
+                                              </div>
+                                            </div>
+                                            <div
+                                              class="flex flex-col w-18 font-medium items-end"
                                             >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
+                                              <div
+                                                class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                                              >
+                                                <a
+                                                  href="${pageContext.request.contextPath}/removefromcart/${item.getId()}"
+                                                >
+                                                  <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="100%"
+                                                    height="100%"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="feather feather-trash-2"
+                                                  >
+                                                    <polyline
+                                                      points="3 6 5 6 21 6"
+                                                    ></polyline>
+                                                    <path
+                                                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                                    ></path>
+                                                    <line
+                                                      x1="10"
+                                                      y1="11"
+                                                      x2="10"
+                                                      y2="17"
+                                                    ></line>
+                                                    <line
+                                                      x1="14"
+                                                      y1="11"
+                                                      x2="14"
+                                                      y2="17"
+                                                    ></line>
+                                                  </svg>
+                                                </a>
+                                              </div>
+                                              ${item.getPrice()}
+                                            </div>
                                           </div>
-                                          $12.22
-                                        </div>
-                                      </div>
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50"
-                                            alt="img product"
-                                          />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">Product 3</div>
-                                          <div class="truncate">
-                                            Product 3 description
-                                          </div>
-                                          <div class="text-gray-400">Qt: 2</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
-                                          <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                                        </c:forEach>
+
+                                        <div class="p-4 justify-center flex">
+                                          <button
+                                            class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                           >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
-                                            >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
-                                          </div>
-                                          $12.22
+                                            Checkout $${totalPrice}
+                                          </button>
                                         </div>
-                                      </div>
-                                      <div class="p-4 justify-center flex">
-                                        <button
-                                          class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
-                                        >
-                                          Checkout $36.66
-                                        </button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="h-32"></div>
                               </div>
-                              <div class="h-32"></div>
-                            </div>
+                            </c:if>
                           </div>
                         </div>
                       </div>
