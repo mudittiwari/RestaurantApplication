@@ -50,7 +50,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       }
     </style>
   </head>
-  <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
+  <body class="bg-gray-100 rounded-3xl p-1 bg-Image overflow-x-hidden">
     <c:if test="${not empty message}">
       <div id="overlay" class="overlay" onclick="hidePopup()"></div>
       <div id="popup" class="popup">
@@ -325,96 +325,99 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <div class="flex flex-col w-3/4 mx-auto h-full">
         <!-- Products -->
         <div class="flex flex-wrap h-screen">
-
           <div class="button-container" id="buttonContainer">
             <c:forEach items="${categories}" var="category">
               <button class="button active" id="starterButton">
-              <a href="${pageContext.request.contextPath}/items/${category.getId()}">${category.getName()}</a></button>
-          </c:forEach>
+                <a
+                  href="${pageContext.request.contextPath}/items/${category.getId()}"
+                  >${category.getName()}</a
+                >
+              </button>
+            </c:forEach>
             <!-- Border highlight element -->
           </div>
 
           <!-- Select Product -->
-          <div class="swiper mt-14 h-screen">
+          <div class="swiper mt-14 h-screen w-full">
             <div class="swiper-wrapper h-full">
               <c:forEach items="${items}" var="item">
-              <div class="swiper-slide h-full">
-                <div
-                  class="w-full px-1 flex flex-wrap justify-center gap-1 h-full"
-                >
-                  <!-- Product Card -->
+                <div class="swiper-slide h-full">
                   <div
-                    class="w-3/4 flex justify-center flex-col align-center h-full"
+                    class="w-full px-1 flex flex-wrap justify-center gap-1 h-full"
                   >
+                    <!-- Product Card -->
                     <div
-                      class="flex productTitle text-3xl justify-center items-center absolute top-10 left-1/2 transform -translate-x-1/2 translate-y-1/4"
-                      id="productTitle"
+                      class="w-3/4 flex justify-center flex-col items-start align-center h-full"
                     >
-                      <h2>${item.getName()}</h2>
-                    </div>
-                    <div
-                      class="w-full overflow-hidden flex justify-center flex-col items-center"
-                    >
-                      <img
-                        class="w-full mt-10 object-fill rounded-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                        src="${pageContext.request.contextPath}${item.getImage()}"
-                        alt="Product Image"
-                      />
-                    </div>
-                    <div
-                      class="flex w-full justify-center items-center absolute top-2/4 left-1/2 transform -translate-x-1/2 translate-y-3/4 flex-col gap-2 text-center"
-                      id="productDescription"
-                    >
-                      <p class="text-sm">
-                        ${item.getDescription()}
-                      </p>
-                      <p class="text-2xl productTitle">${item.getDiscountedPrice()}$</p>
-                    </div>
-                    <div
-                      class="flex flex-col w-full justify-center relative top-16 left-0"
-                      id="productIngredients"
-                    >
-                      <ul class="flex w-full justify-center gap-2 mt-8">
-                        <li>
-                          <img
-                            src="${pageContext.request.contextPath}/images/resources/onion.png"
-                            class="w-40 h-10 object-contain"
-                            alt=""
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src="${pageContext.request.contextPath}/images/resources/gajar.png"
-                            class="w-40 h-10 object-contain"
-                            alt=""
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src="${pageContext.request.contextPath}/images/resources/mirch.png"
-                            class="w-40 h-10 object-contain"
-                            alt=""
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src="${pageContext.request.contextPath}/images/resources/meat.png"
-                            class="w-40 h-10 object-contain"
-                            alt=""
-                          />
-                        </li>
-                      </ul>
-                      <div class="flex justify-center">
-                        <button
-                          class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl"
-                        >
-                          Add to Cart >>
-                        </button>
+                      <div
+                        class="flex productTitle text-3xl justify-center items-center absolute top-10 left-1/2 transform -translate-x-1/2 translate-y-1/4"
+                        id="productTitle"
+                      >
+                        <h2>${item.getName()}</h2>
+                      </div>
+                      <div
+                        class="w-full overflow-hidden flex justify-center flex-col items-center"
+                      >
+                        <img
+                          class="w-full mt-10 object-fill rounded-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                          src="${pageContext.request.contextPath}${item.getImage()}"
+                          alt="Product Image"
+                        />
+                      </div>
+                      <div
+                        class="flex w-full justify-center items-center absolute top-2/4 mt-20 left-1/2 transform -translate-x-1/2 translate-y-3/4 flex-col gap-2 text-center productDescription"
+                        id="productDescription"
+                      >
+                        <p class="text-sm">${item.getDescription()}</p>
+                        <p class="text-2xl productTitle">
+                          ${item.getDiscountedPrice()}$
+                        </p>
+                      </div>
+                      <div
+                        class="flex flex-col w-full justify-center relative top-16 left-0 productIngredients"
+                        id="productIngredients"
+                      >
+                        <ul class="flex w-full justify-center gap-2 mt-8">
+                          <li>
+                            <img
+                              src="${pageContext.request.contextPath}/images/resources/onion.png"
+                              class="w-40 h-10 object-contain"
+                              alt=""
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src="${pageContext.request.contextPath}/images/resources/gajar.png"
+                              class="w-40 h-10 object-contain"
+                              alt=""
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src="${pageContext.request.contextPath}/images/resources/mirch.png"
+                              class="w-40 h-10 object-contain"
+                              alt=""
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src="${pageContext.request.contextPath}/images/resources/meat.png"
+                              class="w-40 h-10 object-contain"
+                              alt=""
+                            />
+                          </li>
+                        </ul>
+                        <div class="flex justify-center">
+                          <button
+                            class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl"
+                          >
+                            Add to Cart >>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </c:forEach>
             </div>
 
@@ -734,11 +737,11 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <script>
       const swiper = new Swiper(".swiper", {
         direction: "horizontal",
-        loop: true,
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 3,
         centeredSlides: true,
         effect: "creative",
+        centerInsufficientSlides: true,
         creativeEffect: {
           perspective: true,
           limitProgress: 5,
@@ -769,7 +772,78 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         scrollbar: {
           el: ".swiper-scrollbar",
         },
+
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        },
+
+        on: {
+          init() {
+            document
+              .querySelectorAll(".swiper-slide-active .productTitle")
+              .forEach((el) => {
+                el.style.display = "block";
+              });
+            document
+              .querySelectorAll(".swiper-slide-active .productDescription")
+              .forEach((el) => {
+                el.style.display = "block";
+              });
+            document
+              .querySelectorAll(".swiper-slide-active .productIngredients")
+              .forEach((el) => {
+                el.style.display = "block";
+              });
+          },
+        },
       });
     </script>
+    <script>
+      // add one more property to the swiper instance
+      swiper.on("slideChange", function () {
+        // get the index of the active slide & hide the title of the rest
+        document.querySelectorAll(".productTitle").forEach((el) => {
+          el.style.display = "none";
+        });
+        document.querySelectorAll(".productDescription").forEach((el) => {
+          el.style.display = "none";
+        });
+        document.querySelectorAll(".productIngredients").forEach((el) => {
+          el.style.display = "none";
+        });
+
+        const slides = document.querySelectorAll(".swiper-slide");
+        const swiperLength = slides.length;
+        const centeredIndex = swiper.realIndex;
+        const centeredSlide = slides[centeredIndex];
+
+        centeredSlide
+          .querySelectorAll(
+            ".productTitle, .productDescription, .productIngredients"
+          )
+          .forEach((el) => {
+            el.style.display = "block";
+          });
+      });
+    </script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/bootstrap/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/sidebarmenu.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
   </body>
 </html>

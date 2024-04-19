@@ -47,7 +47,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       }
     </style>
   </head>
-  <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
+  <body class="bg-gray-100 rounded-3xl p-1 bg-Image overflow-x-hidden">
     <c:if test="${not empty message}">
       <div id="overlay" class="overlay" onclick="hidePopup()"></div>
       <div id="popup" class="popup">
@@ -697,5 +697,14 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         },
       });
     </script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/bootstrap/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/sidebarmenu.js"></script>
+    <script
+        src="${pageContext.request.contextPath}/js/admin/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
   </body>
 </html>

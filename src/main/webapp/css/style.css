@@ -215,10 +215,19 @@ main {
 
 .productTitle {
     color: #EB6D01;
+    display: none;
+}
+
+.productDescription {
+    display: none;
+}
+
+.productIngredients {
+    display: none;
 }
 
 .button-container {
-    width: 500px;
+    width: 50%;
     height: 60px;
     display: flex;
     position: absolute;
@@ -226,7 +235,7 @@ main {
     background-color: white;
     border-radius: 50px;
     top: 3%;
-    left: 33%;
+    left: 25%;
     /* margin-left: 60px; */
     /* margin-top: 100px; */
 }
@@ -268,6 +277,7 @@ main {
     z-index: 0;
 }
 
-/* #productTitle {
-    color: black;
-} */
+.swiper-slide {
+    height: 100%;
+    align-items: start;
+}
