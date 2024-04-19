@@ -131,6 +131,12 @@ public class AdminRepo {
                     category.getItems().remove(item);
                     session.saveOrUpdate(category);
                 }
+                List<User> users=getUsers();
+                for(int i=0;i<users.size();i++){
+                    users.get(i).getFavourites().remove(item);
+                    System.out.println(users.get(i).getFavourites());
+                    session.saveOrUpdate(users.get(i));
+                }
                 session.delete(item);
                 tx.commit();
                 return true;
