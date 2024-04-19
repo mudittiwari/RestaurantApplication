@@ -1,8 +1,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <%@
 taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
 language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-
+<c:set var="totalProducts" value="0" />
+<c:forEach var="quantity" items="${cart.values()}">
+  <c:set var="totalProducts" value="${totalProducts + quantity}" />
+</c:forEach>
+<c:set var="totalPrice" value="0" />
+<c:forEach var="entry" items="${cart}">
+    <c:set var="item" value="${entry.key}" />
+    <c:set var="quantity" value="${entry.value}" />
+    <c:set var="subtotal" value="${item.price * quantity}" />
+    <c:set var="totalPrice" value="${totalPrice + subtotal}" />
+</c:forEach>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +26,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
+    <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
     <link
       rel="stylesheet"
       type="text/css"
@@ -33,6 +43,17 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     </style>
   </head>
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
+
+    <c:if test="${not empty message}">
+      <div id="overlay" class="overlay" onclick="hidePopup()"></div>
+      <div id="popup" class="popup">
+          <h2>${message.getTitle()}</h2>
+          <p>${message.getDesc()}</p>
+          <button class="popupbutton" onclick="hidePopup()">Close</button>
+      </div>
+  </c:if>
+
+
     <div class="flex w-full justify-start">
       <!-- Left Navbar -->
       <div class="flex justify-start left-0" id="leftnavbar">
@@ -285,10 +306,11 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <!-- Main Content -->
       <div class="flex flex-col w-full justify-center">
         <!-- Top Cards -->
-        <div class="flex gap-12 mt-16 justify-start px-16">
+        <div class="w-full flex gap-12 mt-16 justify-start px-16">
+          <a href="${pageContext.request.contextPath}/items" class="w-1/4">
           <div
-            class="w-1/5 hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-            href="${pageContext.request.contextPath}/items"
+            class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+           
           >
             <img
               class="w-full object-fill"
@@ -296,9 +318,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               alt="Banner"
             />
           </div>
+        </a>
+        <a href="${pageContext.request.contextPath}" class="w-1/4">
           <div
-            class="w-1/5 hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-            href="${pageContext.request.contextPath}"
+            class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
           >
             <img
               class="w-full object-fill"
@@ -306,6 +329,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               alt="Banner"
             />
           </div>
+        </a>
         </div>
 
         <div class="w-full px-16 text-2xl font-bold my-16 titleColor">
@@ -368,13 +392,15 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <div
                 class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm"
               >
-              <a href="${pageContext.request.contextPath}/addtocart/${item.getId()}">
-                <button
-                  class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
+                <a
+                  href="${pageContext.request.contextPath}/addtocart/${item.getId()}"
                 >
-                  Add to Cart - ${item.getPrice()}
-                </button>
-              </a>
+                  <button
+                    class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
+                  >
+                    Add to Cart - ${item.getPrice()}
+                  </button>
+                </a>
                 <div
                   class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4"
                 >
@@ -412,13 +438,19 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img
+                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    class="w-7 h-6 mt-1"
+                  />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
-                    <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                    <img
+                      src="${pageContext.request.contextPath}/images/resources/orders.png"
+                      class="w-7 h-7"
+                    />
                   </button>
                 </div>
               </nav>
@@ -430,14 +462,20 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
-                  <img src="${pageContext.request.contextPath}/images/resources/fav-icon.png" class="w-7 h-6 mt-1" />
+                  <img
+                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    class="w-7 h-6 mt-1"
+                  />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                     :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-yellow-300' : 'text-gray-500'"
                   >
                     <div class="flex gap-7">
-                      <img src="${pageContext.request.contextPath}/images/resources/orders.png" class="w-7 h-7" />
+                      <img
+                        src="${pageContext.request.contextPath}/images/resources/orders.png"
+                        class="w-7 h-7"
+                      />
                     </div>
                   </button>
                 </div>
@@ -490,125 +528,149 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                         <div class="flex">
                           <div class="w-72 pr-20">
                             <!-- component -->
-                            <div class="p-5">
-                              <div class="flex h-64 justify-center">
-                                <div class="relative">
-                                  <div
-                                    class="flex flex-row cursor-pointer truncate p-2 px-4 rounded"
-                                  >
+                            <c:if test="${empty cart}">
+                              <p>Your cart is empty.</p>
+                            </c:if>
+                            <c:if test="${not empty cart}">
+                              <div class="p-5">
+                                <div class="flex h-64 justify-center">
+                                  <div class="relative">
                                     <div
-                                      class="flex flex-row-reverse ml-20 w-full"
+                                      class="flex flex-row cursor-pointer truncate p-2 px-4 rounded"
                                     >
-                                      <div slot="icon" class="relative">
-                                        <div
-                                          class="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white"
-                                        >
-                                          3
+                                      <div
+                                        class="flex flex-row-reverse ml-20 w-full"
+                                      >
+                                        <div slot="icon" class="relative">
+                                          <div
+                                            class="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white"
+                                          >
+                                            ${totalProducts}
+                                          </div>
+
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="100%"
+                                            height="100%"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-shopping-cart w-6 h-6 mt-2"
+                                          >
+                                            <circle
+                                              cx="9"
+                                              cy="21"
+                                              r="1"
+                                            ></circle>
+                                            <circle
+                                              cx="20"
+                                              cy="21"
+                                              r="1"
+                                            ></circle>
+                                            <path
+                                              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                                            ></path>
+                                          </svg>
                                         </div>
-                                        <a href="${pageContext.request.contextPath}/addtocart/${item.getId()}">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width="100%"
-                                          height="100%"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          stroke="currentColor"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          class="feather feather-shopping-cart w-6 h-6 mt-2"
-                                        >
-                                          <circle cx="9" cy="21" r="1"></circle>
-                                          <circle
-                                            cx="20"
-                                            cy="21"
-                                            r="1"
-                                          ></circle>
-                                          <path
-                                            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-                                          ></path>
-                                        </svg>
-                                      </a>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="w-full rounded-b border-t-0 z-10">
-                                    <div class="w-full">
-                                      <c:forEach var="entry" items="${cart}">
-                                        <c:set var="item" value="${entry.key}" />
-                                        <c:set var="quantity" value="${entry.value}" />
-                                      <div
-                                        class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                      >
-                                        <div class="p-2 w-12">
-                                          <img
-                                            src="${pageContext.request.contextPath}${item.getImage()}"
-                                            alt="img product"
+                                    <div
+                                      class="w-full rounded-b border-t-0 z-10"
+                                    >
+                                      <div class="w-full">
+                                        <c:forEach var="entry" items="${cart}">
+                                          <c:set
+                                            var="item"
+                                            value="${entry.key}"
                                           />
-                                        </div>
-                                        <div class="flex-auto text-sm w-32">
-                                          <div class="font-bold">${item.getName()}</div>
-                                          <div class="truncate">
-                                            ${item.getDescription()}
-                                          </div>
-                                          <div class="text-gray-400">Qt: ${quantity}</div>
-                                        </div>
-                                        <div
-                                          class="flex flex-col w-18 font-medium items-end"
-                                        >
+                                          <c:set
+                                            var="quantity"
+                                            value="${entry.value}"
+                                          />
                                           <div
-                                            class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                                            class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
                                           >
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              width="100%"
-                                              height="100%"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke="currentColor"
-                                              stroke-width="2"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              class="feather feather-trash-2"
+                                            <div class="p-2 w-12">
+                                              <img
+                                                src="${pageContext.request.contextPath}${item.getImage()}"
+                                                alt="img product"
+                                              />
+                                            </div>
+                                            <div class="flex-auto text-sm w-32">
+                                              <div class="font-bold">
+                                                ${item.getName()}
+                                              </div>
+                                              <div class="truncate">
+                                                ${item.getDescription()}
+                                              </div>
+                                              <div class="text-gray-400">
+                                                Qt: ${quantity}
+                                              </div>
+                                            </div>
+                                            <div
+                                              class="flex flex-col w-18 font-medium items-end"
                                             >
-                                              <polyline
-                                                points="3 6 5 6 21 6"
-                                              ></polyline>
-                                              <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                              ></path>
-                                              <line
-                                                x1="10"
-                                                y1="11"
-                                                x2="10"
-                                                y2="17"
-                                              ></line>
-                                              <line
-                                                x1="14"
-                                                y1="11"
-                                                x2="14"
-                                                y2="17"
-                                              ></line>
-                                            </svg>
+                                              <div
+                                                class="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                                              >
+                                                <a
+                                                  href="${pageContext.request.contextPath}/removefromcart/${item.getId()}"
+                                                >
+                                                  <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="100%"
+                                                    height="100%"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="feather feather-trash-2"
+                                                  >
+                                                    <polyline
+                                                      points="3 6 5 6 21 6"
+                                                    ></polyline>
+                                                    <path
+                                                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                                    ></path>
+                                                    <line
+                                                      x1="10"
+                                                      y1="11"
+                                                      x2="10"
+                                                      y2="17"
+                                                    ></line>
+                                                    <line
+                                                      x1="14"
+                                                      y1="11"
+                                                      x2="14"
+                                                      y2="17"
+                                                    ></line>
+                                                  </svg>
+                                                </a>
+                                              </div>
+                                              ${item.getPrice()}
+                                            </div>
                                           </div>
-                                          ${item.getPrice()}
+                                        </c:forEach>
+
+                                        <div class="p-4 justify-center flex">
+                                          <button
+                                            class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
+                                          >
+                                            Checkout $${totalPrice}
+                                          </button>
                                         </div>
-                                      </div>
-                                      </c:forEach>
-                                      
-                                      <div class="p-4 justify-center flex">
-                                        <button
-                                          class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
-                                        >
-                                          Checkout $36.66
-                                        </button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="h-32"></div>
                               </div>
-                              <div class="h-32"></div>
-                            </div>
+                            </c:if>
                           </div>
                         </div>
                       </div>
@@ -621,11 +683,12 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         </div>
       </div>
     </div>
-
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"
       defer
     ></script>
+    
     <script>
       const setup = () => {
         return {

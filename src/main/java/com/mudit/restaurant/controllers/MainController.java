@@ -183,13 +183,13 @@ public class MainController {
         if(service.addCartItem(item,request.getSession())){
             Message message = new Message();
             message.setTitle("Success");
-            message.setDesc("Item removed from cart successfully");
+            message.setDesc("Item added to cart successfully");
             attributes.addFlashAttribute("message", message);
         }
         else{
             Message message = new Message();
             message.setTitle("Error");
-            message.setDesc("Error occoured while removing the item from cart");
+            message.setDesc("Error occoured while adding the item to cart");
             attributes.addFlashAttribute("message", message);
         }
         return "redirect:" + referer;
