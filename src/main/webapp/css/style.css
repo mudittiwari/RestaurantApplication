@@ -264,3 +264,7 @@ main {
     z-index: 1;
     /* Ensure it stays behind buttons */
 }
+
+.swiper {
+    z-index: 0;
+}

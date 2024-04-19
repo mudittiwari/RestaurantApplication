@@ -1,6 +1,6 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <%@
+taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
+language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +15,25 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="${pageContext.request.contextPath}/css/style.css"
+    />
+    <style>
+      body {
+        background-image: url("${pageContext.request.contextPath}/images/resources/bg-image.png");
+        background-size: 105% 105%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+      }
+    </style>
   </head>
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
     <div class="flex w-full justify-start">
+      <!-- Left Navbar -->
       <div class="flex justify-start left-0" id="leftnavbar">
-        <!-- Left Navbar -->
         <div
           x-data="setup()"
           x-init="$refs.loading.classList.add('hidden');"
@@ -215,20 +228,44 @@
                               </li>
                               <li
                                 class="py-2 pl-8 gap-4 bg-white rounded-2xl flex items-center text-black hover:bg-yellow-400 hover:text-white"
+                                x-data="{ isOpen: false }"
                               >
-                                <svg
-                                  width="40"
-                                  height="40"
-                                  viewBox="0 0 40 40"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
+                                <button
+                                  @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})"
+                                  class="transition-opacity py-2 gap-4 flex items-center rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2"
                                 >
-                                  <path
-                                    d="M24.6438 26.3562L24.5688 23.7C25.1313 23.5937 25.9188 22.6437 26.2375 22.1375L25.1625 19.725C24.5688 19.6313 23.3375 19.575 22.8813 19.925L20.9563 18.0938C21.275 17.625 21.1625 16.4 21.025 15.8188L18.5563 14.875C18.075 15.2187 17.1688 16.0563 17.0938 16.625L14.4375 16.6937C14.3313 16.1312 13.375 15.3562 12.875 15.0312L10.4625 16.1062C10.3688 16.7 10.3125 17.9313 10.6625 18.3875L8.83755 20.3125C8.36255 19.9937 7.13755 20.1125 6.5563 20.2437L5.61255 22.7063C5.9563 23.2 6.7938 24.0938 7.3563 24.175L7.4313 26.8312C6.87505 26.9438 6.0938 27.8875 5.7688 28.3937L6.85005 30.8062C7.43755 30.9 8.6688 30.95 9.12505 30.6125L11.05 32.4312C10.7313 32.9 10.85 34.1313 10.9813 34.7125L13.4438 35.6562C13.9313 35.3062 14.8375 34.4688 14.9125 33.9062L17.5688 33.8312C17.6813 34.4 18.625 35.175 19.1375 35.4937L21.5438 34.425C21.6438 33.825 21.6875 32.6 21.35 32.1437L23.1688 30.2125C23.6438 30.5375 24.8688 30.4187 25.4563 30.2875L26.3938 27.8187C26.0438 27.3375 25.2125 26.4375 24.6438 26.3562ZM18.8188 26.3375C18.6062 26.895 18.233 27.3769 17.7465 27.7224C17.26 28.0678 16.682 28.2612 16.0855 28.2781C15.4891 28.295 14.9011 28.1347 14.3957 27.8174C13.8904 27.5001 13.4906 27.0401 13.2467 26.4955C13.0028 25.951 12.9259 25.3463 13.0257 24.7581C13.1254 24.1698 13.3974 23.6243 13.8072 23.1906C14.217 22.7569 14.7462 22.4545 15.3278 22.3215C15.9095 22.1886 16.5175 22.2311 17.075 22.4437C17.4456 22.5844 17.7847 22.7969 18.0729 23.0689C18.3612 23.3408 18.593 23.667 18.755 24.0288C18.917 24.3905 19.006 24.7806 19.0169 25.1768C19.0279 25.5729 18.9606 25.9674 18.8188 26.3375ZM34.375 9.1625C34.0813 8.91875 33.3875 8.4875 33.0438 8.6L31.9875 6.8C32.25 6.55625 32.2125 5.7375 32.1438 5.36875L30.3375 4.34375C29.9813 4.475 29.2626 4.8625 29.1875 5.2125L27.1 5.23125C27.0188 4.88125 26.2938 4.50625 25.9375 4.375L24.15 5.43125C24.0875 5.8 24.0625 6.61875 24.325 6.8625L23.3 8.675C22.95 8.56875 22.2625 9.0125 21.975 9.25625L21.9938 11.3312C22.2875 11.575 22.9813 12 23.325 11.8938L24.3813 13.6938C24.1188 13.9375 24.1563 14.7563 24.225 15.125L26.0313 16.15C26.3813 16.0187 27.1 15.6313 27.1813 15.2812L29.2625 15.2625C29.35 15.6125 30.075 15.9875 30.4313 16.1187L32.2188 15.0625C32.2813 14.6875 32.3063 13.875 32.0375 13.6312L33.0688 11.8187C33.4125 11.9187 34.1 11.4812 34.3876 11.2375L34.375 9.1625ZM28.1813 11.8813C27.8583 11.8806 27.5428 11.7843 27.2745 11.6045C27.0062 11.4247 26.7972 11.1694 26.6739 10.8709C26.5506 10.5724 26.5184 10.244 26.5816 9.92726C26.6448 9.61051 26.8004 9.31958 27.0288 9.0912C27.2571 8.86282 27.5481 8.70722 27.8648 8.64406C28.1816 8.5809 28.5099 8.613 28.8084 8.73631C29.1069 8.85963 29.3622 9.06863 29.5421 9.33692C29.7219 9.60521 29.8182 9.92077 29.8188 10.2437C29.8193 10.4589 29.7773 10.6721 29.6952 10.871C29.613 11.0699 29.4924 11.2506 29.3403 11.4027C29.1881 11.5549 29.0074 11.6755 28.8085 11.7576C28.6096 11.8397 28.3965 11.8817 28.1813 11.8813Z"
-                                    fill="#A098AE"
-                                  />
-                                </svg>
-                                <a href="manage-order.php">Settings</a>
+                                  <svg
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 40 40"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M24.6438 26.3562L24.5688 23.7C25.1313 23.5937 25.9188 22.6437 26.2375 22.1375L25.1625 19.725C24.5688 19.6313 23.3375 19.575 22.8813 19.925L20.9563 18.0938C21.275 17.625 21.1625 16.4 21.025 15.8188L18.5563 14.875C18.075 15.2187 17.1688 16.0563 17.0938 16.625L14.4375 16.6937C14.3313 16.1312 13.375 15.3562 12.875 15.0312L10.4625 16.1062C10.3688 16.7 10.3125 17.9313 10.6625 18.3875L8.83755 20.3125C8.36255 19.9937 7.13755 20.1125 6.5563 20.2437L5.61255 22.7063C5.9563 23.2 6.7938 24.0938 7.3563 24.175L7.4313 26.8312C6.87505 26.9438 6.0938 27.8875 5.7688 28.3937L6.85005 30.8062C7.43755 30.9 8.6688 30.95 9.12505 30.6125L11.05 32.4312C10.7313 32.9 10.85 34.1313 10.9813 34.7125L13.4438 35.6562C13.9313 35.3062 14.8375 34.4688 14.9125 33.9062L17.5688 33.8312C17.6813 34.4 18.625 35.175 19.1375 35.4937L21.5438 34.425C21.6438 33.825 21.6875 32.6 21.35 32.1437L23.1688 30.2125C23.6438 30.5375 24.8688 30.4187 25.4563 30.2875L26.3938 27.8187C26.0438 27.3375 25.2125 26.4375 24.6438 26.3562ZM18.8188 26.3375C18.6062 26.895 18.233 27.3769 17.7465 27.7224C17.26 28.0678 16.682 28.2612 16.0855 28.2781C15.4891 28.295 14.9011 28.1347 14.3957 27.8174C13.8904 27.5001 13.4906 27.0401 13.2467 26.4955C13.0028 25.951 12.9259 25.3463 13.0257 24.7581C13.1254 24.1698 13.3974 23.6243 13.8072 23.1906C14.217 22.7569 14.7462 22.4545 15.3278 22.3215C15.9095 22.1886 16.5175 22.2311 17.075 22.4437C17.4456 22.5844 17.7847 22.7969 18.0729 23.0689C18.3612 23.3408 18.593 23.667 18.755 24.0288C18.917 24.3905 19.006 24.7806 19.0169 25.1768C19.0279 25.5729 18.9606 25.9674 18.8188 26.3375ZM34.375 9.1625C34.0813 8.91875 33.3875 8.4875 33.0438 8.6L31.9875 6.8C32.25 6.55625 32.2125 5.7375 32.1438 5.36875L30.3375 4.34375C29.9813 4.475 29.2626 4.8625 29.1875 5.2125L27.1 5.23125C27.0188 4.88125 26.2938 4.50625 25.9375 4.375L24.15 5.43125C24.0875 5.8 24.0625 6.61875 24.325 6.8625L23.3 8.675C22.95 8.56875 22.2625 9.0125 21.975 9.25625L21.9938 11.3312C22.2875 11.575 22.9813 12 23.325 11.8938L24.3813 13.6938C24.1188 13.9375 24.1563 14.7563 24.225 15.125L26.0313 16.15C26.3813 16.0187 27.1 15.6313 27.1813 15.2812L29.2625 15.2625C29.35 15.6125 30.075 15.9875 30.4313 16.1187L32.2188 15.0625C32.2813 14.6875 32.3063 13.875 32.0375 13.6312L33.0688 11.8187C33.4125 11.9187 34.1 11.4812 34.3876 11.2375L34.375 9.1625ZM28.1813 11.8813C27.8583 11.8806 27.5428 11.7843 27.2745 11.6045C27.0062 11.4247 26.7972 11.1694 26.6739 10.8709C26.5506 10.5724 26.5184 10.244 26.5816 9.92726C26.6448 9.61051 26.8004 9.31958 27.0288 9.0912C27.2571 8.86282 27.5481 8.70722 27.8648 8.64406C28.1816 8.5809 28.5099 8.613 28.8084 8.73631C29.1069 8.85963 29.3622 9.06863 29.5421 9.33692C29.7219 9.60521 29.8182 9.92077 29.8188 10.2437C29.8193 10.4589 29.7773 10.6721 29.6952 10.871C29.613 11.0699 29.4924 11.2506 29.3403 11.4027C29.1881 11.5549 29.0074 11.6755 28.8085 11.7576C28.6096 11.8397 28.3965 11.8817 28.1813 11.8813Z"
+                                      fill="#A098AE"
+                                    />
+                                  </svg>
+                                  <a>Settings</a>
+                                </button>
+                                <div
+                                  x-show="isOpen"
+                                  @click.away="isOpen = false"
+                                  @keydown.escape="isOpen = false"
+                                  x-ref="userMenu"
+                                  tabindex="-1"
+                                  class="absolute w-48 py-1 mt-2 origin-bottom-left bg-white rounded-md shadow-lg left-10 bottom-14 focus:outline-none"
+                                  role="menu"
+                                  aria-orientation="vertical"
+                                  aria-label="user menu"
+                                >
+                                  <a
+                                    href="${pageContext.request.contextPath}/login"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem"
+                                    >Sign out</a
+                                  >
+                                </div>
                               </li>
                             </ul>
                           </div>
@@ -249,6 +286,7 @@
         <div class="flex gap-12 mt-16 justify-start px-16">
           <div
             class="w-1/5 hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+            href="${pageContext.request.contextPath}/items"
           >
             <img
               class="w-full object-fill"
@@ -258,6 +296,7 @@
           </div>
           <div
             class="w-1/5 hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+            href="${pageContext.request.contextPath}"
           >
             <img
               class="w-full object-fill"
@@ -271,50 +310,74 @@
           Featured Items
         </div>
 
-
         <div class="w-full px-16 w-full flex flex-wrap justify-start gap-12">
           <c:forEach items="${featuredItems}" var="item">
-           
-<div class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center">
-  <div class="relative w-full px-2">
-    <img class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-      src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
-    <a href="${pageContext.request.contextPath}/${favourites.contains(item) ? 'removefavourite' : 'addfavourite'}/${item.getId()}">
-  <button class="absolute top-0 right-0 mt-2 mr-2">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-      fill="${favourites.contains(item) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
-      <path
-        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-      </path>
-    </svg>
-  </button>
-</a>
-  </div>
-  <div class="font-bold text-xl mt-5 titleColor">${item.getName()}</div>
-  <div class="py-2 text-center">
-    <div class="flex justify-between gap-4">
-      <div class="mt-4 flex flex-col justify-center items-center">
-        <span class="text-sm font-semibold titleColor">Category</span>
-        <span class="text-sm textColor">${item.getCategory().getName()}</span>
-      </div>
-      <div class="mt-4 flex flex-col justify-center items-center">
-        <span class="text-sm font-semibold titleColor">Price</span>
-        <span class="text-sm textColor font-bold">${item.getPrice()}</span>
-      </div>
-    </div>
-  </div>
-  <div class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm">
-    <button class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl">
-      Add to Cart - ${item.getPrice()}
-    </button>
-    <div class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4">
-      In Stock
-    </div>
-  </div>
-</div>
-
-
+            <div
+              class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center"
+            >
+              <div class="relative w-full px-2">
+                <img
+                  class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                  src="${pageContext.request.contextPath}${item.getImage()}"
+                  alt="Product Image"
+                />
+                <a
+                  href="${pageContext.request.contextPath}/${favourites.contains(item) ? 'removefavourite' : 'addfavourite'}/${item.getId()}"
+                >
+                  <button class="absolute top-0 right-0 mt-2 mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="${favourites.contains(item) ? 'currentColor' : 'none'}"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-6 w-6"
+                    >
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </a>
+              </div>
+              <div class="font-bold text-xl mt-5 titleColor">
+                ${item.getName()}
+              </div>
+              <div class="py-2 text-center">
+                <div class="flex justify-between gap-4">
+                  <div class="mt-4 flex flex-col justify-center items-center">
+                    <span class="text-sm font-semibold titleColor"
+                      >Category</span
+                    >
+                    <span class="text-sm textColor"
+                      >${item.getCategory().getName()}</span
+                    >
+                  </div>
+                  <div class="mt-4 flex flex-col justify-center items-center">
+                    <span class="text-sm font-semibold titleColor">Price</span>
+                    <span class="text-sm textColor font-bold"
+                      >${item.getPrice()}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm"
+              >
+                <button
+                  class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
+                >
+                  Add to Cart - ${item.getPrice()}
+                </button>
+                <div
+                  class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4"
+                >
+                  In Stock
+                </div>
+              </div>
+            </div>
           </c:forEach>
         </div>
       </div>
@@ -697,14 +760,14 @@
       };
     </script>
     <script>
-  function containsItem(list, item) {
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].id === item.id) {
-        return true;
+      function containsItem(list, item) {
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].id === item.id) {
+            return true;
+          }
+        }
+        return false;
       }
-    }
-    return false;
-  }
-</script>
+    </script>
   </body>
 </html>
