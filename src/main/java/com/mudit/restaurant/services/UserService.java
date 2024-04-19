@@ -21,7 +21,7 @@ public class UserService {
     public boolean addUser(User user){
         Authority authority=new Authority();
         authority.setUsername(user.getUsername());
-        authority.setAuthority("USER");
+        authority.setAuthority("ROLE_USER");
         user.setEnabled(true);
         user.setAuthority(authority);
         return repo.addUser(user);
@@ -99,13 +99,5 @@ public class UserService {
     public Boolean addOrder(Order order){
         return repo.addOrder(order);
     }
-    public Boolean editOrder(int id,String status){
-        return repo.editOrder(id,status);
-    }
-    public Item getOrderById(int id){
-        return repo.getOrderById(id);
-    }
-    public List<Order> getOrders(){
-        return repo.getOrders();
-    }
+
 }

@@ -1,8 +1,10 @@
 package com.mudit.restaurant.controllers;
 
 
+import com.mudit.restaurant.constants.Strings;
 import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.Item;
+import com.mudit.restaurant.entity.Order;
 import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.services.AdminService;
 import com.mudit.restaurant.utils.Message;
@@ -88,7 +90,9 @@ public class AdminController {
 
 
     @RequestMapping("/orders")
-    public String orders(){
+    public String orders(Model model){
+        List<Order> orders=adminService.getOrders();
+        model.addAttribute("orders",orders);
         return "orders";
     }
 
@@ -96,7 +100,6 @@ public class AdminController {
     public String items(Model model){
 
         List<Item> items=adminService.getItems();
-        System.out.println(items);
         model.addAttribute("items",items);
         return "items";
     }
@@ -375,6 +378,23 @@ public class AdminController {
         }
         System.out.println(attributes.getFlashAttributes());
         return "redirect:/admin/users/";
+    }
+
+    @RequestMapping("/editorder/{id}")
+    public String editOrder(@PathVariable("id") int id,@RequestParam("status") String status,HttpServletRequest request){
+        String referer = request.getHeader("referer");
+        boolean flag=false;
+        if(status.equals(Strings.preparingStatus)){
+            flag= adminService.editOrder(id,Strings.preparingStatus);
+        }
+        else if(status.equals(Strings.cancelledStatus)){
+            flag= adminService.editOrder(id,Strings.cancelledStatus);
+        }
+        else if(status.equals(Strings.deleveredStatus)){
+            flag= adminService.editOrder(id,Strings.deleveredStatus);
+        }
+
+        return "redirect:" + referer;
     }
 }
 

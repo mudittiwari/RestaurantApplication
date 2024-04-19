@@ -9,7 +9,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:forEach var="entry" items="${cart}">
   <c:set var="item" value="${entry.key}" />
   <c:set var="quantity" value="${entry.value}" />
-  <c:set var="subtotal" value="${item.price * quantity}" />
+  <c:set var="subtotal" value="${item.discountedPrice * quantity}" />
   <c:set var="totalPrice" value="${totalPrice + subtotal}" />
 </c:forEach>
 
@@ -396,7 +396,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <div class="mt-4 flex flex-col justify-center items-center">
                     <span class="text-sm font-semibold titleColor">Price</span>
                     <span class="text-sm textColor font-bold"
-                      >${item.getPrice()}</span
+                      >${item.getDiscountedPrice()}</span
                     >
                   </div>
                 </div>
@@ -410,7 +410,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <button
                     class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
                   >
-                    Add to Cart - ${item.getPrice()}
+                    Add to Cart - ${item.getDiscountedPrice()}
                   </button>
                 </a>
                 <div
@@ -665,7 +665,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                                   </svg>
                                                 </a>
                                               </div>
-                                              ${item.getPrice()}
+                                              ${item.getDiscountedPrice()}
                                             </div>
                                           </div>
                                         </c:forEach>

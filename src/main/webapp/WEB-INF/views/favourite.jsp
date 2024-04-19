@@ -371,7 +371,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <div class="mt-4 flex flex-col justify-center items-center">
                     <span class="text-sm font-semibold titleColor">Price</span>
                     <span class="text-sm textColor font-bold"
-                      >${item.getPrice()}</span
+                      >${item.getDiscountedPrice()}</span
                     >
                   </div>
                 </div>
@@ -382,7 +382,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 <button
                   class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
                 >
-                  Add to Cart - ${item.getPrice()}
+                  Add to Cart - ${item.getDiscountedPrice()}
                 </button>
                 <div
                   class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4"
@@ -635,7 +635,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                                     </svg>
                                                   </a>
                                                 </div>
-                                                ${item.getPrice()}
+                                                ${item.getDiscountedPrice()}
                                               </div>
                                             </div>
                                           </c:forEach>

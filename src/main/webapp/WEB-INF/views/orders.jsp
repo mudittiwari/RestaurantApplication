@@ -110,23 +110,52 @@
                                 </div>
 
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Title</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Address</th>
-                                                <th>Status</th>
-                                                <th>Reg-Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Order data will be dynamically inserted here -->
-                                        </tbody>
-                                    </table>
+                                    <table
+                      id="example23"
+                      class="display nowrap table table-hover table-striped table-bordered"
+                      cellspacing="0"
+                      width="100%"
+                    >
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Username</th>
+                          <th>Table Number</th>
+                          <th>Price</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Iterate over items -->
+                        <c:forEach items="${orders}" var="order">
+                          <tr>
+                            <td>${order.getId()}</td>
+                            <td>${order.getUser().getUsername()}</td>
+                            <td>${order.getTableNumber()}</td>
+                            <td>${order.getTotalPrice()}</td>
+                            
+                            <td>
+                              <a
+                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
+                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
+                                >Accept</a
+                              >
+                              <a
+                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
+                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
+                                >Cancel</a
+                              >
+                              <a
+                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
+                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
+                                >Delivered</a
+                              >
+                              
+                            </td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
                                 </div>
                             </div>
                         </div>

@@ -15,6 +15,8 @@ public class Order {
     @ManyToOne
     private User user;
 
+
+
     @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Item> items = new ArrayList<>();
     private String status;
@@ -23,15 +25,10 @@ public class Order {
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
 
-    public int getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(int tableNumber) {
-        this.tableNumber = tableNumber;
-    }
 
     private int tableNumber;
+
+    private double totalPrice;
     public int getId() {
         return id;
     }
@@ -69,6 +66,20 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override

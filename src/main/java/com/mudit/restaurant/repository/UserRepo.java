@@ -194,50 +194,7 @@ public class UserRepo {
     }
 
 
-    public Boolean editOrder(int id,String status){
-        Transaction tx=null;
-        try(Session session=sessionFactory.openSession()){
-            tx=session.beginTransaction();
-            Order userOrder=session.get(Order.class,id);
-            userOrder.setStatus(status);
-            session.saveOrUpdate(userOrder);
-            tx.commit();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            assert tx != null;
-            tx.rollback();
-            return false;
-        }
-        return true;
-    }
 
-
-    public List<Order> getOrders(){
-        List<Order> lst=new ArrayList<>();
-        try(Session session=sessionFactory.openSession()){
-            String hql = "FROM Order";
-            Query<Order> query = session.createQuery(hql, Order.class);
-            lst = query.list();
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return lst;
-    }
-
-    public Order getOrderById(int id){
-        Order order=null;
-        try (Session session = sessionFactory.openSession()) {
-            String hql = "FROM Order WHERE id = :id";
-            Query<Order> query = session.createQuery(hql, Order.class);
-            query.setParameter("id", id);
-            order=query.list().get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return order;
-    }
 
 
 

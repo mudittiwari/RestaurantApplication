@@ -2,6 +2,7 @@ package com.mudit.restaurant.services;
 
 import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.Item;
+import com.mudit.restaurant.entity.Order;
 import com.mudit.restaurant.entity.User;
 import com.mudit.restaurant.repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,14 @@ public class AdminService {
     }
     public long getUserCount(){
         return adminRepo.getUserCount();
+    }
+    public Boolean editOrder(int id,String status){
+        return adminRepo.editOrder(id,status);
+    }
+    public Order getOrderById(int id){
+        return adminRepo.getOrderById(id);
+    }
+    public List<Order> getOrders(){
+        return adminRepo.getOrders();
     }
 }

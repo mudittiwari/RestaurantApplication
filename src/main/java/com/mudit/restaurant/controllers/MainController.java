@@ -228,40 +228,29 @@ public class MainController {
             HttpSession session = request.getSession();
             Map<Item, Integer> cart = (Map<Item, Integer>) session.getAttribute("cart");
             List<Item> itemsList=new ArrayList<>();
+            double totalPrice=0;
             if (cart != null) {
+
                 for (Map.Entry<Item, Integer> entry : cart.entrySet()) {
                     Item item = entry.getKey();
                     Integer quantity = entry.getValue();
+                    totalPrice+=item.getDiscountedPrice()*quantity;
                     for (int i = 0; i < quantity; i++) {
                         itemsList.add(item);
                     }
                 }
+                User user=service.getUserByUsername(username);
+                Order order=new Order();
+                order.setItems(itemsList);
+                order.setStatus(Strings.processingStatus);
+                order.setUser(user);
+                order.setCreatedAt(new Date());
+                order.setTotalPrice(totalPrice);
+                service.addOrder(order);
             }
-            User user=service.getUserByUsername(username);
-            Order order=new Order();
-            order.setItems(itemsList);
-            order.setStatus(Strings.processingStatus);
-            order.setUser(user);
-            order.setCreatedAt(new Date());
-            service.addOrder(order);
         }
         return "redirect:" + referer;
     }
 
-    @RequestMapping("/editorder/{id}")
-    public String editOrder(@PathVariable("id") int id,@RequestParam("status") String status,HttpServletRequest request){
-        String referer = request.getHeader("referer");
-        boolean flag=false;
-        if(status.equals(Strings.preparingStatus)){
-            flag= service.editOrder(id,Strings.preparingStatus);
-        }
-        else if(status.equals(Strings.cancelledStatus)){
-            flag= service.editOrder(id,Strings.cancelledStatus);
-        }
-        else if(status.equals(Strings.deleveredStatus)){
-            flag= service.editOrder(id,Strings.deleveredStatus);
-        }
 
-        return "redirect:" + referer;
-    }
 }
