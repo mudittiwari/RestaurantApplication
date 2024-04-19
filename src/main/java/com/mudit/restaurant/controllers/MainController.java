@@ -79,7 +79,7 @@ public class MainController {
         System.out.println(items);
         model.addAttribute("items",items);
         model.addAttribute("categories",categories);
-        return "useritems";
+        return "categoryitems";
     }
     @RequestMapping("/submitsignup")
     public String submitSignup(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes attributes){
