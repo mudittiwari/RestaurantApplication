@@ -64,7 +64,7 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a href="dashboard.html"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+                        <li> <a href="${pageContext.request.contextPath}/admin/"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
                         <li class="nav-label">Log</li>
                         <li> <a href="${pageContext.request.contextPath}/admin/users"> <span><i class="fa fa-user f-s-20 "></i></span><span>Users</span></a></li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">category</span></a>
@@ -103,7 +103,7 @@
                                             <span><i class="fa fa-cutlery f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>56</h2>
+                                            <h2>${itemCount}</h2>
                                             <p class="m-b-0">Dishes</p>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                             <span><i class="fa fa-users f-s-40"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>456</h2>
+                                            <h2>${userCount}</h2>
                                             <p class="m-b-0">Users</p>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                             <span><i class="fa fa-th-large f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>3</h2>
+                                            <h2><h2>${categoryCount}</h2></h2>
                                             <p class="m-b-0">Restro Categories</p>
                                         </div>
                                     </div>

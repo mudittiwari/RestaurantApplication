@@ -1,10 +1,7 @@
 package com.mudit.restaurant.services;
 
 
-import com.mudit.restaurant.entity.Authority;
-import com.mudit.restaurant.entity.Category;
-import com.mudit.restaurant.entity.Item;
-import com.mudit.restaurant.entity.User;
+import com.mudit.restaurant.entity.*;
 import com.mudit.restaurant.repository.UserRepo;
 import org.apache.logging.log4j.core.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +96,16 @@ public class UserService {
             return false;
         }
     }
-
+    public Boolean addOrder(Order order){
+        return repo.addOrder(order);
+    }
+    public Boolean editOrder(int id,String status){
+        return repo.editOrder(id,status);
+    }
+    public Item getOrderById(int id){
+        return repo.getOrderById(id);
+    }
+    public List<Order> getOrders(){
+        return repo.getOrders();
+    }
 }

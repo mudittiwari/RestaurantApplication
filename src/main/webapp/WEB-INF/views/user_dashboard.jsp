@@ -7,10 +7,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 </c:forEach>
 <c:set var="totalPrice" value="0" />
 <c:forEach var="entry" items="${cart}">
-    <c:set var="item" value="${entry.key}" />
-    <c:set var="quantity" value="${entry.value}" />
-    <c:set var="subtotal" value="${item.price * quantity}" />
-    <c:set var="totalPrice" value="${totalPrice + subtotal}" />
+  <c:set var="item" value="${entry.key}" />
+  <c:set var="quantity" value="${entry.value}" />
+  <c:set var="subtotal" value="${item.price * quantity}" />
+  <c:set var="totalPrice" value="${totalPrice + subtotal}" />
 </c:forEach>
 
 <!DOCTYPE html>
@@ -26,7 +26,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
-    <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
+    <link
+      href="${pageContext.request.contextPath}/css/common.css"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -43,16 +46,14 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     </style>
   </head>
   <body class="bg-gray-100 rounded-3xl p-1 bg-Image">
-
     <c:if test="${not empty message}">
       <div id="overlay" class="overlay" onclick="hidePopup()"></div>
       <div id="popup" class="popup">
-          <h2>${message.getTitle()}</h2>
-          <p>${message.getDesc()}</p>
-          <button class="popupbutton" onclick="hidePopup()">Close</button>
+        <h2>${message.getTitle()}</h2>
+        <p>${message.getDesc()}</p>
+        <button class="popupbutton" onclick="hidePopup()">Close</button>
       </div>
-  </c:if>
-
+    </c:if>
 
     <div class="flex w-full justify-start">
       <!-- Left Navbar -->
@@ -320,28 +321,27 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         <!-- Top Cards -->
         <div class="w-full flex gap-12 mt-16 justify-start px-16">
           <a href="${pageContext.request.contextPath}/items" class="w-1/4">
-          <div
-            class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-           
-          >
-            <img
-              class="w-full object-fill"
-              src="${pageContext.request.contextPath}/images/resources/items-list.png"
-              alt="Banner"
-            />
-          </div>
-        </a>
-        <a href="${pageContext.request.contextPath}" class="w-1/4">
-          <div
-            class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-          >
-            <img
-              class="w-full object-fill"
-              src="${pageContext.request.contextPath}/images/resources/discounts.png"
-              alt="Banner"
-            />
-          </div>
-        </a>
+            <div
+              class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+            >
+              <img
+                class="w-full object-fill"
+                src="${pageContext.request.contextPath}/images/resources/items-list.png"
+                alt="Banner"
+              />
+            </div>
+          </a>
+          <a href="${pageContext.request.contextPath}" class="w-1/4">
+            <div
+              class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+            >
+              <img
+                class="w-full object-fill"
+                src="${pageContext.request.contextPath}/images/resources/discounts.png"
+                alt="Banner"
+              />
+            </div>
+          </a>
         </div>
 
         <div class="w-full px-16 text-2xl font-bold my-16 titleColor">
@@ -451,12 +451,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
                 <div class="flex gap-7 items-center">
                   <img
-                   
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
-                   
                     class="w-7 h-6 mt-1"
-                 
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
@@ -674,11 +671,13 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         </c:forEach>
 
                                         <div class="p-4 justify-center flex">
-                                          <button
+                                          <form action="${pageContext.request.contextPath}/addorder">
+                                          <button type="submit"
                                             class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                           >
                                             Checkout $${totalPrice}
                                           </button>
+                                        </form>
                                         </div>
                                       </div>
                                     </div>
@@ -704,7 +703,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"
       defer
     ></script>
-    
+
     <script>
       const setup = () => {
         return {

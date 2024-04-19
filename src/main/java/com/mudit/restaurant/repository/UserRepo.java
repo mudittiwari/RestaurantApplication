@@ -3,7 +3,9 @@ package com.mudit.restaurant.repository;
 
 import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.Item;
+import com.mudit.restaurant.entity.Order;
 import com.mudit.restaurant.entity.User;
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -166,6 +168,76 @@ public class UserRepo {
         return item;
     }
 
+
+    public Boolean addOrder(Order order){
+        System.out.println(order);
+        Transaction tx=null;
+        try(Session session=sessionFactory.openSession()){
+            tx=session.beginTransaction();
+            User usr= order.getUser();
+            User user=session.get(User.class,usr.getUsername());
+            List<Order> userOrders=user.getOrders();
+            System.out.println(order.getId());
+            userOrders.add(order);
+            user.setOrders(userOrders);
+            session.save(order);
+            session.saveOrUpdate(user);
+            tx.commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            assert tx != null;
+            tx.rollback();
+            return false;
+        }
+        return true;
+    }
+
+
+    public Boolean editOrder(int id,String status){
+        Transaction tx=null;
+        try(Session session=sessionFactory.openSession()){
+            tx=session.beginTransaction();
+            Order userOrder=session.get(Order.class,id);
+            userOrder.setStatus(status);
+            session.saveOrUpdate(userOrder);
+            tx.commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            assert tx != null;
+            tx.rollback();
+            return false;
+        }
+        return true;
+    }
+
+
+    public List<Order> getOrders(){
+        List<Order> lst=new ArrayList<>();
+        try(Session session=sessionFactory.openSession()){
+            String hql = "FROM Order";
+            Query<Order> query = session.createQuery(hql, Order.class);
+            lst = query.list();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lst;
+    }
+
+    public Order getOrderById(int id){
+        Order order=null;
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Order WHERE id = :id";
+            Query<Order> query = session.createQuery(hql, Order.class);
+            query.setParameter("id", id);
+            order=query.list().get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
 
 
 

@@ -343,44 +343,76 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             <div class="swiper-slide">
               <div class="w-full flex flex-wrap justify-center  h-full gap-12">
           </c:if>
-          <div class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center">
-            <div class="relative w-full px-2">
-              <img class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image" />
-              <a href="${pageContext.request.contextPath}/${favourites.contains(item) ? 'removefavourite' : 'addfavourite'}/${item.getId()}">
-            <button class="absolute top-0 right-0 mt-2 mr-2">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                fill="${favourites.contains(item) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                </path>
-              </svg>
-            </button>
-          </a>
-            </div>
-            <div class="font-bold text-xl mt-5 titleColor">${item.getName()}</div>
-            <div class="py-2 text-center ">
-              <div class="flex justify-between gap-4">
-                <div class="mt-4 flex flex-col justify-center items-center">
-                  <span class="text-sm font-semibold titleColor">Category</span>
-                  <span class="text-sm textColor">${item.getCategory().getName()}</span>
+          <div
+              class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center"
+            >
+              <div class="relative w-full px-2">
+                <img
+                  class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                  src="${pageContext.request.contextPath}${item.getImage()}"
+                  alt="Product Image"
+                />
+                <a
+                  href="${pageContext.request.contextPath}/${favourites.contains(item) ? 'removefavourite' : 'addfavourite'}/${item.getId()}"
+                >
+                  <button class="absolute top-0 right-0 mt-2 mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="${favourites.contains(item) ? 'currentColor' : 'none'}"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-6 w-6"
+                    >
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 19.78l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </a>
+              </div>
+              <div class="font-bold text-xl mt-5 titleColor">
+                ${item.getName()}
+              </div>
+              <div class="py-2 text-center">
+                <div class="flex justify-between gap-4">
+                  <div class="mt-4 flex flex-col justify-center items-center">
+                    <span class="text-sm font-semibold titleColor"
+                      >Category</span
+                    >
+                    <span class="text-sm textColor"
+                      >${item.getCategory().getName()}</span
+                    >
+                  </div>
+                  <div class="mt-4 flex flex-col justify-center items-center">
+                    <span class="text-sm font-semibold titleColor">Price</span>
+                    <span class="text-sm textColor font-bold"
+                      >${item.getPrice()}</span
+                    >
+                  </div>
                 </div>
-                <div class="mt-4 flex flex-col justify-center items-center">
-                  <span class="text-sm font-semibold titleColor">Price</span>
-                  <span class="text-sm textColor font-bold">${item.getPrice()}</span>
+              </div>
+              <div
+                class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm"
+              >
+                <a
+                  href="${pageContext.request.contextPath}/addtocart/${item.getId()}"
+                >
+                  <button
+                    class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl"
+                  >
+                    Add to Cart - ${item.getPrice()}
+                  </button>
+                </a>
+                <div
+                  class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4"
+                >
+                  In Stock
                 </div>
               </div>
             </div>
-            <div class="pt-2 pb-4 w-full flex flex-col items-center justify-between text-sm">
-              <button class="btnBg w-max text-white font-bold py-2 px-4 m-2 rounded-2xl">
-                Add to Cart - ${item.getPrice()}
-              </button>
-              <div class="btnBg w-max text-white font-bold py-2 m-2 rounded-2xl px-4">
-                In Stock
-              </div>
-            </div>
-          </div>
                   <!-- Close the swiper-slide if this is the 3rd product or the last product -->
                   <c:if test="${loop.index % 3 == 2 or loop.last}">
               </div>
@@ -674,6 +706,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"
         defer
       ></script>
+      <script src="${pageContext.request.contextPath}/js/common.js"></script>
       <script>
         const setup = () => {
           return {

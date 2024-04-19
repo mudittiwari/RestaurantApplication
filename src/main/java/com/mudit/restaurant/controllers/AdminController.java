@@ -45,7 +45,13 @@ public class AdminController {
     }
 
     @RequestMapping("/")
-    public String home(){
+    public String home(Model model){
+        long itemCount= adminService.getItemCount();
+        long categoryCount= adminService.getCategoryCount();
+        long userCount= adminService.getUserCount();
+        model.addAttribute("itemCount",itemCount);
+        model.addAttribute("categoryCount",categoryCount);
+        model.addAttribute("userCount",userCount);
         return "dashboard";
     }
 
