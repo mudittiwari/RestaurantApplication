@@ -123,40 +123,43 @@ public class AdminRepo {
     }
     public boolean deleteItem(int id) {
         Transaction tx = null;
-        List<Order> orders = this.getOrders();
-        System.out.println(orders);
-        for (Order order : orders) {
-            System.out.println(order.getItems());
+        List<User> users = this.getUsers();
+        try (Session session = sessionFactory.openSession()) {
+            tx=session.beginTransaction();
+            for (User user : users) {
+                List<Order> lst;
+                Item item = session.get(Item.class, id);
+                String hql = "SELECT DISTINCT o FROM Order o " +
+                        "JOIN FETCH o.items " +
+                        "WHERE o.user.username = :username";
+                Query<Order> query = session.createQuery(hql, Order.class);
+                query.setParameter("username", user.getUsername());
+                lst = query.list();
+                for (Order order:lst){
+                    order.getItems().remove(item);
+                    System.out.println(order.getItems());
+                    session.saveOrUpdate(order);
+                }
+
+                    if (item != null) {
+                        Category category = item.getCategory();
+                        if (category != null) {
+                            category.getItems().remove(item);
+                            session.saveOrUpdate(category);
+                        }
+                        session.delete(item);
+                    }
+
+            }
+            assert tx != null;
+            tx.commit();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return false;
-//            try (Session session = sessionFactory.openSession()) {
-//                tx = session.beginTransaction();
-//                Item item = session.get(Item.class, id);
-//                if (item != null) {
-//
-//                    List<User> users = getUsers();
-//                    for (User user : users) {
-//                        user.getFavourites().remove(item);
-//                        session.saveOrUpdate(user);
-//                    }
-//                    Category category = item.getCategory();
-//                    if (category != null) {
-//                        category.getItems().remove(item);
-//                        session.saveOrUpdate(category);
-//                    }
-//                    session.delete(item);
-//                    tx.commit();
-//                    return true;
-//                }
-//                return false; // Item not found
-//            } catch (Exception e) {
-//                if (tx != null) {
-//                    tx.rollback();
-//                }
-//                e.printStackTrace();
-//                return false;
-//            }
-        }
+    }
+
 
 
     public boolean addFeatured(int id) {

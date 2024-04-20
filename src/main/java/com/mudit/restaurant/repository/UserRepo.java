@@ -196,7 +196,7 @@ public class UserRepo {
     public List<Order> getUserOrders(String username) {
         List<Order> lst = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
-            String hql = "SELECT o FROM Order o " +
+            String hql = "SELECT DISTINCT o FROM Order o " +
                     "JOIN FETCH o.items " +
                     "WHERE o.user.username = :username";
             Query<Order> query = session.createQuery(hql, Order.class);

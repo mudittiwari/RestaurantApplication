@@ -208,7 +208,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                             <td>${item.getCategory().getName()}</td>
                             <td>${item.getName()}</td>
                             <td>${item.getDescription()}</td>
-                            <td>${item.getDiscountedPrice()}</td>
+                            <td>${item.getPrice()}</td>
                             <td>${item.getDiscountedPrice()}</td>
                             <td>
                               <a

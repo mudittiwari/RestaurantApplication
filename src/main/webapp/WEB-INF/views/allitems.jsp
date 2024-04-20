@@ -346,9 +346,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           <div
               class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center"
             >
-              <div class="relative w-full px-2">
+              <div class="relative w-full">
                 <img
-                  class="w-full h-44 object-fill hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                  class="w-full h-44 object-cover hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
                   src="${pageContext.request.contextPath}${item.getImage()}"
                   alt="Product Image"
                 />

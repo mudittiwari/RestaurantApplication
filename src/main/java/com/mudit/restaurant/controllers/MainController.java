@@ -64,15 +64,22 @@ public class MainController {
     }
     @RequestMapping("/items")
     public String allItems(Model model){
-        Map<String, List<Item>> items=new HashMap<>();
-        List<Category> categories=service.getCategories();
-        for (int i=0;i<categories.size();i++){
-            String category=categories.get(i).getName();
-            int categoryId=categories.get(i).getId();
-            List<Item> categoryItems=service.getCategoryItems(categoryId);
-            items.put(category,categoryItems);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            Map<String, List<Item>> items = new HashMap<>();
+            List<Category> categories = service.getCategories();
+            for (int i = 0; i < categories.size(); i++) {
+                String category = categories.get(i).getName();
+                int categoryId = categories.get(i).getId();
+                List<Item> categoryItems = service.getCategoryItems(categoryId);
+                items.put(category, categoryItems);
+            }
+            List<Item> favItems = service.getFavouriteItems(username);
+            model.addAttribute("favourites", favItems);
+            model.addAttribute("items", items);
         }
-        model.addAttribute("items",items);
         return "allitems";
     }
     @RequestMapping("/items/{id}")
@@ -265,7 +272,9 @@ public class MainController {
                     System.out.println(orders.get(i).getItems());
             }
             model.addAttribute("orders",orders);
+            System.out.println(orders);
         }
+
         else {
             Message message = new Message();
             message.setTitle("Error");
