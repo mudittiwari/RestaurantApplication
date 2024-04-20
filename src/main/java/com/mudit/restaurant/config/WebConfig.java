@@ -92,16 +92,22 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         http
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/signup","/submitsignup","/css/**", "/js/**", "/images/**","/uploads/**").permitAll()
+                .antMatchers("/signup", "/submitsignup", "/css/**", "/js/**", "/images/**", "/uploads/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
                 .httpBasic();
         http.csrf().disable();
     }
+
 
     @Bean
     @Override

@@ -380,8 +380,8 @@ public class AdminController {
         return "redirect:/admin/users/";
     }
 
-    @RequestMapping("/editorder/{id}")
-    public String editOrder(@PathVariable("id") int id,@RequestParam("status") String status,HttpServletRequest request){
+    @RequestMapping("/order/changestatus/{id}/{status}")
+    public String editOrder(@PathVariable("id") int id,@PathVariable("status") String status,HttpServletRequest request,RedirectAttributes attributes){
         String referer = request.getHeader("referer");
         boolean flag=false;
         if(status.equals(Strings.preparingStatus)){
@@ -392,6 +392,12 @@ public class AdminController {
         }
         else if(status.equals(Strings.deleveredStatus)){
             flag= adminService.editOrder(id,Strings.deleveredStatus);
+        }
+        if(flag){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("Order status changed to "+status+" successfully");
+            attributes.addFlashAttribute("message", message);
         }
 
         return "redirect:" + referer;

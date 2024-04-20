@@ -219,7 +219,7 @@ public class MainController {
     }
 
     @RequestMapping("/addorder")
-    public String addOrder(HttpServletRequest request){
+    public String addOrder(@RequestParam("tableNumber") int tableNumber, HttpServletRequest request){
         String referer = request.getHeader("referer");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
@@ -245,6 +245,7 @@ public class MainController {
                 order.setStatus(Strings.processingStatus);
                 order.setUser(user);
                 order.setCreatedAt(new Date());
+                order.setTableNumber(tableNumber);
                 order.setTotalPrice(totalPrice);
                 service.addOrder(order);
             }
@@ -252,5 +253,25 @@ public class MainController {
         return "redirect:" + referer;
     }
 
-
+    @RequestMapping("/orders")
+    public String getOrders(Model model,RedirectAttributes attributes){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            List<Order> orders=service.getUserOrders(username);
+            for (int i=0;i<orders.size();i++){
+                if(orders.get(i).getItems().size()>1)
+                    System.out.println(orders.get(i).getItems());
+            }
+            model.addAttribute("orders",orders);
+        }
+        else {
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while getting the orders");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "orderhistory";
+    }
 }

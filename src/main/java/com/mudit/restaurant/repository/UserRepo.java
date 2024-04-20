@@ -193,6 +193,20 @@ public class UserRepo {
         return true;
     }
 
+    public List<Order> getUserOrders(String username) {
+        List<Order> lst = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "SELECT o FROM Order o " +
+                    "JOIN FETCH o.items " +
+                    "WHERE o.user.username = :username";
+            Query<Order> query = session.createQuery(hql, Order.class);
+            query.setParameter("username", username);
+            lst = query.list();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return lst;
+    }
 
 
 

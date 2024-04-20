@@ -297,7 +297,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                   aria-label="user menu"
                                 >
                                   <a
-                                    href="${pageContext.request.contextPath}/login"
+                                    href="${pageContext.request.contextPath}/logout"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Sign out</a
@@ -614,17 +614,16 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                           </div>
                                         </c:forEach>
 
-                                        <div class="flex justify-center flex-col">
+                                        <div class="flex justify-center flex-col mt-5">
                                           <p class="text-center">
                                             Select Table Number: ${tableNumber}
                                           </p>
-                                          <form
-                                            action="${pageContext.request.contextPath}/addtocart"
-                                            method="post"
-                                            class="flex justify-center"
-                                          >
+                                          
+
+                                        <div class="p-4 justify-center flex">
+                                          <form action="${pageContext.request.contextPath}/addorder">
                                             <select
-                                              name="quantity"
+                                              name="tableNumber"
                                               class="w-20 h-8"
                                             >
                                               <c:forEach
@@ -643,15 +642,6 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                                 >
                                               </c:forEach>
                                             </select>
-                                            <input
-                                              type="hidden"
-                                              name="id"
-                                              value="${item.getId()}"
-                                            />
-                                          </form>
-
-                                        <div class="p-4 justify-center flex">
-                                          <form action="${pageContext.request.contextPath}/addorder">
                                           <button type="submit"
                                             class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
                                           >

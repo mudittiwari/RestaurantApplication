@@ -122,6 +122,7 @@
                           <th>Username</th>
                           <th>Table Number</th>
                           <th>Price</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -133,25 +134,27 @@
                             <td>${order.getUser().getUsername()}</td>
                             <td>${order.getTableNumber()}</td>
                             <td>${order.getTotalPrice()}</td>
+                            <td>${order.getStatus()}</td>
+                            <c:choose>
+                                <c:when test="${order.getStatus() eq 'Processing'}">
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/admin/order/changestatus/${order.getId()}/Preparing"
+                                           class="btn btn-info btn-flat btn-addon btn-xs m-b-10">Accept</a>
+                                        <a href="${pageContext.request.contextPath}/admin/order/changestatus/${order.getId()}/Cancelled"
+                                           class="btn btn-info btn-flat btn-addon btn-xs m-b-10">Cancel</a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${order.getStatus() eq 'Cancelled'}">
+                                    <td></td>
+                                </c:when>
+                                <c:when test="${order.getStatus() eq 'Preparing'}">
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/admin/order/changestatus/${order.getId()}/Delivered"
+                                           class="btn btn-info btn-flat btn-addon btn-xs m-b-10">Delivered</a>
+                                    </td>
+                                </c:when>
+                            </c:choose>
                             
-                            <td>
-                              <a
-                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
-                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
-                                >Accept</a
-                              >
-                              <a
-                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
-                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
-                                >Cancel</a
-                              >
-                              <a
-                                href="${pageContext.request.contextPath}/admin/edititem/${item.getId()}"
-                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10"
-                                >Delivered</a
-                              >
-                              
-                            </td>
                           </tr>
                         </c:forEach>
                       </tbody>

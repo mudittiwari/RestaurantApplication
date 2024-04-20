@@ -35,7 +35,7 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public List<Item> getFavourites() {

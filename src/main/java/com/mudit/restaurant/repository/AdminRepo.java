@@ -123,33 +123,42 @@ public class AdminRepo {
     }
     public boolean deleteItem(int id) {
         Transaction tx = null;
-        try (Session session = sessionFactory.openSession()) {
-            tx = session.beginTransaction();
-            Item item = session.get(Item.class, id);
-            if (item != null) {
-                Category category = item.getCategory();
-                if (category != null) {
-                    category.getItems().remove(item);
-                    session.saveOrUpdate(category);
-                }
-                List<User> users=getUsers();
-                for(int i=0;i<users.size();i++){
-                    users.get(i).getFavourites().remove(item);
-                    session.saveOrUpdate(users.get(i));
-                }
-                session.delete(item);
-                tx.commit();
-                return true;
-            }
-            return false; // Item not found
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
+        List<Order> orders = this.getOrders();
+        System.out.println(orders);
+        for (Order order : orders) {
+            System.out.println(order.getItems());
         }
-    }
+        return false;
+//            try (Session session = sessionFactory.openSession()) {
+//                tx = session.beginTransaction();
+//                Item item = session.get(Item.class, id);
+//                if (item != null) {
+//
+//                    List<User> users = getUsers();
+//                    for (User user : users) {
+//                        user.getFavourites().remove(item);
+//                        session.saveOrUpdate(user);
+//                    }
+//                    Category category = item.getCategory();
+//                    if (category != null) {
+//                        category.getItems().remove(item);
+//                        session.saveOrUpdate(category);
+//                    }
+//                    session.delete(item);
+//                    tx.commit();
+//                    return true;
+//                }
+//                return false; // Item not found
+//            } catch (Exception e) {
+//                if (tx != null) {
+//                    tx.rollback();
+//                }
+//                e.printStackTrace();
+//                return false;
+//            }
+        }
+
+
     public boolean addFeatured(int id) {
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {

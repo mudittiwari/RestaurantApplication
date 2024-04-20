@@ -17,7 +17,7 @@ public class Order {
 
 
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany
     private List<Item> items = new ArrayList<>();
     private String status;
 

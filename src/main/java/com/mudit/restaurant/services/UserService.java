@@ -99,5 +99,8 @@ public class UserService {
     public Boolean addOrder(Order order){
         return repo.addOrder(order);
     }
+    public List<Order> getUserOrders(String username){
+        return repo.getUserOrders(username);
+    }
 
 }
