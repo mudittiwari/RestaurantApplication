@@ -345,7 +345,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         <h2>${item.getName()}</h2>
                                     </div>
                                     <div class="w-full overflow-hidden flex justify-center items-center">
-                                        <img class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                        <img style="height: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
                                     </div>
                                     <div class="flex flex-col w-full justify-center items-center mt-5">
                                         <p class="text-sm productDescription">${item.getDescription()}</p>
