@@ -140,6 +140,14 @@ public class AdminRepo {
                     System.out.println(order.getItems());
                     session.saveOrUpdate(order);
                 }
+                hql = "FROM User WHERE username = :username";
+                Query<User> query2 = session.createQuery(hql, User.class);
+                query2.setParameter("username", user.getUsername());
+                User usr=query2.list().get(0);
+                List<Item> usrFav=usr.getFavourites();
+                usrFav.remove(item);
+                usr.setFavourites(usrFav);
+                session.saveOrUpdate(usr);
 
                     if (item != null) {
                         Category category = item.getCategory();

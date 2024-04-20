@@ -322,110 +322,57 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       </div>
 
       <!-- Main Content -->
-      <div class="flex flex-col w-3/4 mx-auto h-full">
+      <div class="flex flex-col w-full h-full">
         <!-- Products -->
-        <div class="flex flex-wrap h-screen">
-          <div class="button-container" id="buttonContainer">
-            <c:forEach items="${categories}" var="category">
-              <button class="button active" id="starterButton">
-                <a
-                  href="${pageContext.request.contextPath}/items/${category.getId()}"
-                  >${category.getName()}</a
-                >
-              </button>
-            </c:forEach>
-            <!-- Border highlight element -->
-          </div>
-
-          <!-- Select Product -->
-          <div class="swiper mt-14 h-screen w-full">
-            <div class="swiper-wrapper h-full">
-              <c:forEach items="${items}" var="item">
-                <div class="swiper-slide h-full">
-                  <div
-                    class="w-full px-1 flex flex-wrap justify-center gap-1 h-full"
-                  >
-                    <!-- Product Card -->
-                    <div
-                      class="w-3/4 flex justify-center flex-col items-start align-center h-full"
-                    >
-                      <div
-                        class="flex productTitle text-3xl justify-center items-center absolute top-10 left-1/2 transform -translate-x-1/2 translate-y-1/4"
-                        id="productTitle"
-                      >
-                        <h2>${item.getName()}</h2>
-                      </div>
-                      <div
-                        class="w-full overflow-hidden flex justify-center flex-col items-center"
-                      >
-                        <img
-                          class="w-full mt-10 object-fill rounded-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                          src="${pageContext.request.contextPath}${item.getImage()}"
-                          alt="Product Image"
-                        />
-                      </div>
-                      <div
-                        class="flex w-full justify-center items-center absolute top-2/4 mt-20 left-1/2 transform -translate-x-1/2 translate-y-3/4 flex-col gap-2 text-center productDescription"
-                        id="productDescription"
-                      >
-                        <p class="text-sm">${item.getDescription()}</p>
-                        <p class="text-2xl productTitle">
-                          ${item.getDiscountedPrice()}$
-                        </p>
-                      </div>
-                      <div
-                        class="flex flex-col w-full justify-center relative top-16 left-0 productIngredients"
-                        id="productIngredients"
-                      >
-                        <ul class="flex w-full justify-center gap-2 mt-8">
-                          <li>
-                            <img
-                              src="${pageContext.request.contextPath}/images/resources/onion.png"
-                              class="w-40 h-10 object-contain"
-                              alt=""
-                            />
-                          </li>
-                          <li>
-                            <img
-                              src="${pageContext.request.contextPath}/images/resources/gajar.png"
-                              class="w-40 h-10 object-contain"
-                              alt=""
-                            />
-                          </li>
-                          <li>
-                            <img
-                              src="${pageContext.request.contextPath}/images/resources/mirch.png"
-                              class="w-40 h-10 object-contain"
-                              alt=""
-                            />
-                          </li>
-                          <li>
-                            <img
-                              src="${pageContext.request.contextPath}/images/resources/meat.png"
-                              class="w-40 h-10 object-contain"
-                              alt=""
-                            />
-                          </li>
-                        </ul>
-                        <div class="flex justify-center">
-                          <button
-                            class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl"
-                          >
-                            Add to Cart >>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </c:forEach>
+        <div class="flex flex-wrap">
+            <div class="button-container flex flex-wrap justify-center gap-2">
+                <c:forEach items="${categories}" var="category">
+                    <button class="button active">
+                        <a href="${pageContext.request.contextPath}/items/${category.getId()}">${category.getName()}</a>
+                    </button>
+                </c:forEach>
             </div>
-
-            <div class="swiper-button-prev cursor-pointer z-0"></div>
-            <div class="swiper-button-next cursor-pointer z-0"></div>
-          </div>
+    
+            <!-- Select Product -->
+            <div class="swiper mt-24 w-full">
+                <div class="swiper-wrapper">
+                    <c:forEach items="${items}" var="item">
+                        <div class="swiper-slide">
+                            <div class="w-full flex flex-wrap justify-center gap-1">
+                                <!-- Product Card -->
+                                <div class="w-full flex justify-center flex-col items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center">
+                                        <h2>${item.getName()}</h2>
+                                    </div>
+                                    <div class="w-full overflow-hidden flex justify-center items-center">
+                                        <img class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center items-center mt-5">
+                                        <p class="text-sm productDescription">${item.getDescription()}</p>
+                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
+                                    </div>
+                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
+                                        <ul class="flex w-full justify-center gap-2">
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex justify-center mt-2 ">
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="swiper-button-prev cursor-pointer z-0"></div>
+                <div class="swiper-button-next cursor-pointer z-0"></div>
+            </div>
         </div>
-      </div>
+    </div>
+    
       <!-- Right Navbar -->
       <div class="flex justify-end right-0" id="rightnavbar">
         <div
