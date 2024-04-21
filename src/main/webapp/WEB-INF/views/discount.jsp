@@ -10,7 +10,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:forEach var="entry" items="${cart}">
     <c:set var="item" value="${entry.key}" />
     <c:set var="quantity" value="${entry.value}" />
-    <c:set var="subtotal" value="${item.price * quantity}" />
+    <c:set var="subtotal" value="${item.discountedPrice * quantity}" />
     <c:set var="totalPrice" value="${totalPrice + subtotal}" />
 </c:forEach>
 
@@ -421,6 +421,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <!-- Menu button -->
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    href="${pageContext.request.contextPath}/favourite"
                     class="w-7 h-6 mt-1"
                   />
                   <button

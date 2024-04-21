@@ -416,6 +416,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <!-- Menu button -->
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    href="${pageContext.request.contextPath}/favourite"
                     class="w-7 h-6 mt-1"
                   />
                   <button

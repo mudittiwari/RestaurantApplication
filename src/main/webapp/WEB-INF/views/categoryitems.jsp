@@ -10,7 +10,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:forEach var="entry" items="${cart}">
   <c:set var="item" value="${entry.key}" />
   <c:set var="quantity" value="${entry.value}" />
-  <c:set var="subtotal" value="${item.price * quantity}" />
+  <c:set var="subtotal" value="${item.discountedPrice * quantity}" />
   <c:set var="totalPrice" value="${totalPrice + subtotal}" />
 </c:forEach>
 
@@ -324,10 +324,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <!-- Main Content -->
       <div class="flex flex-col w-full h-full">
         <!-- Products -->
-        <div class="flex flex-wrap">
-            <div class="button-container flex flex-wrap justify-center gap-2">
+        <div class="flex w-full">
+            <div class="button-container overflow-x-scroll flex justify-start w-full">
                 <c:forEach items="${categories}" var="category">
-                    <button class="button active">
+                    <button class="button active mx-10">
                         <a href="${pageContext.request.contextPath}/items/${category.getId()}">${category.getName()}</a>
                     </button>
                 </c:forEach>
@@ -337,6 +337,34 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             <div class="swiper mt-24 w-full">
                 <div class="swiper-wrapper">
                     <c:forEach items="${items}" var="item">
+                        <div class="swiper-slide">
+                            <div class="w-full flex flex-wrap justify-center gap-1">
+                                <!-- Product Card -->
+                                <div class="w-full flex justify-center flex-col items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center">
+                                        <h2>${item.getName()}</h2>
+                                    </div>
+                                    <div class="w-full overflow-hidden flex justify-center items-center">
+                                        <img style="height: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center items-center mt-5">
+                                        <p class="text-sm productDescription">${item.getDescription()}</p>
+                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
+                                    </div>
+                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
+                                        <ul class="flex w-full justify-center gap-2">
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex justify-center mt-2 ">
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="swiper-slide">
                             <div class="w-full flex flex-wrap justify-center gap-1">
                                 <!-- Product Card -->
@@ -427,6 +455,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <!-- Menu button -->
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                    href="${pageContext.request.contextPath}/favourite"
                     class="w-7 h-6 mt-1"
                   />
                   <button
