@@ -325,7 +325,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <div class="flex flex-col w-full h-full">
         <!-- Products -->
         <div class="flex w-full">
-            <div class="button-container overflow-x-scroll flex justify-start w-full">
+            <div class="button-container overflow-x-scroll flex justify-start w-full mt-5 sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
                 <c:forEach items="${categories}" var="category">
                     <button class="button active mx-10">
                         <a href="${pageContext.request.contextPath}/items/${category.getId()}">${category.getName()}</a>
@@ -341,35 +341,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                             <div class="w-full flex flex-wrap justify-center gap-1">
                                 <!-- Product Card -->
                                 <div class="w-full flex justify-center flex-col items-center">
-                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center">
-                                        <h2>${item.getName()}</h2>
-                                    </div>
-                                    <div class="w-full overflow-hidden flex justify-center items-center">
-                                        <img style="height: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
-                                    </div>
-                                    <div class="flex flex-col w-full justify-center items-center mt-5">
-                                        <p class="text-sm productDescription">${item.getDescription()}</p>
-                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
-                                    </div>
-                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
-                                        <ul class="flex w-full justify-center gap-2">
-                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
-                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
-                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
-                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
-                                        </ul>
-                                    </div>
-                                    <div class="flex justify-center mt-2 ">
-                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="w-full flex flex-wrap justify-center gap-1">
-                                <!-- Product Card -->
-                                <div class="w-full flex justify-center flex-col items-center">
-                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center mt-2 sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
                                         <h2>${item.getName()}</h2>
                                     </div>
                                     <div class="w-full overflow-hidden flex justify-center items-center">
@@ -456,7 +428,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
-                    class="w-7 h-6 mt-1"
+                    class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
@@ -742,7 +714,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <script>
       const swiper = new Swiper(".swiper", {
         direction: "horizontal",
-        slidesPerView: 3,
+        slidesPerView: window.innerWidth < 640 ? 1 : 3,
         spaceBetween: 3,
         centeredSlides: true,
         effect: "creative",
@@ -764,7 +736,6 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
         on: {
           click() {
-            console.log("index", this.clickedIndex);
             swiper.slideTo(this.clickedIndex);
           },
         },
@@ -795,6 +766,24 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
         on: {
           init() {
+            if (document.querySelectorAll(".swiper-slide").length < 3) {
+              console.log("swiper initialized", document.querySelectorAll(".swiper-slide").length);
+              document
+                .querySelectorAll(".swiper-slide .productTitle")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+              document
+                .querySelectorAll(".swiper-slide .productDescription")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+              document
+                .querySelectorAll(".swiper-slide .productIngredients")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+            } else {
             document
               .querySelectorAll(".swiper-slide-active .productTitle")
               .forEach((el) => {
@@ -810,6 +799,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               .forEach((el) => {
                 el.style.display = "block";
               });
+            }
           },
         },
       });
@@ -818,28 +808,46 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       // add one more property to the swiper instance
       swiper.on("slideChange", function () {
         // get the index of the active slide & hide the title of the rest
-        document.querySelectorAll(".productTitle").forEach((el) => {
-          el.style.display = "none";
-        });
-        document.querySelectorAll(".productDescription").forEach((el) => {
-          el.style.display = "none";
-        });
-        document.querySelectorAll(".productIngredients").forEach((el) => {
-          el.style.display = "none";
-        });
-
-        const slides = document.querySelectorAll(".swiper-slide");
-        const swiperLength = slides.length;
-        const centeredIndex = swiper.realIndex;
-        const centeredSlide = slides[centeredIndex];
-
-        centeredSlide
-          .querySelectorAll(
-            ".productTitle, .productDescription, .productIngredients"
-          )
-          .forEach((el) => {
-            el.style.display = "block";
+        if (document.querySelectorAll(".swiper-slide") < 3) {
+              document
+                .querySelectorAll(".swiper-slide .productTitle")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+              document
+                .querySelectorAll(".swiper-slide .productDescription")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+              document
+                .querySelectorAll(".swiper-slide .productIngredients")
+                .forEach((el) => {
+                  el.style.display = "block";
+                });
+        } else {
+          document.querySelectorAll(".productTitle").forEach((el) => {
+            el.style.display = "none";
           });
+          document.querySelectorAll(".productDescription").forEach((el) => {
+            el.style.display = "none";
+          });
+          document.querySelectorAll(".productIngredients").forEach((el) => {
+            el.style.display = "none";
+          });
+
+          const slides = document.querySelectorAll(".swiper-slide");
+          const swiperLength = slides.length;
+          const centeredIndex = swiper.realIndex;
+          const centeredSlide = slides[centeredIndex];
+
+          centeredSlide
+            .querySelectorAll(
+              ".productTitle, .productDescription, .productIngredients"
+            )
+            .forEach((el) => {
+              el.style.display = "block";
+            });
+        }
       });
     </script>
     <script src="${pageContext.request.contextPath}/js/admin/lib/jquery/jquery.min.js"></script>

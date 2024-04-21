@@ -417,7 +417,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
-                    class="w-7 h-6 mt-1"
+                    class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"

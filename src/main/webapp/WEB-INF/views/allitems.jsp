@@ -325,7 +325,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <!-- Main Content -->
       <div class="flex flex-col w-full mt-16">
         <c:forEach var="category" items="${items.keySet()}">
-          <div class="w-full ml-20 text-2xl font-bold titleColor">
+          <div class="w-full text-2xl font-bold titleColor px-2 sm:px-4 md:px-8 lg:px-16 xl:px-16 2xl:px-16">
             ${category}
           </div>
           <div class="w-full flex flex-wrap justify-start gap-12">
@@ -344,7 +344,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               <div class="w-full flex flex-wrap justify-center  h-full gap-12">
           </c:if>
           <div
-          class="w-1/5 bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center"
+          class="bg-white overflow-hidden border border-yellow-100 rounded-2xl flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/5"
       >
           <div class="relative w-full">
               <img
@@ -487,7 +487,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
-                    class="w-7 h-6 mt-1"
+                    class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
                   />
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
