@@ -430,11 +430,14 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 <!-- Menu button -->
 
                 <div class="flex gap-7 items-center">
+                  <a class="flex gap-7"
+                  href="${pageContext.request.contextPath}/favourite">
                   <img
                     src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
                     href="${pageContext.request.contextPath}/favourite"
                     class="w-7 h-6 mt-1"
                   />
+                  </a>
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 right-0 transition-colors rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
@@ -455,11 +458,12 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 <!-- Logo -->
                 <div class="flex items-center gap-4 top-0">
                   <!-- Menu button -->
-                  <img
-                    src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
-                    href="${pageContext.request.contextPath}/favourite"
-                    class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
-                  />
+                  <a class="flex gap-7"
+                  href="${pageContext.request.contextPath}/favourite">
+                    <img
+                      src="${pageContext.request.contextPath}/images/resources/fav-icon.png"
+                      class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
+                    /></a>
                   <button
                     @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
                     class="p-2 transition-colors right-0 rounded-lg hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-white focus:ring-offset-2"
