@@ -37,6 +37,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       href="${pageContext.request.contextPath}/css/style.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     </style>
@@ -334,7 +335,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             </div>
     
             <!-- Select Product -->
-            <div class="swiper mt-24 w-full">
+            <div class="swiper mt-24 w-5/6">
                 <div class="swiper-wrapper">
                     <c:forEach items="${items}" var="item">
                         <div class="swiper-slide">
@@ -345,7 +346,91 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         <h2>${item.getName()}</h2>
                                     </div>
                                     <div class="w-full overflow-hidden flex justify-center items-center">
-                                        <img style="height: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                        <img style="height: 200px; width: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center items-center mt-5">
+                                        <p class="text-sm productDescription">${item.getDescription()}</p>
+                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
+                                    </div>
+                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
+                                        <ul class="flex w-full justify-center gap-2">
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex justify-center mt-2 ">
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-full flex flex-wrap justify-center gap-1">
+                                <!-- Product Card -->
+                                <div class="w-full flex justify-center flex-col items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center mt-2 sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
+                                        <h2>${item.getName()}</h2>
+                                    </div>
+                                    <div class="w-full overflow-hidden flex justify-center items-center">
+                                        <img style="height: 200px; width: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center items-center mt-5">
+                                        <p class="text-sm productDescription">${item.getDescription()}</p>
+                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
+                                    </div>
+                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
+                                        <ul class="flex w-full justify-center gap-2">
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex justify-center mt-2 ">
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-full flex flex-wrap justify-center gap-1">
+                                <!-- Product Card -->
+                                <div class="w-full flex justify-center flex-col items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center mt-2 sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
+                                        <h2>${item.getName()}</h2>
+                                    </div>
+                                    <div class="w-full overflow-hidden flex justify-center items-center">
+                                        <img style="height: 200px; width: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center items-center mt-5">
+                                        <p class="text-sm productDescription">${item.getDescription()}</p>
+                                        <p class="text-2xl productTitle ml-2">${item.getDiscountedPrice()}$</p>
+                                    </div>
+                                    <div class="flex w-full justify-center items-center mt-2 productIngredients">
+                                        <ul class="flex w-full justify-center gap-2">
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/onion.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/gajar.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/mirch.png" class="w-10 h-10 object-contain" alt=""></li>
+                                            <li><img src="${pageContext.request.contextPath}/images/resources/meat.png" class="w-10 h-10 object-contain" alt=""></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex justify-center mt-2 ">
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-full flex flex-wrap justify-center gap-1">
+                                <!-- Product Card -->
+                                <div class="w-full flex justify-center flex-col items-center">
+                                    <div class="w-full text-center flex productTitle text-3xl justify-center items-center mt-2 sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
+                                        <h2>${item.getName()}</h2>
+                                    </div>
+                                    <div class="w-full overflow-hidden flex justify-center items-center">
+                                        <img style="height: 200px; width: 200px;" class="w-1/2 mt-5 object-fill rounded-full hover:scale-110" src="${pageContext.request.contextPath}${item.getImage()}" alt="Product Image">
                                     </div>
                                     <div class="flex flex-col w-full justify-center items-center mt-5">
                                         <p class="text-sm productDescription">${item.getDescription()}</p>
@@ -367,8 +452,8 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                         </div>
                     </c:forEach>
                 </div>
-                <div class="swiper-button-prev cursor-pointer z-0"></div>
-                <div class="swiper-button-next cursor-pointer z-0"></div>
+                <div class="swiper-button-prev cursor-pointer z-10"></div>
+                <div class="swiper-button-next cursor-pointer z-10"></div>
             </div>
         </div>
     </div>
@@ -717,142 +802,39 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     </script>
     <script>
       const swiper = new Swiper(".swiper", {
-        direction: "horizontal",
-        slidesPerView: window.innerWidth < 640 ? 1 : 3,
-        spaceBetween: 3,
-        centeredSlides: true,
-        effect: "creative",
-        centerInsufficientSlides: true,
-        creativeEffect: {
-          perspective: true,
-          limitProgress: 5,
-          prev: {
-            translate: ["-90%", "15%", -100],
-            rotate: [0, 0, 0],
-            origin: "bottom",
-          },
-          next: {
-            translate: ["90%", "15%", -100],
-            rotate: [0, 0, 0],
-            origin: "bottom",
-          },
-        },
-
-        on: {
-          click() {
-            swiper.slideTo(this.clickedIndex);
-          },
-        },
-
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-
-        scrollbar: {
-          el: ".swiper-scrollbar",
-        },
-
-        breakpoints: {
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
-
-        on: {
-          init() {
-            if (document.querySelectorAll(".swiper-slide").length < 3) {
-              console.log("swiper initialized", document.querySelectorAll(".swiper-slide").length);
-              document
-                .querySelectorAll(".swiper-slide .productTitle")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-              document
-                .querySelectorAll(".swiper-slide .productDescription")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-              document
-                .querySelectorAll(".swiper-slide .productIngredients")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-            } else {
-            document
-              .querySelectorAll(".swiper-slide-active .productTitle")
-              .forEach((el) => {
-                el.style.display = "block";
-              });
-            document
-              .querySelectorAll(".swiper-slide-active .productDescription")
-              .forEach((el) => {
-                el.style.display = "block";
-              });
-            document
-              .querySelectorAll(".swiper-slide-active .productIngredients")
-              .forEach((el) => {
-                el.style.display = "block";
-              });
-            }
-          },
-        },
-      });
-    </script>
-    <script>
-      // add one more property to the swiper instance
-      swiper.on("slideChange", function () {
-        // get the index of the active slide & hide the title of the rest
-        if (document.querySelectorAll(".swiper-slide") < 3) {
-              document
-                .querySelectorAll(".swiper-slide .productTitle")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-              document
-                .querySelectorAll(".swiper-slide .productDescription")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-              document
-                .querySelectorAll(".swiper-slide .productIngredients")
-                .forEach((el) => {
-                  el.style.display = "block";
-                });
-        } else {
-          document.querySelectorAll(".productTitle").forEach((el) => {
-            el.style.display = "none";
-          });
-          document.querySelectorAll(".productDescription").forEach((el) => {
-            el.style.display = "none";
-          });
-          document.querySelectorAll(".productIngredients").forEach((el) => {
-            el.style.display = "none";
-          });
-
-          const slides = document.querySelectorAll(".swiper-slide");
-          const swiperLength = slides.length;
-          const centeredIndex = swiper.realIndex;
-          const centeredSlide = slides[centeredIndex];
-
-          centeredSlide
-            .querySelectorAll(
-              ".productTitle, .productDescription, .productIngredients"
-            )
-            .forEach((el) => {
-              el.style.display = "block";
-            });
-        }
-      });
+  effect: "coverflow",
+  grabCursor: true,
+  centeredSlides: true,
+  loop: true,
+  slidesPerView: window.innerWidth < 640 ? 1 : 3,
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 30,
+    modifier: 1,
+    slideShadows: false,
+  },
+  keyboard: {
+    enabled: true,
+  },
+  initialSlide: 0,
+  on: {
+    click(event) {
+      swiper.slideTo(this.clickedIndex);
+    },
+  },
+  breakpoints: {
+    640: {
+      slidesPerView: 1,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 5,
+    },
+  },
+});
     </script>
     <script src="${pageContext.request.contextPath}/js/admin/lib/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/admin/lib/bootstrap/js/popper.min.js"></script>
