@@ -215,15 +215,6 @@ main {
 
 .productTitle {
     color: #EB6D01;
-    display: none;
-}
-
-.productDescription {
-    display: none;
-}
-
-.productIngredients {
-    display: none;
 }
 
 .button-container {
@@ -281,4 +272,96 @@ main {
 .swiper-slide {
     height: 100%;
     align-items: start;
+}
+
+.swiper-slide .productTitle {
+    display: none;
+}
+
+.swiper-slide .productDescription {
+    display: none;
+}
+
+.swiper-slide .productIngredients {
+    display: none;
+}
+
+.swiper {
+    overflow: hidden;
+    position: relative;
+}
+
+.swiper-wrapper {
+    display: flex;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.swiper-slide-active {
+    transform: scale(1);
+    z-index: 2;
+    transition: all 0.1s;
+    transition: transform 0.5s ease-out;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    height: 100%;
+    margin-top: 0px;
+    transform: translate3d(0px, 0px, -800px) rotateX(0deg) rotateY(0deg) scale(1);
+}
+
+.swiper-slide {
+    padding-top: 40px;
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translate3d(0px, 0px, -800px) rotateX(0deg) rotateY(0deg) scale(1);
+}
+
+#slider {
+    transition: width 0.3s, border-radius 0.3s, height 0.3s;
+    position: absolute;
+    left: 3px;
+    background-color: orange;
+    width: 50px;
+    height: 38px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#slider.unlocked {
+    transition: all 0.3s;
+    width: inherit;
+    left: 0 !important;
+    height: inherit;
+    border-radius: inherit;
+}
+
+.swiper-slide-next {
+    transform: scale(0.8);
+    z-index: 1;
+    transition: all 1s;
+    transition: transform 0.5s ease-out;
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    padding-top: 20px;
+    transform: translate3d(0px, 0px, -800px) rotateX(0deg) rotateY(0deg) scale(1);
+}
+
+.swiper-slide-prev {
+    transform: scale(0.8);
+    z-index: 1;
+    transition: all 1s;
+    transition-delay: 1s;
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    padding-top: 20px;
+}
+
+.swiper-slide-active .productTitle {
+    display: block;
+}
+
+.swiper-slide-active .productDescription {
+    display: block;
+}
+
+.swiper-slide-active .productIngredients {
+    display: block;
 }
