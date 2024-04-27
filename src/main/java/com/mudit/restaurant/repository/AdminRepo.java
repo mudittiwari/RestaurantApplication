@@ -1,5 +1,6 @@
 package com.mudit.restaurant.repository;
 
+import com.mudit.restaurant.constants.Strings;
 import com.mudit.restaurant.entity.Category;
 import com.mudit.restaurant.entity.Item;
 import com.mudit.restaurant.entity.Order;
@@ -140,6 +141,8 @@ public class AdminRepo {
                     System.out.println(order.getItems());
                     session.saveOrUpdate(order);
                 }
+                tx.commit();
+                tx=session.beginTransaction();
                 hql = "FROM User WHERE username = :username";
                 Query<User> query2 = session.createQuery(hql, User.class);
                 query2.setParameter("username", user.getUsername());
@@ -164,8 +167,9 @@ public class AdminRepo {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            return false;
         }
-        return false;
+        return true;
     }
 
 
@@ -328,7 +332,7 @@ public class AdminRepo {
     public List<Order> getOrders(){
         List<Order> lst=new ArrayList<>();
         try(Session session=sessionFactory.openSession()){
-            String hql = "FROM Order";
+            String hql = "FROM Order ORDER BY createdAt DESC";
             Query<Order> query = session.createQuery(hql, Order.class);
             lst = query.list();
         }
@@ -349,5 +353,86 @@ public class AdminRepo {
             e.printStackTrace();
         }
         return order;
+    }
+
+    public Boolean deleteCategory(int id){
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            Category category = session.get(Category.class, id);
+            session.delete(category);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    public int countTotalOrders() {
+        try (Session session=sessionFactory.openSession()){
+            Query query = session.createQuery("select count(*) from Order");
+            Long count = (Long) query.uniqueResult();
+            return count.intValue();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return -1;
+    }
+
+    public int countProcessingOrders() {
+        try (Session session=sessionFactory.openSession()){
+            Query query = session.createQuery("select count(*) from Order o where o.status = :status");
+            query.setParameter("status", Strings.processingStatus);
+            Long count = (Long) query.uniqueResult();
+            return count.intValue();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return -1;
+    }
+    public int countCancelledOrders() {
+        try (Session session=sessionFactory.openSession()){
+            Query query = session.createQuery("select count(*) from Order o where o.status = :status");
+            query.setParameter("status", Strings.cancelledStatus);
+            Long count = (Long) query.uniqueResult();
+            return count.intValue();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return -1;
+    }
+    public int countDeliveredOrders() {
+        try (Session session=sessionFactory.openSession()){
+            Query query = session.createQuery("select count(*) from Order o where o.status = :status");
+            query.setParameter("status", Strings.deleveredStatus);
+            Long count = (Long) query.uniqueResult();
+            return count.intValue();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return -1;
+    }
+
+    public List<Item> getOrderItems(int id){
+        List<Item> items=new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            Order order = session.get(Order.class, id);
+            items=order.getItems();
+            System.out.println(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 }

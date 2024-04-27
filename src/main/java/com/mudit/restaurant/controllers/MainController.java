@@ -45,6 +45,13 @@ public class MainController {
         model.addAttribute("discountedItems",discountedItems);
         return "discount";
     }
+    @RequestMapping("/discount")
+    public String discount(Model model){
+        List<Item> discountedItems=service.getDiscountedItems();
+        System.out.println(discountedItems);
+        model.addAttribute("discountedItems",discountedItems);
+        return "discount";
+    }
     @RequestMapping("/signup")
     public String signup(){
         return "signup";
@@ -226,8 +233,9 @@ public class MainController {
     }
 
     @RequestMapping("/addorder")
-    public String addOrder(@RequestParam("tableNumber") int tableNumber, HttpServletRequest request){
+    public String addOrder(@RequestParam("tableNumber") int tableNumber, HttpServletRequest request,RedirectAttributes attributes){
         String referer = request.getHeader("referer");
+        System.out.println(tableNumber);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -254,7 +262,18 @@ public class MainController {
                 order.setCreatedAt(new Date());
                 order.setTableNumber(tableNumber);
                 order.setTotalPrice(totalPrice);
-                service.addOrder(order);
+                if(service.addOrder(order)){
+                    Message message = new Message();
+                    message.setTitle("Success");
+                    message.setDesc("Order has been placed successfully");
+                    attributes.addFlashAttribute("message", message);
+                }
+                else{
+                    Message message = new Message();
+                    message.setTitle("Error");
+                    message.setDesc("Error occoured while placing the order");
+                    attributes.addFlashAttribute("message", message);
+                }
             }
         }
         return "redirect:" + referer;

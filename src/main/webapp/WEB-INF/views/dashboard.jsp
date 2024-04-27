@@ -129,7 +129,7 @@
                                             <span><i class="fa fa-shopping-cart f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>123</h2>
+                                            <h2>${totalOrders}</h2>
                                             <p class="m-b-0">Total Orders</p>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                                             <span><i class="fa fa-spinner f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>3</h2>
+                                            <h2>${processingOrders}</h2>
                                             <p class="m-b-0">Processing Orders</p>
                                         </div>
                                     </div>
@@ -170,7 +170,7 @@
                                             <span><i class="fa fa-check f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>456</h2>
+                                            <h2>${deliveredOrders}</h2>
                                             <p class="m-b-0">Delivered Orders</p>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                                             <span><i class="fa fa-times f-s-40" aria-hidden="true"></i></span>
                                         </div>
                                         <div class="media-body media-text-right">
-                                            <h2>4</h2>
+                                            <h2>${cancelledOrders}</h2>
                                             <p class="m-b-0">Cancelled Orders</p>
                                         </div>
                                     </div>

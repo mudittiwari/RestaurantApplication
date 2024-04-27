@@ -15,7 +15,7 @@ public class Category {
 
     @Length(min = 5,message = "category name length too short")
     private String name;
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
     public List<Item> getItems() {
         return items;

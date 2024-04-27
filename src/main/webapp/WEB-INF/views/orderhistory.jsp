@@ -330,7 +330,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                         <img
                           src="${pageContext.request.contextPath}${item.getImage()}"
                           alt="product-image"
-                          class="w-40 rounded-lg sm:w-40"
+                          class="w-40 h-40 rounded-lg sm:w-40"
                         />
                         <div
                           class="sm:ml-4 sm:flex sm:w-full sm:justify-between"

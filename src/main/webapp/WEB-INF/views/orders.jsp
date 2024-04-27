@@ -123,6 +123,7 @@
                           <th>Table Number</th>
                           <th>Price</th>
                           <th>Status</th>
+                          <th>Items</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -134,7 +135,10 @@
                             <td>${order.getUser().getUsername()}</td>
                             <td>${order.getTableNumber()}</td>
                             <td>${order.getTotalPrice()}</td>
+                            
                             <td>${order.getStatus()}</td>
+                            <td> <a href="${pageContext.request.contextPath}/admin/orderitems/${order.getId()}"
+                                class="btn btn-info btn-flat btn-addon btn-xs m-b-10">View</a></td>
                             <c:choose>
                                 <c:when test="${order.getStatus() eq 'Processing'}">
                                     <td>

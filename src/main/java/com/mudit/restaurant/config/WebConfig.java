@@ -87,7 +87,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 //                .roles("USER");
     }
 
-    @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()

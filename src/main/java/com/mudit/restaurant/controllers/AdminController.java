@@ -51,9 +51,17 @@ public class AdminController {
         long itemCount= adminService.getItemCount();
         long categoryCount= adminService.getCategoryCount();
         long userCount= adminService.getUserCount();
+        int processingOrders=adminService.countProcessingOrders();
+        int cancelledOrders=adminService.countCancelledOrders();
+        int deliveredOrders=adminService.countDeliveredOrders();
+        int totalOrders= adminService.countTotalOrders();
         model.addAttribute("itemCount",itemCount);
         model.addAttribute("categoryCount",categoryCount);
         model.addAttribute("userCount",userCount);
+        model.addAttribute("processingOrders",processingOrders);
+        model.addAttribute("cancelledOrders",cancelledOrders);
+        model.addAttribute("deliveredOrders",deliveredOrders);
+        model.addAttribute("totalOrders",totalOrders);
         return "dashboard";
     }
 
@@ -401,6 +409,32 @@ public class AdminController {
         }
 
         return "redirect:" + referer;
+    }
+
+    @RequestMapping("/deletecategory/{id}")
+    public String deleteCategory(@PathVariable("id") int id,RedirectAttributes attributes){
+        String referer = request.getHeader("referer");
+        if(adminService.deleteCategory(id)){
+            Message message = new Message();
+            message.setTitle("Success");
+            message.setDesc("category deleted successfully");
+            attributes.addFlashAttribute("message", message);
+        }
+        else{
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Error occoured while deleting the category");
+            attributes.addFlashAttribute("message", message);
+        }
+        return "redirect:" + referer;
+    }
+
+    @RequestMapping("/orderitems/{id}")
+    public String orderItems(@PathVariable("id") int id,Model model){
+        List<Item> orderItems=adminService.getOrderItems(id);
+        System.out.println(orderItems);
+        model.addAttribute("orderItems",orderItems);
+        return "orderitems";
     }
 }
 

@@ -320,7 +320,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <div class="flex flex-col w-full justify-center">
         <!-- Top Cards -->
         <div class="w-full flex gap-12 mt-16 justify-start px-2 sm:px-4 md:px-8 lg:px-16 xl:px-16">
-          <a href="${pageContext.request.contextPath}/items" class="w-1/2 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4">
+          <a href="${pageContext.request.contextPath}/items/1" class="w-1/2 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4">
             <div
               class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
             >
@@ -331,7 +331,19 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               />
             </div>
           </a>
-          <a href="${pageContext.request.contextPath}" class="w-1/2 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4">
+          
+          <a href="${pageContext.request.contextPath}/items/1" class="w-1/2 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4">
+            <div
+              class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+            >
+              <img
+                class="w-full object-fill"
+                src="${pageContext.request.contextPath}/images/resources/categories.png"
+                alt="Banner"
+              />
+            </div>
+          </a>
+          <a href="${pageContext.request.contextPath}/discount" class="w-1/2 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4">
             <div
               class="w-full hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
             >

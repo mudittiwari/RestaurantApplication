@@ -327,91 +327,40 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         </div>
 
         <!-- Products -->
-        <div class="w-full relative h-1/3 sm:h-1/3 flex md:h-3/4 lg:h-4/5 xl:h-3/4 2xl:h-3/4 flex items-center justify-center">
+        <div class="w-full relative flex items-center justify-center" style="height: max-content;">
           <!-- Select Product -->
-          <div class="swiper mt-32 h-full">
+          <div class="swiper mt-32 h-full w-full">
             <div class="swiper-wrapper h-full">
               <!-- Product Cards -->
               <c:forEach items="${discountedItems}" var="item" varStatus="loop">
                 <!-- Open new swiper-slide for every 3 products -->
-                <!-- <c:if test="${loop.index % 3 == 0}"> -->
-          <div class="swiper-slide h-screen">
-            <div class="w-full h-full flex flex-wrap justify-center gap-12">
-        <!-- </c:if> -->
-                <div
-                  class="h-full flex justify-center items-center flex-col align-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4"
-                >
-                  <div
-                    class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center"
-                  >
-                    <img
-                      class="p-3 w-4/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                      src="${pageContext.request.contextPath}${item.getImage()}"
-                      alt="Product Image"
-                    />
+                <c:if test="${loop.index % 6 == 0}">
+                  <div class="swiper-slide h-full">
+                    <div class="w-full h-full flex flex-wrap justify-center gap-12">
+                </c:if>
+                <div class=" flex justify-center items-center flex-col align-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4">
+                  <div class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center">
+                    <img style="height: 300px;" class="p-3 w-4/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
+                         src="${pageContext.request.contextPath}${item.getImage()}"
+                         alt="Product Image"/>
                   </div>
                   <div class="w-full font-bold text-xl mt-5 text-center">
                     ${item.getName()}
                   </div>
                 </div>
                 <!-- Close the swiper-slide if this is the 3rd product or the last product -->
-                <!-- <c:if test="${loop.index % 3 == 2 or loop.last}"> -->
-            </div>
-          </div>
-          <div class="swiper-slide h-screen">
-            <div class="w-full h-full flex justify-center gap-12 flex-wrap">
-        <!-- </c:if> -->
-                <div
-                  class="h-full flex justify-center items-center flex-col align-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4"
-                >
-                  <div
-                    class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center"
-                  >
-                    <img
-                      class="p-3 w-4/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                      src="${pageContext.request.contextPath}${item.getImage()}"
-                      alt="Product Image"
-                    />
+                <c:if test="${loop.index % 6 == 5 or loop.last}">
+                    </div>
                   </div>
-                  <div class="w-full font-bold text-xl mt-5 text-center">
-                    ${item.getName()}
-                  </div>
-                </div>
-                <!-- Close the swiper-slide if this is the 3rd product or the last product -->
-                <!-- <c:if test="${loop.index % 3 == 2 or loop.last}"> -->
-            </div>
-          </div>
-          <div class="swiper-slide h-screen">
-            <div class="w-full h-full flex justify-center gap-12 flex-wrap">
-        <!-- </c:if> -->
-                <div
-                  class="h-full flex justify-center items-center flex-col align-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4"
-                >
-                  <div
-                    class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center"
-                  >
-                    <img
-                      class="p-3 w-4/5 object-fill rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                      src="${pageContext.request.contextPath}${item.getImage()}"
-                      alt="Product Image"
-                    />
-                  </div>
-                  <div class="w-full font-bold text-xl mt-5 text-center">
-                    ${item.getName()}
-                  </div>
-                </div>
-                <!-- Close the swiper-slide if this is the 3rd product or the last product -->
-                <!-- <c:if test="${loop.index % 3 == 2 or loop.last}"> -->
-            </div>
-          </div>
-        <!-- </c:if> -->
+                </c:if>
               </c:forEach>
             </div>
             <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+            <div class="swiper-button-next"></div>
           </div>
+          
+            
         </div>
-      </div>
 
       <!-- Right Navbar -->
       <div class="flex justify-end right-0" id="rightnavbar">

@@ -360,7 +360,10 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                         </ul>
                                     </div>
                                     <div class="flex justify-center mt-2 ">
-                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button>
+                                      <a
+                          href="${pageContext.request.contextPath}/addtocart/${item.getId()}"
+                      >
+                                        <button class="bg-yellow-400 text-white w-40 p-2 text-center rounded-3xl productIngredients">Add to Cart >></button></a>
                                     </div>
                                 </div>
                             </div>

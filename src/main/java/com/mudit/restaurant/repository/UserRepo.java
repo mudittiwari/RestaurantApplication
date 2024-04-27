@@ -13,10 +13,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserRepo {
@@ -196,12 +193,21 @@ public class UserRepo {
     public List<Order> getUserOrders(String username) {
         List<Order> lst = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
-            String hql = "SELECT DISTINCT o FROM Order o " +
-                    "JOIN FETCH o.items " +
-                    "WHERE o.user.username = :username";
+            String hql = "SELECT o FROM Order o " +
+                    "JOIN FETCH o.items i " +
+                    "WHERE o.id IN (SELECT DISTINCT o2.id FROM Order o2 " +
+                    "JOIN o2.items i2 " +
+                    "WHERE o2.user.username = :username) " +
+                    "ORDER BY o.createdAt DESC";
             Query<Order> query = session.createQuery(hql, Order.class);
             query.setParameter("username", username);
-            lst = query.list();
+            List<Order> allOrders = query.list();
+            Set<Integer> orderIds = new HashSet<>();
+            for (Order order : allOrders) {
+                if (orderIds.add(order.getId())) {
+                    lst.add(order);
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

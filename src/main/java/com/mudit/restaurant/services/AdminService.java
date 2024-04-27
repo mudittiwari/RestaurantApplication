@@ -74,4 +74,22 @@ public class AdminService {
     public List<Order> getOrders(){
         return adminRepo.getOrders();
     }
+    public Boolean deleteCategory(int id){
+        return adminRepo.deleteCategory(id);
+    }
+    public int countProcessingOrders(){
+        return adminRepo.countProcessingOrders();
+    }
+    public List<Item> getOrderItems(int id){
+        return adminRepo.getOrderItems(id);
+    }
+    public int countCancelledOrders(){
+        return adminRepo.countCancelledOrders();
+    }
+    public int countDeliveredOrders(){
+        return adminRepo.countDeliveredOrders();
+    }
+    public int countTotalOrders(){
+        return adminRepo.countTotalOrders();
+    }
 }

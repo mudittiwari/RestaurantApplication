@@ -323,9 +323,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       </div>
 
       <!-- Main Content -->
-      <div class="flex flex-col w-full mt-16">
+      <div class="flex flex-col w-full">
         <c:forEach var="category" items="${items.keySet()}">
-          <div class="w-full text-2xl font-bold titleColor px-2 sm:px-4 md:px-8 lg:px-16 xl:px-16 2xl:px-16">
+          <div class="w-full text-2xl mt-16 font-bold titleColor px-2 sm:px-4 md:px-8 lg:px-16 xl:px-16 2xl:px-16">
             ${category}
           </div>
           <div class="w-full flex flex-wrap justify-start gap-12">
