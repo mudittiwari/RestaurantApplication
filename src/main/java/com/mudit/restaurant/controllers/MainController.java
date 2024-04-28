@@ -233,48 +233,52 @@ public class MainController {
     }
 
     @RequestMapping("/addorder")
-    public String addOrder(@RequestParam("tableNumber") int tableNumber, HttpServletRequest request,RedirectAttributes attributes){
+    public String addOrder(@RequestParam("tableNumber") int tableNumber,@RequestParam("password") String password,HttpServletRequest request,RedirectAttributes attributes){
         String referer = request.getHeader("referer");
-        System.out.println(tableNumber);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String username = userDetails.getUsername();
-            HttpSession session = request.getSession();
-            Map<Item, Integer> cart = (Map<Item, Integer>) session.getAttribute("cart");
-            List<Item> itemsList=new ArrayList<>();
-            double totalPrice=0;
-            if (cart != null) {
+            User user=service.getUserByUsername(username);
+            if(user.getPassword().equals(password)) {
+                HttpSession session = request.getSession();
+                Map<Item, Integer> cart = (Map<Item, Integer>) session.getAttribute("cart");
+                List<Item> itemsList = new ArrayList<>();
+                double totalPrice = 0;
+                if (cart != null) {
 
-                for (Map.Entry<Item, Integer> entry : cart.entrySet()) {
-                    Item item = entry.getKey();
-                    Integer quantity = entry.getValue();
-                    totalPrice+=item.getDiscountedPrice()*quantity;
-                    for (int i = 0; i < quantity; i++) {
-                        itemsList.add(item);
+                    for (Map.Entry<Item, Integer> entry : cart.entrySet()) {
+                        Item item = entry.getKey();
+                        Integer quantity = entry.getValue();
+                        totalPrice += item.getDiscountedPrice() * quantity;
+                        for (int i = 0; i < quantity; i++) {
+                            itemsList.add(item);
+                        }
+                    }
+                    Order order = new Order();
+                    order.setItems(itemsList);
+                    order.setStatus(Strings.processingStatus);
+                    order.setUser(user);
+                    order.setCreatedAt(new Date());
+                    order.setTableNumber(tableNumber);
+                    order.setTotalPrice(totalPrice);
+                    if (service.addOrder(order)) {
+                        Message message = new Message();
+                        message.setTitle("Success");
+                        message.setDesc("Order has been placed successfully");
+                        attributes.addFlashAttribute("message", message);
+                    } else {
+                        Message message = new Message();
+                        message.setTitle("Error");
+                        message.setDesc("Error occoured while placing the order");
+                        attributes.addFlashAttribute("message", message);
                     }
                 }
-                User user=service.getUserByUsername(username);
-                Order order=new Order();
-                order.setItems(itemsList);
-                order.setStatus(Strings.processingStatus);
-                order.setUser(user);
-                order.setCreatedAt(new Date());
-                order.setTableNumber(tableNumber);
-                order.setTotalPrice(totalPrice);
-                if(service.addOrder(order)){
-                    Message message = new Message();
-                    message.setTitle("Success");
-                    message.setDesc("Order has been placed successfully");
-                    attributes.addFlashAttribute("message", message);
-                }
-                else{
-                    Message message = new Message();
-                    message.setTitle("Error");
-                    message.setDesc("Error occoured while placing the order");
-                    attributes.addFlashAttribute("message", message);
-                }
             }
+            Message message = new Message();
+            message.setTitle("Error");
+            message.setDesc("Your password is incorrect");
+            attributes.addFlashAttribute("message", message);
         }
         return "redirect:" + referer;
     }

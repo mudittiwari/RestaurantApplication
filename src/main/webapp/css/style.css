@@ -276,15 +276,22 @@ main {
 
 .swiper-slide .productTitle {
     display: none;
+    transition: opacity 0.5s ease;
 }
 
 .swiper-slide .productDescription {
     display: none;
+    transition: opacity 0.5s ease;
 }
 
 .swiper-slide .productIngredients {
     display: none;
+    transition: opacity 0.5s ease;
 }
+.show {
+    display: block;
+    opacity: 1;
+  }
 
 .swiper {
     overflow: hidden;
@@ -364,4 +371,7 @@ main {
 
 .swiper-slide-active .productIngredients {
     display: block;
+}
+.password-input{
+    border: 1px solid black;
 }

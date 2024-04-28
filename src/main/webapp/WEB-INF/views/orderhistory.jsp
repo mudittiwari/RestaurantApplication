@@ -445,7 +445,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                 x-transition:leave-start="transform translate-x-0 opacity-100"
                 x-transition:leave-end="transform translate-x-full opacity-0"
                 x-show="isSidebarOpen"
-                class="fixed inset-y-0 right-0 justify-end z-10 flex-shrink-0 w-64 bg-white border-r-2 border-yellow-100 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl sm:w-72 lg:static lg:w-64"
+                class="fixed inset-y-0 right-0 justify-end z-10 flex-shrink-0 w-64 bg-white border-r-2 border-yellow-100 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl sm:w-72 lg:static lg:w-68"
               >
                 <nav
                   x-show="currentSidebarTab == 'linksTab'"
@@ -480,16 +480,16 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                       </div>
 
                       <div
-                        class="flex flex-col items-start h-screen bg-white rounded-l-2xl w-2/5"
+                        class="w-full flex flex-col items-start h-screen bg-white rounded-l-2xl w-2/5"
                       >
-                        <div class="flex">
-                          <div class="w-72 pr-20">
+                        <div class="flex w-full">
+                          <div class="w-full">
                             <!-- component -->
                             <c:if test="${empty cart}">
                               <p>Your cart is empty.</p>
                             </c:if>
                             <c:if test="${not empty cart}">
-                              <div class="p-5">
+                              <div class="">
                                 <div class="flex h-64 justify-center">
                                   <div class="relative">
                                     <div
@@ -624,7 +624,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                           <form action="${pageContext.request.contextPath}/addorder">
                                             <select
                                               name="tableNumber"
-                                              class="w-20 h-8"
+                                              class="w-full h-8"
                                             >
                                               <c:forEach
                                                 begin="1"
@@ -642,8 +642,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                                                 >
                                               </c:forEach>
                                             </select>
+                                            <input type="password" placeholder="Please Enter Password" class="p-2 password-input mt-2" name="password">
                                           <button type="submit"
-                                            class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition"
+                                            class="text-base undefined hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition mt-5"
                                           >
                                             Checkout $${totalPrice}
                                           </button>
