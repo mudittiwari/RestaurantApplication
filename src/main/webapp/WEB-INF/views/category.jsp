@@ -94,15 +94,23 @@
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">Add Category</h4>
                                 </div>
-                                <form:form modelAttribute="category" action='${pageContext.request.contextPath}/admin/addcategory' method='post'>
+                                <form action='${pageContext.request.contextPath}/admin/addcategory' method='post' enctype="multipart/form-data">
                                     <div class="form-body">
                                         <hr>
                                         <div class="row p-t-20">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Category</label>
-                                                    <form:input path="name" type="text" name="name" class="form-control" />
-                                                    <form:errors path="name" cssClass="error" />
+                                                    <input required="true" name="name" type="text" name="name" class="form-control" />
+                                                    <c:if test="${not empty nameerror}">
+                                                        <span class="error">${nameerror}</span>
+                                                    </c:if>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Image</label>
+                                                    <input required="true" name="image" type="file" id="file"
+                                                        class="form-control form-control-danger"
+                                                        placeholder="12n" />
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +118,7 @@
                                             <input type="submit" name="submit" class="btn btn-primary" value="Save">
                                             <a href="add_category.html" class="btn btn-inverse">Cancel</a>
                                         </div>
-                                </form:form>
+                                </form>
                             </div>
                         </div>
                     </div>

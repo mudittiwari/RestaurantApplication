@@ -23,8 +23,16 @@
       href="${pageContext.request.contextPath}/css/common.css"
       rel="stylesheet"
     />
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
+  <c:set var="total" value="0" />
     <h1 class="w-full text-center m-t-40 ">Order Details</h1>
     <div class="table-responsive m-t-40" style="padding: 20px;">
         <table
@@ -42,16 +50,21 @@
             </tr>
           </thead>
         <tbody>
+          
             <c:forEach items="${orderItems}" var="item">
                 <tr>
                     <td>${item.getId()}</td>
                     <td>${item.getCategory().getName()}</td>
                     <td>${item.getName()}</td>
                     <td>${item.getDiscountedPrice()}</td>
+                    <c:set var="total" value="${total + item.getDiscountedPrice()}" />
                 </tr>
             </c:forEach>
         </tbody>
+        
     </table>
+    <p class="font-weight-bold d-block m-t-16 text-center">Total Amount: ${total}</p>
+    <button onclick="window.print()" class="btn btn-dark px-4 w-10 d-block m-t-16 mx-auto no-print">Print</button>
     </div>
 </body>
 </html>

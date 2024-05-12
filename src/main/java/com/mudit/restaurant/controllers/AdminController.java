@@ -73,24 +73,48 @@ public class AdminController {
     }
 
     @RequestMapping("/addcategory")
-    public String addCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult, RedirectAttributes attributes, Model model){
-        if(bindingResult.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.category", bindingResult);
-            attributes.addFlashAttribute("category", category);
-            return "redirect:/admin/category";
-        } else {
-            if (adminService.addCategory(category)) {
-                Message message = new Message();
-                message.setTitle("Success");
-                message.setDesc("Category added successfully.");
-                attributes.addFlashAttribute("message", message);
-            }
-            else{
-                Message message = new Message();
-                message.setTitle("Error");
-                message.setDesc("Error occoured while saving the item");
-                attributes.addFlashAttribute("message", message);
+    public String addCategory(@RequestParam("image") MultipartFile image,
+                              @RequestParam("name") String name, RedirectAttributes attributes, Model model){
+        if(name.length()<5){
+            attributes.addFlashAttribute("nameerror","Name length too short");
         }
+        if(attributes.getFlashAttributes().isEmpty()){
+            if (!image.isEmpty()){
+                try {
+                    String uploadsDir = "/uploads/";
+                    String realPathtoUploads = request.getServletContext().getRealPath(uploadsDir);
+                    if (!new File(realPathtoUploads).exists()) {
+                        new File(realPathtoUploads).mkdir();
+                    }
+                    String orgName = image.getOriginalFilename();
+                    String filePath = realPathtoUploads + orgName;
+                    File dest = new File(filePath);
+                    image.transferTo(dest);
+                    System.out.println(orgName);
+                    Category category=new Category();
+                    category.setName(name);
+                    category.setImage("/uploads/".concat(orgName));
+                    System.out.println(category);
+                    if(adminService.addCategory(category)) {
+                        Message message=new Message();
+                        message.setTitle("Success");
+                        message.setDesc("category added successfully");
+                        attributes.addFlashAttribute("message", message);
+                    }
+                    else {
+                        Message message = new Message();
+                        message.setTitle("Error");
+                        message.setDesc("Error occoured while saving the category");
+                        attributes.addFlashAttribute("message", message);
+                    }
+                } catch (Exception e) {
+                    Message message = new Message();
+                    message.setTitle("Error");
+                    message.setDesc("Error occoured while saving the item");
+                    attributes.addFlashAttribute("message", message);
+                    e.printStackTrace();
+                }
+            }
         }
         return "redirect:/admin/category";
     }

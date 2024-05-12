@@ -17,6 +17,17 @@ public class Category {
     private String name;
     @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
+
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public List<Item> getItems() {
         return items;
     }

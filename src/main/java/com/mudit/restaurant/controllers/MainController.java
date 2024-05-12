@@ -40,16 +40,16 @@ public class MainController {
 
     @RequestMapping("/")
     public String home(Model model){
-        List<Item> discountedItems=service.getDiscountedItems();
-        System.out.println(discountedItems);
-        model.addAttribute("discountedItems",discountedItems);
+        List<Category> categories=service.getCategories();
+        System.out.println(categories);
+        model.addAttribute("categories",categories);
         return "discount";
     }
     @RequestMapping("/discount")
     public String discount(Model model){
-        List<Item> discountedItems=service.getDiscountedItems();
-        System.out.println(discountedItems);
-        model.addAttribute("discountedItems",discountedItems);
+        List<Category> categories=service.getCategories();
+        System.out.println(categories);
+        model.addAttribute("categories",categories);
         return "discount";
     }
     @RequestMapping("/signup")

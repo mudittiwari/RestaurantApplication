@@ -332,20 +332,23 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           <div class="swiper mt-32 h-full w-full">
             <div class="swiper-wrapper h-full">
               <!-- Product Cards -->
-              <c:forEach items="${discountedItems}" var="item" varStatus="loop">
+              <c:forEach items="${categories}" var="category" varStatus="loop">
                 <!-- Open new swiper-slide for every 3 products -->
                 <c:if test="${loop.index % 6 == 0}">
                   <div class="swiper-slide h-full">
                     <div class="w-full h-full flex flex-wrap justify-center gap-12">
                 </c:if>
+                
                 <div class=" flex justify-center items-center flex-col align-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4">
                   <div class="w-full overflow-hidden rounded-3xl flex justify-center flex-col items-center">
+                    <a class="w-full" href="${pageContext.request.contextPath}/items/${category.getId()}">
                     <img style="height: 200px;" class="w-full object-cover rounded-3xl hover:scale-110 transform transition duration-500 ease-in-out cursor-pointer"
-                         src="${pageContext.request.contextPath}${item.getImage()}"
+                         src="${pageContext.request.contextPath}${category.getImage()}"
                          alt="Product Image"/>
+                        </a>
                   </div>
                   <div class="w-full font-bold text-xl mt-5 text-center">
-                    ${item.getName()}
+                    ${category.getName()}
                   </div>
                 </div>
                 <!-- Close the swiper-slide if this is the 3rd product or the last product -->
